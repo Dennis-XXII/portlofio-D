@@ -4,12 +4,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap");
 
 :root {
-	--bg: #fafafa;
-	--ink: #8b6b77;
-	--ink-2: #ae6e86;
-	--button-bg: #efe6dd;
-	--brand: #980139;
-	--brand-2: #a86b81;
+	--bg: #f9f9f9; /* near-white background */
+	--ink: #222222; /* main text: deep neutral black */
+	--ink-2: #555555; /* secondary text: soft gray */
+	--button-bg: #e5e5e5; /* subtle gray for button backgrounds */
+	--brand: #000000; /* pure black for highlights, links, accents */
+	--brand-2: #2f2f2f;
 	--accent: #4caf50;
 	--nav-h: 68px;
 	--max-w: 1120px;
@@ -108,7 +108,7 @@ body {
 	filter: brightness(0.85);
 }
 .btn--ghost {
-	background: #e9e0d9;
+	background: var(--button-bg);
 	color: var(--brand);
 	box-shadow: none;
 }

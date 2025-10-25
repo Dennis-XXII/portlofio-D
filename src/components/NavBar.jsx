@@ -97,7 +97,7 @@ export default function NavBar({ active }) {
 			<nav className="nav">
 				<div className="nav_box">
 					<div className="brand">
-						<h2>Khin Thiri Myat</h2>
+						<h2>Kyaw Swar Hein</h2>
 						<span className="badge">
 							<span className="badge__dot" />
 							Open for work!

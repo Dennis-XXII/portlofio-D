@@ -10,6 +10,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { hobbies } from "../data.js";
+import StorytellingCard from "../bits/StoryCard.jsx";
 
 export default function About({ setActive }) {
 	//start and end refs for inView detection
@@ -38,12 +39,16 @@ export default function About({ setActive }) {
 		<section id="about" className="section">
 			<div className="container">
 				{/* subtle heading */}
-				<h2 className="h2" ref={startRef} style={{ marginBottom: 24 }}>
-					About
-				</h2>
+				<StorytellingCard
+					title="About me"
+					subtitle="& my background"
+					align="left"
+					theme="dark"
+					ref={startRef}
+				/>
 
 				{/* Education */}
-				<h3 className="h3">Education</h3>
+				<h2 className="h2">Education</h2>
 				{education.map((edu, i) => (
 					<AnimatedSection key={i} delay={i * 0.08}>
 						<div className="kv">
@@ -59,9 +64,9 @@ export default function About({ setActive }) {
 				))}
 
 				{/* achievements */}
-				<h3 className="h3" style={{ marginTop: "100px" }}>
+				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Achievements
-				</h3>
+				</h2>
 				{achievements.map((ach, i) => (
 					<AnimatedSection key={i} delay={i * 0.08}>
 						<div className="kv">
@@ -77,9 +82,9 @@ export default function About({ setActive }) {
 				))}
 
 				{/* Certifications */}
-				<h3 className="h3" style={{ marginTop: "100px" }}>
+				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Certifications
-				</h3>
+				</h2>
 				{certifications.map((cert, i) => (
 					<AnimatedSection key={i} delay={i * 0.08}>
 						<div className="kv">
@@ -97,7 +102,7 @@ export default function About({ setActive }) {
 				{/* Skills + Languages */}
 				<div className="grid grid-2" style={{ marginTop: 100 }}>
 					<AnimatedSection>
-						<h3 className="h3">Skills</h3>
+						<h2 className="h2">Skills</h2>
 						<ul className="ul">
 							{skills.map((s, i) => (
 								<li key={i}>{s}</li>
@@ -106,7 +111,7 @@ export default function About({ setActive }) {
 					</AnimatedSection>
 
 					<AnimatedSection delay={0.06}>
-						<h3 className="h3">Languages</h3>
+						<h2 className="h2">Languages</h2>
 						<ul className="ul">
 							{languages.map((l, i) => (
 								<li key={i}>{l}</li>
@@ -115,7 +120,7 @@ export default function About({ setActive }) {
 					</AnimatedSection>
 				</div>
 
-				<AnimatedSection delay={0.12}>
+				{/* <AnimatedSection delay={0.12}>
 					<h3 className="h3" style={{ marginTop: 100 }}>
 						Hobbies
 					</h3>
@@ -128,7 +133,6 @@ export default function About({ setActive }) {
 						onTouchEnd={resumeTrack}>
 						<div className="carousel-viewport">
 							<div className="carousel-track" ref={trackRef}>
-								{/* Duplicate content twice for seamless infinite scroll */}
 								{[...hobbies, ...hobbies].map((hobby, i) => (
 									<motion.div
 										key={i}
@@ -164,7 +168,7 @@ export default function About({ setActive }) {
 							{hoveredCaption && <p>{hoveredCaption}</p>}
 						</div>
 					</div>
-				</AnimatedSection>
+				</AnimatedSection> */}
 				<div ref={endRef} />
 			</div>
 		</section>

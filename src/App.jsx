@@ -28,8 +28,8 @@ export default function App() {
 			<footer className="footer" style={{ textAlign: "center" }}>
 				<div className="container">
 					<p>
-						Built by a loved one using React + Framer Motion &nbsp;|&nbsp; ©
-						Khin Thiri Myat {new Date().getFullYear()}
+						Built using React + Framer Motion &nbsp;|&nbsp; © Kyaw Swar Hein{" "}
+						{new Date().getFullYear()}
 					</p>
 				</div>
 			</footer>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { useInView } from "react-intersection-observer";
+import TiltedCard from "../bits/TiltedCard";
 
 export default function Home({ setActive }) {
 	// Track when the Home section is in view for active nav
@@ -40,20 +41,21 @@ export default function Home({ setActive }) {
 				inViewRef(node);
 			}}
 			className="section section--fullscreen home-section"
-			style={{ padding: "100px 0" }}>
+			style={{ padding: "100px 0", marginTop: "-15px" }}>
 			<div className="container">
 				<div className="media_home">
 					<AnimatedSection delay={0.1}>
-						<motion.div
-							className="circle-img"
-							whileHover={{ scale: 1.05 }}
-							transition={{
-								type: "spring",
-								stiffness: 180,
-								damping: 12,
-							}}>
-							<img src="/me.jpeg" alt="profile picture" />
-						</motion.div>
+						<TiltedCard
+							imageSrc="/hobby3.jpg"
+							containerHeight="200px"
+							containerWidth="200px"
+							imageHeight="200px"
+							imageWidth="200px"
+							rotateAmplitude={12}
+							scaleOnHover={1.05}
+							showMobileWarning={false}
+							whileHover={{ boxShadow: "0 15px 30px rgba(0,0,0,0.3)" }}
+						/>
 					</AnimatedSection>
 
 					<AnimatedSection delay={0.1} className="text_box">
@@ -70,14 +72,12 @@ export default function Home({ setActive }) {
 									color: "var(--brand)",
 									fontWeight: "600",
 								}}>
-								Khin Thiri Myat
+								Kyaw Swar Hein
 							</motion.span>
 							.
 						</h1>
-						<p>
-							I am an aspiring Business Student who is seeking job
-							opportunities.
-						</p>
+						<p>Frontend Developer, Visual Designer & Editor</p>
+						<p>Currently student at Rangsit International College, Thailand.</p>
 
 						<div
 							style={{
@@ -134,7 +134,7 @@ export default function Home({ setActive }) {
 					className="scroll-block"
 					style={{ opacity: fadeOpacity, scale: fadeScale }}>
 					<p className="scroll-text">
-						This is just the tip of my iceberg. Let's scroll down!
+						You can get to know me better below. Let's scroll down!
 					</p>
 					<motion.button
 						whileTap={{ scale: 0.9 }}
