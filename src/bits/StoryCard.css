@@ -15,8 +15,9 @@
 }
 
 .story-card__title {
-	font-size: clamp(40px, 6vw, 80px);
-	font-weight: 700;
+	font-size: clamp(38px, 6vw, 72px);
+	font-weight: 600;
+	font-kerning: auto;
 	line-height: 1.1;
 	margin: 0;
 	letter-spacing: -0.02em;

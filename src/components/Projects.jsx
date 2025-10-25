@@ -6,21 +6,25 @@ import "../exp.css";
 import StorytellingCard from "../bits/StoryCard";
 
 export default function Projects({ setActive }) {
-	const { ref, inView } = useInView({ threshold: 0.5 });
+	const { ref: startRef, inView: startInView } = useInView({
+		threshold: 0.3,
+	});
+	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
 	useEffect(() => {
-		if (inView) setActive("projects");
-	}, [inView, setActive]);
+		if (startInView) setActive("projects");
+		if (endInView) setActive("projects"); // switch to next section when bottom enters
+	}, [startInView, endInView, setActive]);
 
 	return (
 		<section id="projects" className="section">
 			<div className="container">
+				<p ref={startRef} />
 				<StorytellingCard
 					title="Every Project Tells a Story"
 					subtitle="And here are mine"
 					align="right"
 					theme="dark"
-					ref={ref}
 				/>
 
 				<div className="stack-gap">
@@ -49,6 +53,7 @@ export default function Projects({ setActive }) {
 						</AnimatedSection>
 					))}
 				</div>
+				<p ref={endRef} />
 			</div>
 		</section>
 	);

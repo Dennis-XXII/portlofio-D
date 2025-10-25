@@ -8,6 +8,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import { motion } from "framer-motion";
 
 export default function App() {
 	const [active, setActive] = useState("home");
@@ -26,12 +27,12 @@ export default function App() {
 			<About setActive={setActiveMemo} />
 			<Contact setActive={setActiveMemo} />
 			<footer className="footer" style={{ textAlign: "center" }}>
-				<div className="container">
+				<motion.div className="container">
 					<p>
-						Built using React + Framer Motion &nbsp;|&nbsp; © Kyaw Swar Hein{" "}
-						{new Date().getFullYear()}
+						Designed & Built with great care using React.js + Framer Motion
+						&nbsp;|&nbsp; © Kyaw Swar Hein {new Date().getFullYear()}
 					</p>
-				</div>
+				</motion.div>
 			</footer>
 		</>
 	);

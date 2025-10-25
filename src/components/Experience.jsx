@@ -6,11 +6,15 @@ import "../exp.css";
 import StorytellingCard from "../bits/StoryCard";
 
 export default function Experience({ setActive }) {
-	const { ref, inView } = useInView({ threshold: 0.5 });
+	const { ref: startRef, inView: startInView } = useInView({
+		threshold: 0.3,
+	});
+	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
 	useEffect(() => {
-		if (inView) setActive("experience");
-	}, [inView, setActive]);
+		if (startInView) setActive("experience");
+		if (endInView) setActive("experience"); // switch to next section when bottom enters
+	}, [startInView, endInView, setActive]);
 
 	return (
 		<section id="experience" className="section">
@@ -20,8 +24,8 @@ export default function Experience({ setActive }) {
 					subtitle="Over the years"
 					align="left"
 					theme="dark"
-					ref={ref}
 				/>
+				<p ref={startRef}></p>
 
 				<div className="stack-gap">
 					{experiences.map((exp, i) => (
@@ -50,6 +54,7 @@ export default function Experience({ setActive }) {
 					))}
 				</div>
 			</div>
+			<p ref={endRef}></p>
 		</section>
 	);
 }

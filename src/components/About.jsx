@@ -44,8 +44,8 @@ export default function About({ setActive }) {
 					subtitle="& my background"
 					align="left"
 					theme="dark"
-					ref={startRef}
 				/>
+				<p ref={startRef} />
 
 				{/* Education */}
 				<h2 className="h2">Education</h2>
@@ -169,7 +169,7 @@ export default function About({ setActive }) {
 						</div>
 					</div>
 				</AnimatedSection> */}
-				<div ref={endRef} />
+				<p ref={endRef} />
 			</div>
 		</section>
 	);

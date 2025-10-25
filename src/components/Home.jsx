@@ -89,11 +89,11 @@ export default function Home({ setActive }) {
 							<motion.a
 								whileTap={{ scale: 0.95 }}
 								className="btn"
-								href="/my resume.pdf"
-								download="Khin_Thiri_Myat_Resume.pdf"
+								href="/KyawSwarHein_CV.pdf"
+								download="Kyaw_Swar_Hein_Resume.pdf"
 								target="_blank"
 								rel="noopener noreferrer">
-								Download my CV
+								Download my Resume
 							</motion.a>
 							<motion.a
 								whileTap={{ scale: 0.95 }}
@@ -103,7 +103,7 @@ export default function Home({ setActive }) {
 							</motion.a>
 						</div>
 
-						<div
+						{/* <div
 							style={{
 								display: "flex",
 								gap: 28,
@@ -125,7 +125,7 @@ export default function Home({ setActive }) {
 								target="_blank">
 								Facebook
 							</motion.a>
-						</div>
+						</div> */}
 					</AnimatedSection>
 				</div>
 

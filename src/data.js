@@ -10,7 +10,7 @@ export const experiences = [
 		years: "2025 – Active",
 		imgAlt: "Experience 1 image",
 		description:
-			"As a Lead Full Stack Developer (Laravel) & Team Manager at RSU Global, I spearheaded the development of student appointment systems used by around 1,000 students, overseeing a team of four developers and ensuring the successful delivery of projects on time and best quality.",
+			"As a Lead Full Stack Developer (Laravel) & Team Manager at RSU Global, I handle and maintain student appointment web system used by around 1,000 students. I also oversee and manage a team of four developers to ensure successful delivery of projects on time and best quality.",
 	},
 	{
 		image: "/experience5.jpg",
@@ -49,7 +49,7 @@ export const projects = [
 		brief: "Tech Stack: React, Django, PostgreSQL",
 		description:
 			"Project brief : This was my project as a finalist in CimSO ERP Hackathon 2025 with my team, Doomed VII. We got into the final round among 20+ teams. Powerd by Gemini AI, Dash AI is an AI-powered analytics dashboard designed for the hospitality industry to optimize operations and enhance guest experiences.",
-		imgAlt: "Project 1 image",
+		imgAlt: "cimso ERP Hackathon image",
 	},
 	{
 		image: "/rsuGlobal.png",
@@ -58,7 +58,25 @@ export const projects = [
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
 		description:
 			"Project brief : Appoinment Website system for RSU Global Language Center. Under supervision of Dr. Edward Devere Bacon, we developed a web-based appointment system to streamline student bookings and improve administrative efficiency improving process efficiency for both international and Thai students by 60%",
-		imgAlt: "Project 2 image",
+		imgAlt: "RSU Global Appointment System image",
+	},
+	{
+		image: "/experience5.jpg",
+		title: "Foundation Program LMS - Ongoing Project",
+		year: "2025",
+		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
+		description:
+			"Project brief : Learning Management System for English Foundation Program at Rangsit University International College. Under supervision of Dr. Timothy Boundy, we are developing a comprehensive LMS to enhance the learning experience for students.",
+		imgAlt: "Foundation Program LMS image",
+	},
+	{
+		image: "/seminar.jpeg",
+		title: "University Scale Seminar",
+		year: "30th June 2025",
+		brief: '"Tech-Driven Learning: Innovations Shaping ICT & IB Education"',
+		description:
+			"Project brief : Successfully organized university-scale seminar under supervision of Dr. Suttisak Jantavongso. My team was able to publish and present 5 different research papers via this event. With over 100 attendees, two sponsorships and positive reviews from 90% of stakeholders, my first experience in event management and project management skills proved invaluable.",
+		imgAlt: "University Scale Seminar image",
 	},
 ];
 

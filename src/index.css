@@ -1,13 +1,21 @@
 /* ----------------------------------------------------------
    🌿 Global Styles & Variables
 -----------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
 	--bg: #f9f9f9; /* near-white background */
 	--ink: #222222; /* main text: deep neutral black */
 	--ink-2: #555555; /* secondary text: soft gray */
 	--button-bg: #e5e5e5; /* subtle gray for button backgrounds */
+	--button-silver: linear-gradient(
+		165deg,
+		#bbb,
+		#e5e5e5,
+		#fff,
+		#e0e0e0,
+		#c5c5c5
+	);
 	--brand: #000000; /* pure black for highlights, links, accents */
 	--brand-2: #2f2f2f;
 	--accent: #4caf50;
@@ -29,8 +37,8 @@ html {
 }
 body {
 	margin: 0;
-	font-family: "Sulphur Point", system-ui, -apple-system, Segoe UI, Roboto,
-		Ubuntu, "Helvetica Neue", Arial;
+	font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+		"Helvetica Neue", Arial;
 	color: var(--ink);
 	background: var(--bg);
 	line-height: 1.6;
@@ -105,10 +113,10 @@ body {
 	transition: filter 0.2s ease;
 }
 .btn:hover {
-	filter: brightness(0.85);
+	filter: brightness(1.05);
 }
 .btn--ghost {
-	background: var(--button-bg);
+	background: var(--button-silver);
 	color: var(--brand);
 	box-shadow: none;
 }
