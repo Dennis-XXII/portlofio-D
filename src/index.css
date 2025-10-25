@@ -1,0 +1,786 @@
+/* ----------------------------------------------------------
+   🌿 Global Styles & Variables
+-----------------------------------------------------------*/
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+	--bg: #f9f9f9; /* near-white background */
+	--ink: #222222; /* main text: deep neutral black */
+	--ink-2: #555555; /* secondary text: soft gray */
+	--button-bg: #e5e5e5; /* subtle gray for button backgrounds */
+	--button-silver: linear-gradient(
+		165deg,
+		#bbb,
+		#e5e5e5,
+		#fff,
+		#e0e0e0,
+		#c5c5c5
+	);
+	--brand: #000000; /* pure black for highlights, links, accents */
+	--brand-2: #2f2f2f;
+	--accent: #4caf50;
+	--nav-h: 68px;
+	--max-w: 1120px;
+	--radius-xl: 24px;
+	--radius-lg: 16px;
+	--radius-md: 8px;
+	--shadow-md: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	margin: 0;
+	font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+		"Helvetica Neue", Arial;
+	color: var(--ink);
+	background: var(--bg);
+	line-height: 1.6;
+}
+
+/* ----------------------------------------------------------
+   🧱 Layout Containers
+-----------------------------------------------------------*/
+.container {
+	width: 100%;
+	max-width: var(--max-w);
+	padding: 20px;
+	margin-inline: auto;
+	margin-top: 0;
+	align-self: center;
+	align-items: center;
+}
+
+.headerP {
+	color: var(--brand);
+	font-weight: 600;
+}
+
+.section {
+	padding: 40px;
+	scroll-margin-top: calc(var(--nav-h)+20px);
+	border-bottom: 1px solid color-mix(in srgb, var(--brand-2) 40%, transparent);
+	align-items: center;
+}
+.section--fullscreen {
+	min-height: 100svh;
+	display: flex;
+	align-items: center;
+}
+
+/* ----------------------------------------------------------
+   ✍️ Typography
+-----------------------------------------------------------*/
+.h1 {
+	font-size: clamp(36px, 4vw, 56px);
+	font-weight: 600;
+	color: var(--brand);
+}
+.h2 {
+	font-size: clamp(36px, 3vw, 48px);
+	font-weight: 600;
+	color: var(--brand);
+	margin-bottom: 24px;
+}
+.h3 {
+	font-size: clamp(20px, 2vw, 24px);
+	font-weight: 600;
+	color: var(--brand);
+}
+
+/* ----------------------------------------------------------
+   🔘 Buttons & Links
+-----------------------------------------------------------*/
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 14px 22px;
+	border-radius: 999px;
+	background: var(--brand);
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	box-shadow: var(--shadow-md);
+	text-decoration: none;
+	font-weight: 600;
+	transition: filter 0.2s ease;
+}
+.btn:hover {
+	filter: brightness(1.05);
+}
+.btn--ghost {
+	background: var(--button-silver);
+	color: var(--brand);
+	box-shadow: none;
+}
+.link {
+	color: var(--brand);
+	text-underline-offset: 4px;
+	font-weight: 500;
+}
+
+/* ----------------------------------------------------------
+   🧭 Navbar
+-----------------------------------------------------------*/
+.nav {
+	position: fixed;
+	top: 0;
+	z-index: 50;
+	backdrop-filter: saturate(120%) blur(6px);
+	background: color-mix(in srgb, var(--bg) 88%, white);
+	height: var(--nav-h);
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid color-mix(in srgb, var(--brand-2) 60%, transparent);
+	width: 100%;
+}
+.nav_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 20px;
+	max-width: var(--max-w);
+	margin-inline: auto;
+}
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-weight: 600;
+	color: var(--brand);
+}
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 10px;
+	border-radius: 999px;
+	background: #e8f5e9;
+	color: #2e7d32;
+	font-size: 14px;
+}
+
+@keyframes pulseGlow {
+	0% {
+		box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+		transform: scale(1);
+	}
+	70% {
+		box-shadow: 0 0 0 6px rgba(76, 175, 80, 0);
+		transform: scale(1.2);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+		transform: scale(1);
+	}
+}
+
+.badge__dot {
+	width: 8px;
+	height: 8px;
+	background: var(--accent);
+	border-radius: 999px;
+	box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
+	animation: pulseGlow 2s infinite;
+}
+
+.nav__links {
+	position: relative;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	padding: 6px;
+	border-radius: 999px;
+	background: var(--button-bg);
+}
+.nav__btn {
+	position: relative;
+	padding: 8px 12px;
+	border-radius: 999px;
+	color: var(--brand);
+	text-decoration: none;
+	font-weight: 600;
+	transition: all 0.2s ease;
+	isolation: isolate;
+}
+
+.nav__label {
+	position: relative;
+	z-index: 2;
+}
+
+.nav__pill {
+	position: absolute;
+	z-index: 1;
+	inset: -6px -10px; /* slightly larger than button padding */
+	border-radius: 999px;
+	background: var(--brand);
+	box-shadow: var(--shadow-md);
+}
+.nav__btn.is-active {
+	background: transparent;
+	color: #fff;
+}
+
+/* ----------------------------------------------------------
+   🧩 Layout Grids
+-----------------------------------------------------------*/
+.grid {
+	display: grid;
+	gap: 24px;
+}
+.grid-2 {
+	grid-template-columns: 1fr 1fr;
+}
+
+/* Media blocks */
+.media {
+	display: grid;
+	grid-template-columns: 180px 1fr;
+	gap: 12px;
+	align-items: start;
+	margin-bottom: 60px;
+}
+.media_home {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	align-items: center;
+	width: 100%;
+	max-width: var(--max-w);
+	text-align: center;
+}
+
+/* ----------------------------------------------------------
+   🖼️ Image Styles
+-----------------------------------------------------------*/
+.square {
+	width: 100%;
+	aspect-ratio: 1/1;
+	max-width: 160px;
+	background: var(--button-bg);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+	object-fit: cover;
+	overflow: hidden;
+}
+.circle-img {
+	width: 100%;
+	max-width: 200px;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	box-shadow: var(--shadow-md);
+	overflow: hidden;
+	display: inline-grid;
+	place-items: center;
+	position: relative;
+	background: none;
+	transition: transform 0.3s ease;
+	cursor: pointer;
+	filter: brightness(1) !important;
+}
+
+/* subtle depth illusion using perspective */
+.circle-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	border-radius: inherit;
+	transform-origin: center;
+}
+
+/* 🔮 Dolly zoom effect on hover */
+.circle-img:hover img {
+	transform: scale(1.005);
+}
+
+/* optional subtle shadow pulse when hovered */
+.circle-img:hover {
+	transform: scale(1.05);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+@media (hover: none) {
+	.circle-img:hover,
+	.circle-img:hover img {
+		transform: none !important;
+		filter: brightness(1) !important;
+	}
+}
+
+/* ----------------------------------------------------------
+   📜 Lists / Key-Value Rows
+-----------------------------------------------------------*/
+.ul {
+	padding-left: 20px;
+}
+.kv {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--brand-2);
+	padding: 12px 0;
+}
+
+/* ----------------------------------------------------------
+   📞 Contact Icons
+-----------------------------------------------------------*/
+.icons {
+	display: flex;
+	gap: 40px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.icon-link {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	color: var(--brand);
+	text-decoration: none;
+}
+
+/* ----------------------------------------------------------
+   📏 Spacing Utilities
+-----------------------------------------------------------*/
+.stack-gap {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+/* ----------------------------------------------------------
+   ⬇️ Scroll Prompt
+-----------------------------------------------------------*/
+.home-section {
+	position: relative;
+}
+
+/* full-width fixed row, centered with flex  */
+.scroll-block {
+	position: fixed;
+	inset-inline: 0; /* left:0; right:0 in logical shorthand */
+	bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center; /* centers horizontally */
+	gap: 10px;
+	z-index: 10;
+}
+.scroll-text {
+	font-weight: 500;
+	color: var(--brand);
+	font-size: 16px;
+	text-align: center;
+}
+.scroll-down {
+	width: 52px;
+	height: 52px;
+	border-radius: 999px;
+	border: none;
+	background: var(--brand);
+	color: var(--bg);
+	box-shadow: var(--shadow-md);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: filter 0.2s ease;
+}
+.scroll-down:hover {
+	filter: brightness(0.95);
+}
+
+/* ----------------------------------------------------------
+   🌀 Infinite Image Carousel
+-----------------------------------------------------------*/
+/* outer lets vertical overflow show */
+.carousel-outer {
+	position: relative;
+	width: 100%;
+	overflow: visible; /* allow hover scale/shadow to escape vertically */
+	margin-top: 24px;
+}
+
+/* inner clips horizontally only (we’ll add vertical padding so lifts aren't cut) */
+.carousel-viewport {
+	overflow: hidden; /* clips left/right overflow */
+	width: 100%;
+	padding-block: 20px; /* room for hover lift/shadow */
+}
+
+.carousel-viewport:hover .carousel-track {
+	animation-play-state: paused;
+}
+
+.carousel-track {
+	display: flex;
+	gap: 8px;
+	animation: scrollInfinite 20s linear infinite;
+}
+
+@keyframes scrollInfinite {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+.carousel-item {
+	flex: 0 0 auto;
+	width: 220px;
+	text-align: center;
+	cursor: pointer;
+	transition: transform 0.3s ease;
+}
+
+.carousel-img {
+	width: 100%;
+	aspect-ratio: 1/1;
+	object-fit: cover;
+	box-shadow: var(--shadow-md);
+	transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.carousel-item:hover .carousel-img .carousel-caption {
+	filter: brightness(1.005);
+	scale: 1.1;
+}
+
+.carousel-caption {
+	color: var(--brand);
+	margin-top: 10px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+/* Description bar */
+.carousel-description-bar {
+	height: 40px;
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+	transition: all 0.3s ease;
+	min-height: 40px;
+}
+
+.carousel-description-bar p {
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--brand);
+	text-align: center;
+	margin: 0;
+	animation: fadeInDesc 0.3s ease;
+}
+
+@keyframes fadeInDesc {
+	from {
+		opacity: 0;
+		transform: translateY(5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Utility class to pause carousel animation */
+.carousel-track.is-paused {
+	animation-play-state: paused;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+	.carousel-item {
+		width: 140px;
+	}
+}
+
+@media (max-width: 480px) {
+	.carousel-item {
+		width: 110px;
+	}
+}
+
+/* ----------------------------------------------------------
+   📱 Responsive Design (Mobile & Tablet)
+-----------------------------------------------------------*/
+
+/* 🧠 Up to 1100px – 2 columns */
+@media (max-width: 1100px) {
+	.grid-2 {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+}
+
+/* 📗 Up to 900px – single-column layout */
+@media (max-width: 900px) {
+	.grid-2 {
+		grid-template-columns: 1fr;
+	}
+	.media {
+		grid-template-columns: 1fr;
+	}
+	.nav__links {
+		gap: 6px;
+		padding: 2px 4px;
+	}
+}
+
+/* 📘 Up to 768px – text scaling and section padding */
+@media (max-width: 768px) {
+	.section {
+		padding: 48px 24px;
+	}
+	.h1 {
+		font-size: clamp(30px, 6vw, 56px);
+	}
+	.h2 {
+		font-size: clamp(28px, 5vw, 36px);
+	}
+	.h3 {
+		font-size: clamp(10px, 4vw, 20px);
+		width: 100%;
+		max-width: 180px;
+	}
+	.carousel-item {
+		width: 160px;
+	}
+	.text_box {
+		margin-left: 10px;
+	}
+	.badge {
+		font-size: 8px;
+		padding: 4px 8px;
+	}
+	.badge__dot {
+		width: 6px;
+		height: 6px;
+	}
+}
+
+/* 📗 Up to 600px – tighten spacing, smaller icons, center align */
+@media (max-width: 600px) {
+	.container {
+		flex: auto;
+		padding: 16px;
+		flex-direction: column;
+		align-items: center;
+	}
+	.media {
+		grid-template-columns: 1fr;
+		justify-items: center;
+		text-align: start;
+	}
+	.media_home {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		align-items: center;
+		justify-items: center;
+	}
+
+	.headerP {
+		max-width: 220px;
+	}
+
+	.section {
+		padding: 40px 20px;
+	}
+	.circle-img {
+		width: 200px;
+	}
+	.scroll-block {
+		bottom: 25px;
+	}
+	.scroll-down {
+		width: 32px;
+		height: 32px;
+	}
+	.scroll-text {
+		font-size: 14px;
+	}
+	.btn {
+		padding: 10px 14px;
+		font-size: 14px;
+	}
+	.nav {
+		padding: 4px 0;
+	}
+	.nav__links {
+		gap: 2px;
+		padding: 0;
+	}
+	.nav__btn {
+		padding: 8px 12px;
+		font-size: 9px;
+	}
+	.circle-img {
+		width: 160px;
+	}
+	.brand {
+		font-size: 14px;
+		gap: 24px;
+	}
+	.badge {
+		font-size: 12px;
+		padding: 4px 8px;
+	}
+	.badge__dot {
+		width: 8px;
+		height: 8px;
+	}
+	.carousel-item {
+		width: 130px;
+	}
+	.icons {
+		max-width: 200px;
+		margin-inline: auto;
+	}
+}
+
+/* 📘 Up to 420px – smallest phones */
+@media (max-width: 420px) {
+}
+
+/* ----------------------------------------------------------
+   🍔 Mobile Nav / Hamburger
+-----------------------------------------------------------*/
+
+/* Overlay to darken the background */
+.overlay {
+	position: fixed;
+	inset: 0; /* shorthand for top, right, bottom, left = 0 */
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 99;
+}
+
+/* The slide-out drawer container */
+.mobile-nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 75%;
+	max-width: 320px;
+	background: var(--bg);
+	z-index: 100;
+	box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+}
+
+.mobile-nav__header {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+	border-bottom: 1px solid var(--brand-2);
+}
+
+.mobile-nav__close-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--brand);
+}
+
+.mobile-nav__links {
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+	gap: 16px;
+}
+
+.mobile-nav__link {
+	color: var(--brand);
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: 600;
+	padding: 12px;
+	border-radius: 10px;
+	transition: background-color 0.2s ease, color 0.2s ease;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.mobile-nav__link:hover {
+	background-color: var(--brand-2);
+}
+
+.mobile-nav__link.is-active {
+	background: var(--brand);
+	color: #fff;
+}
+
+.mobile-nav__link.is-active .mobile-nav__dot {
+	background: #fff;
+	box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+}
+
+/* keyboard focus */
+.mobile-nav__link:focus-visible {
+	outline: 2px dashed var(--brand);
+	outline-offset: 3px;
+}
+
+/* subtle left dot/stripe */
+.mobile-nav__dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 999px;
+	background: transparent;
+	display: inline-block;
+	flex: 0 0 auto;
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	transition: all 0.2s ease;
+}
+
+.mobile-nav__label {
+	line-height: 1.2;
+}
+
+/* Hamburger button styling */
+.hamburger-btn {
+	display: none; /* Hidden by default */
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 8px;
+	color: var(--brand);
+	z-index: 10000;
+}
+
+/* ----------------------------------------------------------
+   📱 Responsive Design Overrides
+-----------------------------------------------------------*/
+
+/* Show hamburger and hide desktop nav on tablets and smaller */
+@media (max-width: 900px) {
+	/* Hide the original desktop link container */
+	.nav__links {
+		display: none;
+	}
+
+	/* Show the hamburger button */
+	.hamburger-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

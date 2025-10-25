@@ -1,0 +1,169 @@
+/* ----------------------------------------------------------
+   📖 Storytelling Cards
+-----------------------------------------------------------*/
+.story-card {
+	width: 100%;
+	padding: 80px 40px;
+	margin: 40px 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.story-card__content {
+	max-width: 900px;
+	width: 100%;
+}
+
+.story-card__title {
+	font-size: clamp(38px, 6vw, 72px);
+	font-weight: 600;
+	font-kerning: auto;
+	line-height: 1.1;
+	margin: 0;
+	letter-spacing: -0.02em;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25em;
+}
+
+.story-card__word {
+	display: inline-block;
+}
+
+.story-card__underline {
+	height: 6px;
+	width: 120px;
+	background: var(--brand);
+	margin: 24px 0;
+	transform-origin: left;
+	border-radius: 3px;
+}
+
+.story-card__subtitle {
+	font-size: clamp(18px, 2.5vw, 28px);
+	line-height: 1.6;
+	margin: 24px 0 0 0;
+	font-weight: 400;
+	max-width: 700px;
+}
+
+.story-card__extra {
+	margin-top: 32px;
+}
+
+/* Theme variations */
+.story-card--light {
+	background: var(--bg);
+	color: var(--brand);
+}
+
+.story-card--dark {
+	background: var(--brand);
+	color: var(--bg);
+}
+
+.story-card--dark .story-card__underline {
+	background: var(--bg);
+}
+
+.story-card--gradient {
+	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+	color: white;
+}
+
+.story-card--gradient .story-card__underline {
+	background: linear-gradient(90deg, var(--bg), #81c784);
+}
+
+.story-card--accent {
+	background: linear-gradient(135deg, #e8f5e9 0%, #f5f5f5 100%);
+	color: var(--brand);
+	border-left: 8px solid var(--accent);
+}
+
+/* Alignment variations */
+.story-card--left {
+	text-align: left;
+}
+
+.story-card--left .story-card__content {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+.story-card--left .story-card__underline {
+	transform-origin: left;
+}
+
+.story-card--center {
+	text-align: center;
+}
+
+.story-card--center .story-card__content {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.story-card--center .story-card__title {
+	justify-content: center;
+}
+
+.story-card--center .story-card__underline {
+	margin-left: auto;
+	margin-right: auto;
+	transform-origin: center;
+}
+
+.story-card--center .story-card__subtitle {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.story-card--right {
+	text-align: right;
+}
+
+.story-card--right .story-card__content {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.story-card--right .story-card__title {
+	justify-content: flex-end;
+}
+
+.story-card--right .story-card__underline {
+	margin-left: auto;
+	transform-origin: right;
+}
+
+.story-card--right .story-card__subtitle {
+	margin-left: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.story-card {
+		padding: 60px 24px;
+	}
+
+	.story-card__title {
+		font-size: clamp(32px, 8vw, 60px);
+	}
+
+	.story-card__subtitle {
+		font-size: clamp(16px, 4vw, 22px);
+	}
+
+	.story-card__underline {
+		height: 4px;
+		width: 80px;
+		margin: 16px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.story-card {
+		padding: 40px 20px;
+	}
+}

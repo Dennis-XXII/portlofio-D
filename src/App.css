@@ -1,0 +1,8 @@
+/* You can keep app-specific overrides here if you like.
+   For now we’ll keep it tiny; most styles live in index.css. */
+
+html,
+body,
+#root {
+	height: 100%;
+}
