@@ -3,7 +3,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import "./TiltedCard.css";
 
 const springValues = {
-	damping: 30,
+	damping: 20,
 	stiffness: 100,
 	mass: 2,
 };
@@ -15,7 +15,7 @@ export default function TiltedCard({
 	containerWidth = "100%",
 	imageHeight = "300px",
 	imageWidth = "300px",
-	scaleOnHover = 1.1,
+	scaleOnHover = 1.2,
 	rotateAmplitude = 16,
 	showMobileWarning = true,
 	showTooltip = true,

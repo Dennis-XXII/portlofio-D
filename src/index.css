@@ -37,8 +37,15 @@ html {
 }
 body {
 	margin: 0;
-	font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
-		"Helvetica Neue", Arial;
+	font-family:
+		"Raleway",
+		system-ui,
+		-apple-system,
+		Segoe UI,
+		Roboto,
+		Ubuntu,
+		"Helvetica Neue",
+		Arial;
 	color: var(--ink);
 	background: var(--bg);
 	line-height: 1.6;
@@ -116,9 +123,17 @@ body {
 	filter: brightness(1.05);
 }
 .btn--ghost {
-	background: var(--button-silver);
-	color: var(--brand);
+	background: rgba(255, 255, 255, 0.3);
+	color: var(--ink);
 	box-shadow: none;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(10px);
+}
+
+.btn--ghost:hover {
+	background: rgba(255, 255, 255, 0.6);
+	text-decoration: underline;
+	color: var(--brand);
 }
 .link {
 	color: var(--brand);
@@ -452,7 +467,9 @@ body {
 	aspect-ratio: 1/1;
 	object-fit: cover;
 	box-shadow: var(--shadow-md);
-	transition: transform 0.4s ease, filter 0.4s ease;
+	transition:
+		transform 0.4s ease,
+		filter 0.4s ease;
 }
 
 .carousel-item:hover .carousel-img .carousel-caption {
@@ -713,7 +730,9 @@ body {
 	font-weight: 600;
 	padding: 12px;
 	border-radius: 10px;
-	transition: background-color 0.2s ease, color 0.2s ease;
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
 	display: flex;
 	align-items: center;
 	gap: 10px;

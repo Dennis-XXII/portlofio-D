@@ -2,7 +2,7 @@ import AnimatedSection from "./AnimatedSection";
 import { projects } from "../data";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import "../exp.css";
+import "../projects.css";
 import StorytellingCard from "../bits/StoryCard";
 
 export default function Projects({ setActive }) {
@@ -30,24 +30,30 @@ export default function Projects({ setActive }) {
 				<div className="stack-gap">
 					{projects.map((p, i) => (
 						<AnimatedSection key={i} delay={i * 0.08}>
-							<div className="experience-card">
-								<div className="experience-image-wrapper">
-									<img
-										src={p.image}
-										alt={p.imgAlt}
-										className="experience-img"
-									/>
-									<div className="experience-overlay"></div>
+							<div className="projects-card">
+								<div className="projects-image-wrapper">
+									<img src={p.image} alt={p.imgAlt} className="projects-img" />
+									<div className="projects-overlay"></div>
 								</div>
-								<div className="experience-content">
-									<div className="experience-header">
+								<div className="projects-content">
+									<div className="projects-header">
 										<div>
 											<h3 className="h3">{p.title}</h3>
-											<span className="experience-title">{p.brief}</span>
+											<span className="projects-title">{p.brief}</span>
 										</div>
-										<span className="experience-years">{p.year}</span>
+										<span className="projects-years">{p.year}</span>
 									</div>
-									<p className="experience-description">{p.description}</p>
+									<p className="projects-description">{p.description}</p>
+
+									{p.link && (
+										<a
+											className="projects-link"
+											href={p.link}
+											target="_blank"
+											rel="noopener noreferrer">
+											Visit Website
+										</a>
+									)}
 								</div>
 							</div>
 						</AnimatedSection>
