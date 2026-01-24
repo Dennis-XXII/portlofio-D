@@ -48,6 +48,15 @@ export default function Experience({ setActive }) {
 										<span className="experience-years">{exp.years}</span>
 									</div>
 									<p className="experience-description">{exp.description}</p>
+									{exp.link && (
+										<a
+											className="experience-link"
+											href={exp.link}
+											target="_blank"
+											rel="noopener noreferrer">
+											Check out my works here!
+										</a>
+									)}
 								</div>
 							</div>
 						</AnimatedSection>

@@ -63,7 +63,7 @@ export default function About({ setActive }) {
 					</AnimatedSection>
 				))}
 
-				{/* achievements */}
+				{/* achievements
 				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Achievements
 				</h2>
@@ -79,9 +79,9 @@ export default function About({ setActive }) {
 							<div>{ach.year}</div>
 						</div>
 					</AnimatedSection>
-				))}
+				))}  */}
 
-				{/* Certifications */}
+				{/* Certifications
 				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Certifications
 				</h2>
@@ -97,7 +97,7 @@ export default function About({ setActive }) {
 							<div>{cert.year}</div>
 						</div>
 					</AnimatedSection>
-				))}
+				))}  */}
 
 				{/* Skills + Languages */}
 				<div className="grid grid-2" style={{ marginTop: 100 }}>

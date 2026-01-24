@@ -43,7 +43,7 @@
 
 .tilted-card-img:hover {
 	cursor: pointer;
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .tilted-card-overlay {
@@ -52,7 +52,7 @@
 	left: 0;
 	z-index: 2;
 	will-change: transform;
-	transform: translateZ(30px);
+	transform: translateZ(60px);
 }
 
 .tilted-card-caption {

@@ -1,7 +1,6 @@
 // Static content you’ll tweak later
 
-import { desc, image } from "framer-motion/client";
-
+import { desc, image, link } from "framer-motion/client";
 export const experiences = [
 	{
 		image: "/rsuGlobal.png",
@@ -9,6 +8,7 @@ export const experiences = [
 		role: "Lead Full Stack Developer (Laravel) & Team Manager",
 		years: "2025 – Active",
 		imgAlt: "Experience 1 image",
+		link: "https://rsuglobal.rsu.ac.th/",
 		description:
 			"As a Lead Full Stack Developer (Laravel) & Team Manager at RSU Global, I handle and maintain student appointment web system used by around 1,000 students. I also oversee and manage a team of four developers to ensure successful delivery of projects on time and best quality.",
 	},
@@ -18,6 +18,7 @@ export const experiences = [
 		role: "Lead Organizer",
 		years: "June 2025",
 		imgAlt: "Experience 2 image",
+		link: "",
 		description:
 			'Successfully led the seminar "Tech-driven Learning: Innovations shaping ICT & IB Education" as the Lead Organizer. Coordinated logistics, managed speaker engagements, and oversaw event promotion, resulting in a well-attended and impactful seminar for students and faculty.',
 	},
@@ -27,55 +28,61 @@ export const experiences = [
 		role: "Visual Creator & Editor",
 		years: "2023 – 2025",
 		imgAlt: "Experience 3 image",
+		link: "https://www.facebook.com/profile.php?id=100089996959451",
 		description:
 			"Created and edited visual content for club promotions, including posters, social media graphics, and event videos. Collaborated with club members to ensure brand consistency and enhance audience engagement.",
 	},
 	{
 		image: "/experience1.png",
 		title: "SKYRISE CORNER EDUCATION AGENCY",
-		role: "Visual Creator & Editor",
+		role: "Content Editor",
 		years: "2024 – Active",
 		imgAlt: "Experience 1 image",
+		link: "https://www.facebook.com/sharingaboutthai",
 		description:
-			"As a Visual Creator & Editor at Skyrise Corner Education Agency, I developed and edited engaging visual content for marketing campaigns, including social media graphics, promotional videos, and website visuals.",
+			"As a Content Creator & Editor at Skyrise Corner Education Agency, I created and edited engaging visual content for marketing campaigns, including social media graphics, promotional videos, and web content visuals.",
 	},
 ];
 
 export const projects = [
 	{
-		image: "/cimso.jpg",
-		title: "Dash AI - AI-Powered Hospitality Analytics Dashboard",
-		year: "Mar 2025",
-		brief: "Tech Stack: React, Django, PostgreSQL",
-		description:
-			"Project brief : This was my project as a finalist in CimSO ERP Hackathon 2025 with my team, Doomed VII. We got into the final round among 20+ teams. Powerd by Gemini AI, Dash AI is an AI-powered analytics dashboard designed for the hospitality industry to optimize operations and enhance guest experiences.",
-		imgAlt: "cimso ERP Hackathon image",
-	},
-	{
-		image: "/rsuGlobal.png",
+		image: "/rsuGloball.png",
 		title: "RSU Global! - Student Appointment System",
 		year: "2025",
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
+		link: "https://rsuglobal.rsu.ac.th",
 		description:
-			"Project brief : Appoinment Website system for RSU Global Language Center. Under supervision of Dr. Edward Devere Bacon, we developed a web-based appointment system to streamline student bookings and improve administrative efficiency improving process efficiency for both international and Thai students by 60%",
+			"Student management & appointment Website system for RSU Global Language Center. Under supervision of Dr. Edward Devere Bacon, we developed a web-based appointment system to streamline student bookings and improve administrative efficiency improving process efficiency for both international and Thai students by 60%",
 		imgAlt: "RSU Global Appointment System image",
 	},
 	{
-		image: "/experience5.jpg",
-		title: "Foundation Program LMS - Ongoing Project",
+		image: "/ricfp.png",
+		title: "Foundation Program Moodle - RIC LMS",
 		year: "2025",
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
+		link: "https://ricfp.rsu.ac.th/",
 		description:
-			"Project brief : Learning Management System for English Foundation Program at Rangsit University International College. Under supervision of Dr. Timothy Boundy, we are developing a comprehensive LMS to enhance the learning experience for students.",
+			"Learning Management System for English Foundation Program at Rangsit University International College. Under supervision of Dr. Timothy Boundy, we are developing a comprehensive LMS to enhance the learning experience for students.",
 		imgAlt: "Foundation Program LMS image",
 	},
 	{
-		image: "/seminar.jpeg",
+		image: "/cimso.png",
+		title: "Dash AI - AI-Powered Hospitality Analytics Dashboard",
+		year: "Mar 2025",
+		brief: "Tech Stack: React, Django, PostgreSQL",
+		link: "",
+		description:
+			"My finalist project in CimSO ERP Hackathon 2025 with my team, Doomed VII. We got into the final round among 20+ teams. Powerd by Gemini AI, Dash AI is an AI-powered analytics dashboard designed for the hospitality industry to optimize operations and enhance guest experiences.",
+		imgAlt: "cimso ERP Hackathon image",
+	},
+	{
+		image: "/seminar.png",
 		title: "University Scale Seminar",
 		year: "30th June 2025",
 		brief: '"Tech-Driven Learning: Innovations Shaping ICT & IB Education"',
+		link: "",
 		description:
-			"Project brief : Successfully organized university-scale seminar under supervision of Dr. Suttisak Jantavongso. My team was able to publish and present 5 different research papers via this event. With over 100 attendees, two sponsorships and positive reviews from 90% of stakeholders, my first experience in event management and project management skills proved invaluable.",
+			"Successfully organized university-scale seminar under supervision of Dr. Suttisak Jantavongso. My team was able to publish and present 5 different research papers via this event. With over 100 attendees, two sponsorships and positive reviews from 90% of stakeholders, my first experience in event management and project management skills proved invaluable.",
 		imgAlt: "University Scale Seminar image",
 	},
 ];

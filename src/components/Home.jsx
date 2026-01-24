@@ -76,8 +76,10 @@ export default function Home({ setActive }) {
 							</motion.span>
 							.
 						</h1>
-						<p>Frontend Developer, Visual Designer & Editor</p>
-						<p>Currently student at Rangsit International College, Thailand.</p>
+						<p>Web Developer, Visual Designer & Editor</p>
+						<p>
+							Currently ICT student at Rangsit International College, Thailand.
+						</p>
 
 						<div
 							style={{
