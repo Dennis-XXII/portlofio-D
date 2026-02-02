@@ -123,9 +123,34 @@
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+	p {
+		font-size: 12px;
+	}
+
+	.experience-header {
+		font-size: 14px;
+	}
+	.experience-title {
+		font-size: 12px;
+		padding: 4px 10px;
+	}
+	.experience-years {
+		font-size: 12px;
+		padding: 4px 10px;
+		background: var(--brand);
+		color: white;
+	}
+	.experience-link {
+		font-size: 11px;
+		padding: 4px 10px;
+	}
 	.experience-card {
 		grid-template-columns: 1fr;
 		padding: 20px;
+	}
+	.experience-card:hover {
+		transform: translateY(0);
+		box-shadow: none;
 	}
 
 	.experience-image-wrapper {

@@ -52,7 +52,7 @@ export const projects = [
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://rsuglobal.rsu.ac.th",
 		description:
-			"Student management & appointment Website system for RSU Global Language Center. Under supervision of Dr. Edward Devere Bacon, we developed a web-based appointment system to streamline student bookings and improve administrative efficiency improving process efficiency for both international and Thai students by 60%",
+			"A legacy-transformed web ecosystem designed to automate student bookings and administrative workflows for the RSU Global! Peer-assisted Learning Center. By re-engineering the website and enriching features in my term, the system achieved a 60% increase in process efficiency for both Thai and international student bodies.",
 		imgAlt: "RSU Global Appointment System image",
 	},
 	{
@@ -62,7 +62,7 @@ export const projects = [
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://ricfp.rsu.ac.th/",
 		description:
-			"Learning Management System for English Foundation Program at Rangsit University International College. Under supervision of Dr. Timothy Boundy, we are developing a comprehensive LMS to enhance the learning experience for students.",
+			"Under supervision of Prof. Timothy Boundy, we developed a customized LMS using Laravel to facilitate end-to-end online learning and resource sharing platform. The platform supports course materials, assignments, and communication between students and instructors. Me and my team successfully launched the LMS on university-hosted servers, which is now actively used by Rangsit International College students and faculty members.",
 		imgAlt: "Foundation Program LMS image",
 	},
 	{
@@ -72,7 +72,7 @@ export const projects = [
 		brief: "Tech Stack: React, Django, PostgreSQL",
 		link: "",
 		description:
-			"My finalist project in CimSO ERP Hackathon 2025 with my team, Doomed VII. We got into the final round among 20+ teams. Powerd by Gemini AI, Dash AI is an AI-powered analytics dashboard designed for the hospitality industry to optimize operations and enhance guest experiences.",
+			"An AI-powered analytics dashboard built for the hospitality industry, integrating Gemini AI to streamline operations and elevate guest experience. Recognized as a top finalist among 20+ competing teams, the platform transforms complex ERP data into actionable operational insights.",
 		imgAlt: "cimso ERP Hackathon image",
 	},
 	{
@@ -91,15 +91,25 @@ export const skills = [
 	"React.js",
 	"Next.js",
 	"Laravel",
-	"Advanced HTML, CSS",
-	"Basic Python and Backend API knowledge",
-	"Digital Media",
-	"Video Editing and Promotion Contents",
+	"Advanced CSS",
+	"Python and Backend APIs",
+	"Graphic Design (Figma, Canva, Affinity)",
+	"Video Editing(CapCut, Davinci Resolve)",
+];
+
+export const softSkills = [
+	"Effective Communication",
+	"Team Management",
+	"Cross-functional Leadership",
+	"Punctuality",
+	"Time Management",
+	"Branding & Creative Sensibility",
+	"Agile Adaptability",
 ];
 
 export const languages = [
 	"Burmese (Native)",
-	"English (Advanced)",
+	"English (Advanced, CEFR C1)",
 	"Thai (Beginner)",
 	"Chinese (Conversational)",
 ];

@@ -1,6 +1,7 @@
 import AnimatedSection from "./AnimatedSection";
 import {
 	skills,
+	softSkills,
 	languages,
 	education,
 	achievements,
@@ -100,11 +101,20 @@ export default function About({ setActive }) {
 				))}  */}
 
 				{/* Skills + Languages */}
-				<div className="grid grid-2" style={{ marginTop: 100 }}>
+				<div className="grid-3" style={{ marginTop: 100 }}>
 					<AnimatedSection>
-						<h2 className="h2">Skills</h2>
+						<h2 className="h2">Hard Skills</h2>
 						<ul className="ul">
 							{skills.map((s, i) => (
+								<li key={i}>{s}</li>
+							))}
+						</ul>
+					</AnimatedSection>
+
+					<AnimatedSection delay={0.06}>
+						<h2 className="h2">Soft Skills</h2>
+						<ul className="ul">
+							{softSkills.map((s, i) => (
 								<li key={i}>{s}</li>
 							))}
 						</ul>
