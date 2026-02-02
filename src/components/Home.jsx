@@ -27,7 +27,7 @@ export default function Home({ setActive }) {
 		if (!el) return;
 		const navH =
 			parseInt(
-				getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
+				getComputedStyle(document.documentElement).getPropertyValue("--nav-h"),
 			) || 68;
 		const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
 		window.scrollTo({ top: y, behavior: "smooth" });
@@ -46,7 +46,7 @@ export default function Home({ setActive }) {
 				<div className="media_home">
 					<AnimatedSection delay={0.1}>
 						<TiltedCard
-							imageSrc="/hobby3.jpg"
+							imageSrc="/dennis.jpeg"
 							containerHeight="200px"
 							containerWidth="200px"
 							imageHeight="200px"
@@ -54,7 +54,9 @@ export default function Home({ setActive }) {
 							rotateAmplitude={12}
 							scaleOnHover={1.05}
 							showMobileWarning={false}
-							whileHover={{ boxShadow: "0 15px 30px rgba(0,0,0,0.3)" }}
+							whileHover={{
+								boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
+							}}
 						/>
 					</AnimatedSection>
 
@@ -76,9 +78,11 @@ export default function Home({ setActive }) {
 							</motion.span>
 							.
 						</h1>
-						<p>Web Developer, Visual Designer & Editor</p>
 						<p>
-							Currently ICT student at Rangsit International College, Thailand.
+							Everyone calls me <b>Dennis</b>. I'm a Full-stack Web Developer,
+							Visual Designer & Editor
+							<br />I have a modern eye for clean and user-friendly end-to-end
+							web experiences.
 						</p>
 
 						<div
@@ -91,8 +95,8 @@ export default function Home({ setActive }) {
 							<motion.a
 								whileTap={{ scale: 0.95 }}
 								className="btn"
-								href="/KyawSwarHein_CV.pdf"
-								download="Kyaw_Swar_Hein_Resume.pdf"
+								href="/Kyaw Swar Hein.pdf"
+								download="Kyaw Swar Hein.pdf"
 								target="_blank"
 								rel="noopener noreferrer">
 								Download my Resume

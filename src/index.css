@@ -132,8 +132,9 @@ body {
 
 .btn--ghost:hover {
 	background: rgba(255, 255, 255, 0.6);
-	text-decoration: underline;
 	color: var(--brand);
+	box-shadow: var(--shadow-md);
+	transition: all 0.4s ease;
 }
 .link {
 	color: var(--brand);
@@ -253,7 +254,15 @@ body {
 	gap: 24px;
 }
 .grid-2 {
+	display: grid;
 	grid-template-columns: 1fr 1fr;
+}
+.grid-3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 32px;
+	align-items: stretch;
+	justify-items: center;
 }
 
 /* Media blocks */
@@ -721,6 +730,11 @@ body {
 	flex-direction: column;
 	padding: 24px;
 	gap: 16px;
+}
+
+.grid-3 {
+	grid-template-columns: repeat(2, 1fr);
+	/* responsive columns */
 }
 
 .mobile-nav__link {
