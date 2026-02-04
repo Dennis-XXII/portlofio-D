@@ -53,13 +53,14 @@ export default function About({ setActive }) {
 				{education.map((edu, i) => (
 					<AnimatedSection key={i} delay={i * 0.08}>
 						<div className="kv">
-							<div>
-								<p className="headerP">
-									{edu.degree} – {edu.institution}
-								</p>
-								<p style={{ maxWidth: "900px" }}>Remark: {edu.remarks}</p>
-							</div>
-							<div>{edu.years}</div>
+							<p className="headerP">{edu.degree}</p>
+							<p className="infoP">
+								{edu.institution} ( {edu.years} )
+							</p>
+							<p>
+								<b>Remark: </b>
+								{edu.remarks}
+							</p>
 						</div>
 					</AnimatedSection>
 				))}
