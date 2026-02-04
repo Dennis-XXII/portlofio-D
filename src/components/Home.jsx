@@ -46,11 +46,11 @@ export default function Home({ setActive }) {
 				<div className="media_home">
 					<AnimatedSection delay={0.1}>
 						<TiltedCard
-							imageSrc="/dennis.jpeg"
-							containerHeight="200px"
-							containerWidth="200px"
-							imageHeight="200px"
-							imageWidth="200px"
+							imageSrc="/dennis.webp"
+							containerHeight="250px"
+							containerWidth="250px"
+							imageHeight="250px"
+							imageWidth="250px"
 							rotateAmplitude={12}
 							scaleOnHover={1.05}
 							showMobileWarning={false}
@@ -81,8 +81,8 @@ export default function Home({ setActive }) {
 						<p>
 							Everyone calls me <b>Dennis</b>. I'm a Full-stack Web Developer,
 							Visual Designer & Editor
-							<br />I have a modern eye for clean and user-friendly end-to-end
-							web experiences.
+							<br />I have a modern eye for clean designs and user-friendly
+							end-to-end web experiences.
 						</p>
 
 						<div

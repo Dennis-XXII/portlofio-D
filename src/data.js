@@ -128,13 +128,6 @@ export const education = [
 		remarks:
 			"Online Education started in 2022 after coup in my country. Fully funded by university. Expected graduation date is 2027.",
 	},
-	{
-		institution: "Myanmar Institute of Infomation Technology",
-		degree: "B.Sc(Hons) Electrical Engineering",
-		years: "Ceased",
-		remarks:
-			"I had to cease my first university education due to unforseen events like the global pandemic and the coup in Myanmar.",
-	},
 ];
 
 export const achievements = [
