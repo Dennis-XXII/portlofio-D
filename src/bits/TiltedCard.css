@@ -18,6 +18,9 @@
 }
 
 @media (max-width: 640px) {
+	.tilted-card-img {
+		scale: 0.8;
+	}
 	.tilted-card-mobile-alert {
 		display: block;
 	}
