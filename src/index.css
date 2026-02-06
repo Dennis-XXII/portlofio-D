@@ -97,6 +97,7 @@ body {
 .headerP {
 	color: var(--brand);
 	font-weight: 600;
+	font-size: 20px;
 }
 
 .infoP {
@@ -104,7 +105,7 @@ body {
 	font-size: 12px;
 	background-color: var(--brand);
 	width: fit-content;
-	padding: 4px 8px;
+	padding: 6px 12px;
 	border-radius: 999px;
 }
 
@@ -323,7 +324,7 @@ body {
 	text-decoration: none;
 	font-size: 20px;
 	font-weight: 600;
-	padding: 12px;
+	padding: 12px 16px;
 	border-radius: var(--radius-xl);
 	transition:
 		background-color 0.2s ease,
@@ -504,12 +505,17 @@ body {
 }
 
 .tab-button:hover {
-	color: rgba(0, 0, 0, 0.8);
-	background: rgba(0, 0, 0, 0.02);
+	color: var(--bg);
+	background: var(--brand);
+	border-radius: 999px;
+	transition: ease-in-out 0.3s;
 }
 
 .tab-button.active {
 	color: var(--brand);
+}
+.tab-button.active:hover {
+	color: var(--bg);
 }
 
 .tab-button.active::after {
@@ -744,7 +750,7 @@ body {
 	}
 
 	.headerP {
-		font-size: 14px;
+		font-size: 16px;
 	}
 
 	.infoP {

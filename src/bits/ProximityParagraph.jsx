@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useRef, useEffect } from "react";
+import { useState, forwardRef, useMemo, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import "./ProximityParagraph.css";
 
@@ -55,12 +55,28 @@ const VariableProximity = forwardRef((props, ref) => {
 		className = "",
 		onClick,
 		style,
+		disableOnMobile = true,
+		mobileBreakpoint = 768,
 		...restProps
 	} = props;
 
+	//check for mobile and disable if needed
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		if (!disableOnMobile) return;
+
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= mobileBreakpoint);
+		};
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, [disableOnMobile, mobileBreakpoint]);
+
 	const letterRefs = useRef([]);
 	const interpolatedSettingsRef = useRef([]);
-	const mousePositionRef = useMousePositionRef(containerRef);
+	const mousePositionRef = useMousePositionRef(containerRef, !isMobile); // disable on mobile
 	const lastPositionRef = useRef({ x: null, y: null });
 
 	const parsedSettings = useMemo(() => {
@@ -102,7 +118,7 @@ const VariableProximity = forwardRef((props, ref) => {
 	};
 
 	useAnimationFrame(() => {
-		if (!containerRef?.current) return;
+		if (!containerRef?.current || isMobile) return; // disable on mobile
 		const containerRect = containerRef.current.getBoundingClientRect();
 		const { x, y } = mousePositionRef.current;
 		if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
@@ -141,7 +157,7 @@ const VariableProximity = forwardRef((props, ref) => {
 			interpolatedSettingsRef.current[index] = newSettings;
 			letterRef.style.fontVariationSettings = newSettings;
 		});
-	});
+	}, !isMobile);
 
 	const words = label.split(" ");
 	let letterIndex = 0;

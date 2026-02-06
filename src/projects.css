@@ -8,13 +8,15 @@
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: hidden;
 	border: 1px solid rgba(0, 0, 0, 0.06);
+	max-width: 80%;
 	min-height: 300px;
 	background: white;
 	aspect-ratio: 16 / 9;
+	margin-inline: auto;
 }
 
 .projects-card:hover {
-	transform: translateY(-4px);
+	scale: 0.985;
 	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 	border-color: rgba(0, 0, 0, 0.1);
 }
@@ -51,15 +53,6 @@
 
 .projects-card:hover .projects-img {
 	transform: scale(1.05);
-}
-
-.projects-card:hover .projects-overlay {
-	background: linear-gradient(
-		to bottom,
-		rgba(0, 0, 0, 0.4) 0%,
-		rgba(0, 0, 0, 0.7) 50%,
-		rgba(0, 0, 0, 0.95) 100%
-	);
 }
 
 .projects-content {
@@ -162,7 +155,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 32px;
-	padding: 20px 0;
+	padding: 40px 0;
 }
 
 .projects-navigation button {

@@ -85,7 +85,11 @@ export default function Home({ setActive }) {
 						</h1>
 						<div
 							ref={containerRef}
-							style={{ position: "relative", maxWidth: 600 }}>
+							style={{
+								position: "relative",
+								maxWidth: 600,
+								marginInline: "auto",
+							}}>
 							<VariableProximity
 								label={
 									"I'm a Full-stack Developer, Visual Designer & Editor. I have a modern eye for clean designs and user-friendly end-to-end web experiences."

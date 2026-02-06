@@ -54,7 +54,7 @@ export default function About({ setActive }) {
 							<p className="infoP">
 								{edu.institution} ( {edu.years} )
 							</p>
-							<p>
+							<p style={{ maxWidth: "70%" }}>
 								<b>Remark: </b>
 								{edu.remarks}
 							</p>

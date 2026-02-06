@@ -32,7 +32,7 @@
 
 .story-card__underline {
 	height: 6px;
-	width: 25%;
+	width: 30%;
 	background: var(--brand);
 	margin: 24px 0;
 	transform-origin: left;
@@ -144,26 +144,30 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
 	.story-card {
-		padding: 60px 24px;
+		padding: 20px 20px;
 	}
 
 	.story-card__title {
-		font-size: clamp(18px, 6vw, 48px);
+		font-size: clamp(18px, 5vw, 48px);
 	}
 
 	.story-card__subtitle {
-		font-size: clamp(14px, 3vw, 22px);
+		font-size: clamp(12px, 3vw, 20px);
+		margin: 16px 0 0 0;
 	}
 
 	.story-card__underline {
 		height: 4px;
-		width: 80px;
 		margin: 16px 0;
 	}
 }
 
 @media (max-width: 480px) {
 	.story-card {
-		padding: 40px 20px;
+		padding: 20px 20px;
+	}
+
+	.story-card__subtitle {
+		margin: 12px 0 0 0;
 	}
 }
