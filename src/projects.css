@@ -303,6 +303,7 @@
 		min-height: 240px;
 		border-radius: 10px;
 		aspect-ratio: 4 / 3;
+		margin-top: 20px;
 	}
 
 	.projects-overlay {
