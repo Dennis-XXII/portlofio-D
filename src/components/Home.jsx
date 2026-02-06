@@ -87,12 +87,12 @@ export default function Home({ setActive }) {
 							ref={containerRef}
 							style={{
 								position: "relative",
-								maxWidth: 600,
+								maxWidth: 800,
 								marginInline: "auto",
 							}}>
 							<VariableProximity
 								label={
-									"I'm a Full-stack Developer, Visual Designer & Editor. I have a modern eye for clean designs and user-friendly end-to-end web experiences."
+									"A Full-stack developer with a designer's eye. I specialize in turning complex problems into refined, user-centric digital realities. Brutalist minimalism drive my design philosophy."
 								}
 								className={"variable-proximity-demo"}
 								fromFontVariationSettings="'wght' 200, 'opsz' 9"
