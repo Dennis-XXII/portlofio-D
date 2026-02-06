@@ -51,6 +51,7 @@ export const projects = [
 		year: "2025",
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://rsuglobal.rsu.ac.th",
+		repo: "https://rsuglobal.rsu.ac.th",
 		description:
 			"A legacy-transformed web ecosystem designed to automate student bookings and administrative workflows for the RSU Global! Peer-assisted Learning Center. By re-engineering the website and enriching features in my term, the system achieved a 60% increase in process efficiency for both Thai and international student bodies.",
 		imgAlt: "RSU Global Appointment System image",
@@ -61,6 +62,7 @@ export const projects = [
 		year: "2025",
 		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://ricfp.rsu.ac.th/",
+		repo: "",
 		description:
 			"Under supervision of Prof. Timothy Boundy, we developed a customized LMS using Laravel to facilitate end-to-end online learning and resource sharing platform. The platform supports course materials, assignments, and communication between students and instructors. Me and my team successfully launched the LMS on university-hosted servers, which is now actively used by Rangsit International College students and faculty members.",
 		imgAlt: "Foundation Program LMS image",
@@ -71,6 +73,7 @@ export const projects = [
 		year: "Mar 2025",
 		brief: "Tech Stack: React, Django, PostgreSQL",
 		link: "",
+		repo: "",
 		description:
 			"An AI-powered analytics dashboard built for the hospitality industry, integrating Gemini AI to streamline operations and elevate guest experience. Recognized as a top finalist among 20+ competing teams, the platform transforms complex ERP data into actionable operational insights.",
 		imgAlt: "cimso ERP Hackathon image",
@@ -81,6 +84,7 @@ export const projects = [
 		year: "30th June 2025",
 		brief: '"Tech-Driven Learning: Innovations Shaping ICT & IB Education"',
 		link: "",
+		repo: "",
 		description:
 			"Successfully organized university-scale seminar under supervision of Dr. Suttisak Jantavongso. My team was able to publish and present 5 different research papers via this event. With over 100 attendees, two sponsorships and positive reviews from 90% of stakeholders, my first experience in event management and project management skills proved invaluable.",
 		imgAlt: "University Scale Seminar image",

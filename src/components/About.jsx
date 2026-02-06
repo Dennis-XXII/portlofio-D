@@ -9,7 +9,7 @@ import {
 } from "../data";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "motion/react";
 import { hobbies } from "../data.js";
 import StorytellingCard from "../bits/StoryCard.jsx";
 
@@ -20,16 +20,13 @@ export default function About({ setActive }) {
 	});
 	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
-	const [hoveredCaption, setHoveredCaption] = useState("");
+	const [activeTab, setActiveTab] = useState("hard");
 
-	const trackRef = useRef(null);
-
-	const pauseTrack = () => {
-		if (trackRef.current) trackRef.current.style.animationPlayState = "paused";
-	};
-	const resumeTrack = () => {
-		if (trackRef.current) trackRef.current.style.animationPlayState = "running";
-	};
+	const tabs = [
+		{ id: "hard", label: "Tech Skills", data: skills },
+		{ id: "soft", label: "Soft Skills", data: softSkills },
+		{ id: "languages", label: "Languages", data: languages },
+	];
 
 	useEffect(() => {
 		if (startInView) setActive("about");
@@ -57,7 +54,7 @@ export default function About({ setActive }) {
 							<p className="infoP">
 								{edu.institution} ( {edu.years} )
 							</p>
-							<p>
+							<p style={{ maxWidth: "70%" }}>
 								<b>Remark: </b>
 								{edu.remarks}
 							</p>
@@ -102,84 +99,37 @@ export default function About({ setActive }) {
 				))}  */}
 
 				{/* Skills + Languages */}
-				<div className="grid-3" style={{ marginTop: 100 }}>
-					<AnimatedSection>
-						<h2 className="h2">Hard Skills</h2>
-						<ul className="ul">
-							{skills.map((s, i) => (
-								<li key={i}>{s}</li>
-							))}
-						</ul>
-					</AnimatedSection>
+				<div>
+					{/* Tab Buttons */}
+					<div className="skills-tabs">
+						{tabs.map((tab) => (
+							<button
+								key={tab.id}
+								className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+								onClick={() => setActiveTab(tab.id)}
+								aria-label={`Show ${tab.label}`}>
+								{tab.label}
+							</button>
+						))}
+					</div>
 
-					<AnimatedSection delay={0.06}>
-						<h2 className="h2">Soft Skills</h2>
-						<ul className="ul">
-							{softSkills.map((s, i) => (
-								<li key={i}>{s}</li>
-							))}
-						</ul>
-					</AnimatedSection>
-
-					<AnimatedSection delay={0.06}>
-						<h2 className="h2">Languages</h2>
-						<ul className="ul">
-							{languages.map((l, i) => (
-								<li key={i}>{l}</li>
-							))}
-						</ul>
+					{/* Tab Content */}
+					<AnimatedSection key={activeTab}>
+						<div className="tab-content">
+							<h2 className="h2">
+								{tabs.find((t) => t.id === activeTab).label}
+							</h2>
+							<ul className="ul">
+								{tabs
+									.find((t) => t.id === activeTab)
+									.data.map((item, i) => (
+										<li key={i}>{item}</li>
+									))}
+							</ul>
+						</div>
 					</AnimatedSection>
 				</div>
 
-				{/* <AnimatedSection delay={0.12}>
-					<h3 className="h3" style={{ marginTop: 100 }}>
-						Hobbies
-					</h3>
-
-					<div
-						className="carousel-outer"
-						onMouseEnter={pauseTrack}
-						onMouseLeave={resumeTrack}
-						onTouchStart={pauseTrack}
-						onTouchEnd={resumeTrack}>
-						<div className="carousel-viewport">
-							<div className="carousel-track" ref={trackRef}>
-								{[...hobbies, ...hobbies].map((hobby, i) => (
-									<motion.div
-										key={i}
-										className="carousel-item"
-										whileHover={{ scale: 1.005 }}
-										transition={{
-											type: "tween",
-											stiffness: 400,
-											damping: 15,
-										}}
-										onMouseEnter={() => setHoveredCaption(hobby.desc)}
-										onMouseLeave={() => setHoveredCaption("")}>
-										<motion.img
-											src={hobby.img}
-											alt={hobby.caption}
-											className="carousel-img"
-											whileHover={{
-												aspectRatio: "3/3.5",
-											}}
-											transition={{
-												type: "tween",
-												stiffness: 250,
-												damping: 15,
-											}}
-										/>
-										<p className="carousel-caption">{hobby.caption}</p>
-									</motion.div>
-								))}
-							</div>
-						</div>
-
-						<div className="carousel-description-bar">
-							{hoveredCaption && <p>{hoveredCaption}</p>}
-						</div>
-					</div>
-				</AnimatedSection> */}
 				<p ref={endRef} />
 			</div>
 		</section>
