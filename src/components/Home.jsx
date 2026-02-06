@@ -1,8 +1,9 @@
 import { useEffect, useRef, useCallback } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import AnimatedSection from "./AnimatedSection";
 import { useInView } from "react-intersection-observer";
 import TiltedCard from "../bits/TiltedCard";
+import VariableProximity from "../bits/ProximityParagraph";
 
 export default function Home({ setActive }) {
 	// Track when the Home section is in view for active nav
@@ -32,6 +33,10 @@ export default function Home({ setActive }) {
 		const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
 		window.scrollTo({ top: y, behavior: "smooth" });
 	}, []);
+
+	// container reference for variable proximity
+
+	const containerRef = useRef(null);
 
 	return (
 		<section
@@ -78,12 +83,21 @@ export default function Home({ setActive }) {
 							</motion.span>
 							.
 						</h1>
-						<p>
-							Everyone calls me <b>Dennis</b>. I'm a Full-stack Web Developer,
-							Visual Designer & Editor
-							<br />I have a modern eye for clean designs and user-friendly
-							end-to-end web experiences.
-						</p>
+						<div
+							ref={containerRef}
+							style={{ position: "relative", maxWidth: 600 }}>
+							<VariableProximity
+								label={
+									"I'm a Full-stack Developer, Visual Designer & Editor. I have a modern eye for clean designs and user-friendly end-to-end web experiences."
+								}
+								className={"variable-proximity-demo"}
+								fromFontVariationSettings="'wght' 200, 'opsz' 9"
+								toFontVariationSettings="'wght' 800, 'opsz' 40"
+								containerRef={containerRef}
+								radius={70}
+								falloff="gaussian"
+							/>
+						</div>
 
 						<div
 							style={{
@@ -108,30 +122,6 @@ export default function Home({ setActive }) {
 								Contact me
 							</motion.a>
 						</div>
-
-						{/* <div
-							style={{
-								display: "flex",
-								gap: 28,
-								marginTop: 12,
-								alignItems: "center",
-								justifyContent: "center",
-							}}>
-							<motion.a
-								whileTap={{ scale: 0.95 }}
-								className="link"
-								href="https://www.linkedin.com/in/khin-thiri-myat-73b53923a/"
-								target="_blank">
-								LinkedIn
-							</motion.a>
-							<motion.a
-								whileTap={{ scale: 0.95 }}
-								className="link"
-								href="https://www.facebook.com/harmony.carol.5"
-								target="_blank">
-								Facebook
-							</motion.a>
-						</div> */}
 					</AnimatedSection>
 				</div>
 

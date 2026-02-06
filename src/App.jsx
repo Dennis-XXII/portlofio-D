@@ -8,7 +8,7 @@ import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function App() {
 	const [active, setActive] = useState("home");
@@ -29,7 +29,7 @@ export default function App() {
 			<footer className="footer" style={{ textAlign: "center" }}>
 				<motion.div className="container">
 					<p>
-						Designed & Built with great care using React.js + Framer Motion
+						Designed & Built with great care using React.js & Motion
 						&nbsp;|&nbsp; © Kyaw Swar Hein {new Date().getFullYear()}
 					</p>
 				</motion.div>

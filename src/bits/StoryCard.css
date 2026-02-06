@@ -4,9 +4,9 @@
 .story-card {
 	width: 100%;
 	padding: 40px 40px;
-	margin: 40px 0;
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 
 .story-card__content {
@@ -148,11 +148,11 @@
 	}
 
 	.story-card__title {
-		font-size: clamp(32px, 8vw, 60px);
+		font-size: clamp(18px, 6vw, 48px);
 	}
 
 	.story-card__subtitle {
-		font-size: clamp(16px, 4vw, 22px);
+		font-size: clamp(14px, 3vw, 22px);
 	}
 
 	.story-card__underline {
