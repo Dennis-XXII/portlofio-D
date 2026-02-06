@@ -49,7 +49,7 @@ export const projects = [
 		image: "/rsuGloball.png",
 		title: "RSU Global! - Student Appointment System",
 		year: "2025",
-		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
+		brief: "Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://rsuglobal.rsu.ac.th",
 		repo: "https://rsuglobal.rsu.ac.th",
 		description:
@@ -60,7 +60,7 @@ export const projects = [
 		image: "/ricfp.png",
 		title: "Foundation Program Moodle - RIC LMS",
 		year: "2025",
-		brief: "Tech Stack: Laravel, MariaDB, Tailwind CSS, JavaScript",
+		brief: "Laravel, MariaDB, Tailwind CSS, JavaScript",
 		link: "https://ricfp.rsu.ac.th/",
 		repo: "",
 		description:
@@ -71,9 +71,9 @@ export const projects = [
 		image: "/cimso.png",
 		title: "Dash AI - AI-Powered Hospitality Analytics Dashboard",
 		year: "Mar 2025",
-		brief: "Tech Stack: React, Django, PostgreSQL",
+		brief: "React, Django, PostgreSQL",
 		link: "",
-		repo: "",
+		repo: "https://github.com/Dennis-XXII/DashAI",
 		description:
 			"An AI-powered analytics dashboard built for the hospitality industry, integrating Gemini AI to streamline operations and elevate guest experience. Recognized as a top finalist among 20+ competing teams, the platform transforms complex ERP data into actionable operational insights.",
 		imgAlt: "cimso ERP Hackathon image",

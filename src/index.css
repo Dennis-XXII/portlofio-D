@@ -70,6 +70,8 @@ body {
 	min-height: 100svh;
 	display: flex;
 	align-items: center;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 /* ----------------------------------------------------------
