@@ -75,7 +75,7 @@ export const projects = [
     link: "https://spoti-vinyl.vercel.app/",
     repo: "",
     description:
-      "A React-based web application that simulates a vinyl record player in Teenage Engineering Devices, allowing users to simply play their albums usingthe Spotify API. The project combines modern web development techniques with modern UI design principles, providing an engaging user experience for music lovers.",
+      "A React-based web application that simulates a vinyl record player in Teenage Engineering Devices, allowing users to simply play their albums usingthe Spotify API. The project combines modern web development techniques with modern UI design principles, providing an engaging and interactive music experience. ",
     imgAlt: "Vinyl Deck with Spotify API image",
   },
   {
