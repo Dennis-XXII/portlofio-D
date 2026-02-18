@@ -68,7 +68,7 @@ export const projects = [
     imgAlt: "Foundation Program LMS image",
   },
   {
-    image: "/vinyl-deck.webp",
+    image: "/vinyl deck.webp",
     title: "Vinyl Deck with Spotify API Integration",
     year: "2026",
     brief: "React, Spotify API, Tailwind CSS",
