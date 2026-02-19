@@ -46,7 +46,7 @@ export const experiences = [
 
 export const projects = [
   {
-    image: "/rsuGloball.png",
+    image: "/rsuGloball.webp",
     title: "RSU Global! - Student Appointment System",
     year: "2025",
     brief: "Laravel, MariaDB, Tailwind CSS, JavaScript",
