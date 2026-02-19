@@ -232,6 +232,12 @@
 		gap: 10px;
 	}
 
+	.projects-title,
+	.projects-years,
+	.projects-link {
+		backdrop-filter: none;
+	}
+
 	.projects-header {
 		flex-direction: column;
 		gap: 8px;

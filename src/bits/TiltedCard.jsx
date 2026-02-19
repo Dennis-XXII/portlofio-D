@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { m as Motion, useMotionValue, useSpring } from "framer-motion";
 import "./TiltedCard.css";
 
 const springValues = {
@@ -15,6 +15,7 @@ export default function TiltedCard({
 	containerWidth = "100%",
 	imageHeight = "300px",
 	imageWidth = "300px",
+	imageAlt = "Tilted card image",
 	scaleOnHover = 1.2,
 	rotateAmplitude = 16,
 	showMobileWarning = true,
@@ -72,6 +73,9 @@ export default function TiltedCard({
 		rotateFigcaption.set(0);
 	}
 
+	const parsedWidth = Number.parseInt(String(imageWidth), 10);
+	const parsedHeight = Number.parseInt(String(imageHeight), 10);
+
 	return (
 		<figure
 			ref={ref}
@@ -89,7 +93,7 @@ export default function TiltedCard({
 				</div>
 			)}
 
-			<motion.div
+			<Motion.div
 				className="tilted-card-inner"
 				style={{
 					width: imageWidth,
@@ -98,9 +102,15 @@ export default function TiltedCard({
 					rotateY,
 					scale,
 				}}>
-				<motion.img
+				<Motion.img
 					src={imageSrc}
+					alt={imageAlt}
 					className="tilted-card-img"
+					loading="eager"
+					decoding="async"
+					fetchPriority="high"
+					width={Number.isFinite(parsedWidth) ? parsedWidth : undefined}
+					height={Number.isFinite(parsedHeight) ? parsedHeight : undefined}
 					style={{
 						width: imageWidth,
 						height: imageHeight,
@@ -108,14 +118,14 @@ export default function TiltedCard({
 				/>
 
 				{displayOverlayContent && overlayContent && (
-					<motion.div className="tilted-card-overlay">
+					<Motion.div className="tilted-card-overlay">
 						{overlayContent}
-					</motion.div>
+					</Motion.div>
 				)}
-			</motion.div>
+			</Motion.div>
 
 			{showTooltip && (
-				<motion.figcaption
+				<Motion.figcaption
 					className="tilted-card-caption"
 					style={{
 						x,
@@ -124,7 +134,7 @@ export default function TiltedCard({
 						rotate: rotateFigcaption,
 					}}>
 					{captionText}
-				</motion.figcaption>
+				</Motion.figcaption>
 			)}
 		</figure>
 	);

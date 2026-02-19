@@ -4,13 +4,9 @@ import {
 	softSkills,
 	languages,
 	education,
-	achievements,
-	certifications,
 } from "../data";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState, useRef } from "react";
-import { motion, useAnimation } from "motion/react";
-import { hobbies } from "../data.js";
+import { useEffect, useState } from "react";
 import StorytellingCard from "../bits/StoryCard.jsx";
 
 export default function About({ setActive }) {

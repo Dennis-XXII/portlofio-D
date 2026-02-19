@@ -1,4 +1,4 @@
-import { motion, useAnimation } from "framer-motion";
+import { m as Motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -31,13 +31,13 @@ export default function AnimatedSection({
 	const Tag = as;
 
 	return (
-		<motion.div
+		<Motion.div
 			ref={ref}
 			initial="hidden"
 			animate={controls}
 			variants={variants}
 			className={className}>
 			<Tag>{children}</Tag>
-		</motion.div>
+		</Motion.div>
 	);
 }

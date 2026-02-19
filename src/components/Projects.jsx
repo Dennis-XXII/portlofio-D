@@ -49,6 +49,11 @@ export default function Projects({ setActive }) {
 									src={projects[currentIndex].image}
 									alt={projects[currentIndex].imgAlt}
 									className="projects-img"
+									loading="lazy"
+									decoding="async"
+									width="1600"
+									height="900"
+									sizes="(max-width: 768px) 100vw, 85vw"
 								/>
 								<div className="projects-overlay"></div>
 							</div>

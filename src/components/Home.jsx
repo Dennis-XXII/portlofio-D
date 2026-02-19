@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { m as Motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { useInView } from "react-intersection-observer";
 import TiltedCard from "../bits/TiltedCard";
@@ -52,6 +52,7 @@ export default function Home({ setActive }) {
 					<AnimatedSection delay={0.1}>
 						<TiltedCard
 							imageSrc="/dennis.webp"
+							imageAlt="Portrait of Kyaw Swar Hein"
 							containerHeight="250px"
 							containerWidth="250px"
 							imageHeight="250px"
@@ -68,7 +69,7 @@ export default function Home({ setActive }) {
 					<AnimatedSection delay={0.1} className="text_box">
 						<h1 className="h1" style={{ fontWeight: "200" }}>
 							Hello, I’m{" "}
-							<motion.span
+							<Motion.span
 								whileHover={{ letterSpacing: "2px" }}
 								transition={{
 									type: "spring",
@@ -80,7 +81,7 @@ export default function Home({ setActive }) {
 									fontWeight: "600",
 								}}>
 								Kyaw Swar Hein
-							</motion.span>
+							</Motion.span>
 							.
 						</h1>
 						<div
@@ -110,7 +111,7 @@ export default function Home({ setActive }) {
 								margin: "12px 0 12px",
 								justifyContent: "center",
 							}}>
-							<motion.a
+							<Motion.a
 								whileTap={{ scale: 0.95 }}
 								className="btn"
 								href="/Kyaw Swar Hein.pdf"
@@ -118,31 +119,31 @@ export default function Home({ setActive }) {
 								target="_blank"
 								rel="noopener noreferrer">
 								Download my Resume
-							</motion.a>
-							<motion.a
+							</Motion.a>
+							<Motion.a
 								whileTap={{ scale: 0.95 }}
 								className="btn btn--ghost"
 								href="#contact">
 								Contact me
-							</motion.a>
+							</Motion.a>
 						</div>
 					</AnimatedSection>
 				</div>
 
 				{/* Text + Arrow together at bottom */}
-				<motion.div
+				<Motion.div
 					className="scroll-block"
 					style={{ opacity: fadeOpacity, scale: fadeScale }}>
 					<p className="scroll-text">
 						You can get to know me better below. Let's scroll down!
 					</p>
-					<motion.button
+					<Motion.button
 						whileTap={{ scale: 0.9 }}
 						type="button"
 						aria-label="Scroll to next section"
 						className="scroll-down"
 						onClick={goToExperience}>
-						<motion.svg
+						<Motion.svg
 							width="22"
 							height="22"
 							viewBox="0 0 24 24"
@@ -162,9 +163,9 @@ export default function Home({ setActive }) {
 								strokeLinecap="round"
 								strokeLinejoin="round"
 							/>
-						</motion.svg>
-					</motion.button>
-				</motion.div>
+						</Motion.svg>
+					</Motion.button>
+				</Motion.div>
 			</div>
 		</section>
 	);

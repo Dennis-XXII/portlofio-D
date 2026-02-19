@@ -1,6 +1,6 @@
 // new - import useState, useEffect and framer-motion
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, scale } from "framer-motion";
+import { m as Motion, AnimatePresence, LayoutGroup } from "framer-motion";
 
 const LINKS = [
 	{ id: "home", label: "Home" },
@@ -105,43 +105,44 @@ export default function NavBar({ active }) {
 					</div>
 
 					{/* Desktop navigation */}
-					<div className="nav__links" role="tablist" aria-label="Sections">
-						{LINKS.map((link) => {
-							const isActive = active === link.id;
-							return (
-								<a
-									key={link.id}
-									href={`#${link.id}`}
-									onClick={handleClick(link.id)}
-									className={`nav__btn ${isActive ? "is-active" : ""}`}
-									role="tab"
-									aria-selected={isActive}
-									aria-controls={link.id}>
-									{/* 👇 This shared-layout span animates between links */}
-									{isActive && (
-										<motion.span
-											layoutId="nav-active-pill"
-											className="nav__pill"
-											transition={{
-												type: "spring",
-												stiffness: 500,
-												damping: 40,
-											}}
-										/>
-									)}
-									<span className="nav__label">{link.label}</span>
-								</a>
-							);
-						})}
-					</div>
+					<LayoutGroup id="desktop-nav-pill">
+						<div className="nav__links" role="tablist" aria-label="Sections">
+							{LINKS.map((link) => {
+								const isActive = active === link.id;
+								return (
+									<a
+										key={link.id}
+										href={`#${link.id}`}
+										onClick={handleClick(link.id)}
+										className={`nav__btn ${isActive ? "is-active" : ""}`}
+										role="tab"
+										aria-selected={isActive}
+										aria-controls={link.id}>
+										{isActive && (
+											<Motion.span
+												layoutId="nav-active-pill"
+												className="nav__pill"
+												transition={{
+													type: "spring",
+													stiffness: 500,
+													damping: 40,
+												}}
+											/>
+										)}
+										<span className="nav__label">{link.label}</span>
+									</a>
+								);
+							})}
+						</div>
+					</LayoutGroup>
 
 					{/* new - Hamburger Button for mobile */}
-					<motion.button
+					<Motion.button
 						className="hamburger-btn"
 						onClick={() => setIsOpen(true)}
 						aria-label="Open menu">
 						<HamburgerIcon />
-					</motion.button>
+					</Motion.button>
 				</div>
 			</nav>
 
@@ -149,7 +150,7 @@ export default function NavBar({ active }) {
 			<AnimatePresence>
 				{isOpen && (
 					<>
-						<motion.div
+						<Motion.div
 							className="overlay"
 							onClick={() => setIsOpen(false)}
 							initial="hidden"
@@ -157,7 +158,7 @@ export default function NavBar({ active }) {
 							exit="exit"
 							variants={overlayVariants}
 						/>
-						<motion.div
+						<Motion.div
 							className="mobile-nav"
 							initial="hidden"
 							animate="visible"
@@ -195,7 +196,7 @@ export default function NavBar({ active }) {
 									);
 								})}
 							</div>
-						</motion.div>
+						</Motion.div>
 					</>
 				)}
 			</AnimatePresence>

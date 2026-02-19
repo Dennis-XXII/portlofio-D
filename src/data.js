@@ -1,6 +1,4 @@
 // Static content you’ll tweak later
-
-import { desc, image, link } from "framer-motion/client";
 export const experiences = [
   {
     image: "/rsuGlobal.webp",
