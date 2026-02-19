@@ -3,7 +3,7 @@
 import { desc, image, link } from "framer-motion/client";
 export const experiences = [
   {
-    image: "/rsuGlobal.png",
+    image: "/rsuGlobal.webp",
     title: "RSU Global",
     role: "Lead Full Stack Developer (Laravel) & Team Manager",
     years: "2025 – Active",
@@ -57,7 +57,7 @@ export const projects = [
     imgAlt: "RSU Global Appointment System image",
   },
   {
-    image: "/ricfp.png",
+    image: "/ricfp.webp",
     title: "Foundation Program Moodle - RIC LMS",
     year: "2025",
     brief: "Laravel, MariaDB, Tailwind CSS, JavaScript",
@@ -79,7 +79,7 @@ export const projects = [
     imgAlt: "Vinyl Deck with Spotify API image",
   },
   {
-    image: "/cimso.png",
+    image: "/cimso.webp",
     title: "Dash AI - AI-Powered Hospitality Analytics Dashboard",
     year: "Mar 2025",
     brief: "React, Django, PostgreSQL",
@@ -90,7 +90,7 @@ export const projects = [
     imgAlt: "cimso ERP Hackathon image",
   },
   {
-    image: "/seminar.png",
+    image: "/seminar.webp",
     title: "University Scale Seminar",
     year: "30th June 2025",
     brief: '"Tech-Driven Learning: Innovations Shaping ICT & IB Education"',
