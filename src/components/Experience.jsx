@@ -36,6 +36,11 @@ export default function Experience({ setActive }) {
 										src={exp.image}
 										alt={exp.imgAlt}
 										className="experience-img"
+										loading="lazy"
+										decoding="async"
+										width="640"
+										height="640"
+										sizes="(max-width: 768px) 120px, 200px"
 									/>
 									<div className="experience-overlay"></div>
 								</div>

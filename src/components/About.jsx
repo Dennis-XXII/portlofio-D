@@ -1,68 +1,59 @@
 import AnimatedSection from "./AnimatedSection";
-import {
-	skills,
-	softSkills,
-	languages,
-	education,
-	achievements,
-	certifications,
-} from "../data";
+import { skills, softSkills, languages, education } from "../data";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState, useRef } from "react";
-import { motion, useAnimation } from "motion/react";
-import { hobbies } from "../data.js";
+import { useEffect, useState } from "react";
 import StorytellingCard from "../bits/StoryCard.jsx";
 
 export default function About({ setActive }) {
-	//start and end refs for inView detection
-	const { ref: startRef, inView: startInView } = useInView({
-		threshold: 0.3,
-	});
-	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
+  //start and end refs for inView detection
+  const { ref: startRef, inView: startInView } = useInView({
+    threshold: 0.3,
+  });
+  const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
-	const [activeTab, setActiveTab] = useState("hard");
+  const [activeTab, setActiveTab] = useState("hard");
 
-	const tabs = [
-		{ id: "hard", label: "Tech Skills", data: skills },
-		{ id: "soft", label: "Soft Skills", data: softSkills },
-		{ id: "languages", label: "Languages", data: languages },
-	];
+  const tabs = [
+    { id: "hard", label: "Tech Skills", data: skills },
+    { id: "soft", label: "Soft Skills", data: softSkills },
+    { id: "languages", label: "Languages", data: languages },
+  ];
 
-	useEffect(() => {
-		if (startInView) setActive("about");
-		if (endInView) setActive("about"); // switch to next section when bottom enters
-	}, [startInView, endInView, setActive]);
+  useEffect(() => {
+    if (startInView) setActive("about");
+    if (endInView) setActive("about"); // switch to next section when bottom enters
+  }, [startInView, endInView, setActive]);
 
-	return (
-		<section id="about" className="section">
-			<div className="container">
-				{/* subtle heading */}
-				<StorytellingCard
-					title="About me"
-					subtitle="& my background"
-					align="left"
-					theme="dark"
-				/>
-				<p ref={startRef} />
+  return (
+    <section id='about' className='section'>
+      <div className='container'>
+        {/* subtle heading */}
+        <StorytellingCard
+          title='About me'
+          subtitle='& my background'
+          align='left'
+          theme='dark'
+        />
+        <p ref={startRef} />
 
-				{/* Education */}
-				<h2 className="h2">Education</h2>
-				{education.map((edu, i) => (
-					<AnimatedSection key={i} delay={i * 0.08}>
-						<div className="kv">
-							<p className="headerP">{edu.degree}</p>
-							<p className="infoP">
-								{edu.institution} ( {edu.years} )
-							</p>
-							<p style={{ maxWidth: "70%" }}>
-								<b>Remark: </b>
-								{edu.remarks}
-							</p>
-						</div>
-					</AnimatedSection>
-				))}
+        {/* Education */}
+        <h2 className='h2'>Education</h2>
+        {education.map((edu, i) => (
+          <AnimatedSection key={i} delay={i * 0.08}>
+            <div className='kv'>
+              <p className='headerP'>{edu.degree}</p>
+              <p className='infoP'>
+                {edu.institution} ( {edu.years} )
+              </p>
+              <p style={{ maxWidth: "70%" }}>
+                <b>Remark: </b>
+                {edu.remarks}
+              </p>
+            </div>
+          </AnimatedSection>
+        ))}
 
-				{/* achievements
+        {/* achievements
 				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Achievements
 				</h2>
@@ -80,7 +71,7 @@ export default function About({ setActive }) {
 					</AnimatedSection>
 				))}  */}
 
-				{/* Certifications
+        {/* Certifications
 				<h2 className="h2" style={{ marginTop: "100px" }}>
 					Certifications
 				</h2>
@@ -98,40 +89,41 @@ export default function About({ setActive }) {
 					</AnimatedSection>
 				))}  */}
 
-				{/* Skills + Languages */}
-				<div>
-					{/* Tab Buttons */}
-					<div className="skills-tabs">
-						{tabs.map((tab) => (
-							<button
-								key={tab.id}
-								className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
-								onClick={() => setActiveTab(tab.id)}
-								aria-label={`Show ${tab.label}`}>
-								{tab.label}
-							</button>
-						))}
-					</div>
+        {/* Skills + Languages */}
+        <div>
+          {/* Tab Buttons */}
+          <div className='skills-tabs'>
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
+                onClick={() => setActiveTab(tab.id)}
+                aria-label={`Show ${tab.label}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
-					{/* Tab Content */}
-					<AnimatedSection key={activeTab}>
-						<div className="tab-content">
-							<h2 className="h2">
-								{tabs.find((t) => t.id === activeTab).label}
-							</h2>
-							<ul className="ul">
-								{tabs
-									.find((t) => t.id === activeTab)
-									.data.map((item, i) => (
-										<li key={i}>{item}</li>
-									))}
-							</ul>
-						</div>
-					</AnimatedSection>
-				</div>
+          {/* Tab Content */}
+          <AnimatedSection key={activeTab}>
+            <div className='tab-content'>
+              <h2 className='h2'>
+                {tabs.find((t) => t.id === activeTab).label}
+              </h2>
+              <ul className='ul'>
+                {tabs
+                  .find((t) => t.id === activeTab)
+                  .data.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+              </ul>
+            </div>
+          </AnimatedSection>
+        </div>
 
-				<p ref={endRef} />
-			</div>
-		</section>
-	);
+        <p ref={endRef} />
+      </div>
+    </section>
+  );
 }

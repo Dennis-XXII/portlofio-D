@@ -1,9 +1,11 @@
 import { useState, forwardRef, useMemo, useRef, useEffect } from "react";
-import { motion } from "motion/react";
+import { m as Motion } from "framer-motion";
 import "./ProximityParagraph.css";
 
-function useAnimationFrame(callback) {
+function useAnimationFrame(callback, enabled = true) {
 	useEffect(() => {
+		if (!enabled) return;
+
 		let frameId;
 		const loop = () => {
 			callback();
@@ -11,20 +13,21 @@ function useAnimationFrame(callback) {
 		};
 		frameId = requestAnimationFrame(loop);
 		return () => cancelAnimationFrame(frameId);
-	}, [callback]);
+	}, [callback, enabled]);
 }
 
-function useMousePositionRef(containerRef) {
+function useMousePositionRef(targetRef, enabled = true) {
 	const positionRef = useRef({ x: 0, y: 0 });
 
 	useEffect(() => {
+		if (!enabled) return;
+
+		const target = targetRef?.current;
+		if (!target) return;
+
 		const updatePosition = (x, y) => {
-			if (containerRef?.current) {
-				const rect = containerRef.current.getBoundingClientRect();
-				positionRef.current = { x: x - rect.left, y: y - rect.top };
-			} else {
-				positionRef.current = { x, y };
-			}
+			const rect = target.getBoundingClientRect();
+			positionRef.current = { x: x - rect.left, y: y - rect.top };
 		};
 
 		const handleMouseMove = (ev) => updatePosition(ev.clientX, ev.clientY);
@@ -33,13 +36,13 @@ function useMousePositionRef(containerRef) {
 			updatePosition(touch.clientX, touch.clientY);
 		};
 
-		window.addEventListener("mousemove", handleMouseMove);
-		window.addEventListener("touchmove", handleTouchMove);
+		target.addEventListener("mousemove", handleMouseMove);
+		target.addEventListener("touchmove", handleTouchMove, { passive: true });
 		return () => {
-			window.removeEventListener("mousemove", handleMouseMove);
-			window.removeEventListener("touchmove", handleTouchMove);
+			target.removeEventListener("mousemove", handleMouseMove);
+			target.removeEventListener("touchmove", handleTouchMove);
 		};
-	}, [containerRef]);
+	}, [targetRef, enabled]);
 
 	return positionRef;
 }
@@ -59,9 +62,12 @@ const VariableProximity = forwardRef((props, ref) => {
 		mobileBreakpoint = 768,
 		...restProps
 	} = props;
+	const localContainerRef = useRef(null);
+	const activeContainerRef = containerRef ?? localContainerRef;
 
 	//check for mobile and disable if needed
 	const [isMobile, setIsMobile] = useState(false);
+	const [isPointerInside, setIsPointerInside] = useState(false);
 
 	useEffect(() => {
 		if (!disableOnMobile) return;
@@ -75,9 +81,9 @@ const VariableProximity = forwardRef((props, ref) => {
 	}, [disableOnMobile, mobileBreakpoint]);
 
 	const letterRefs = useRef([]);
-	const interpolatedSettingsRef = useRef([]);
-	const mousePositionRef = useMousePositionRef(containerRef, !isMobile); // disable on mobile
+	const mousePositionRef = useMousePositionRef(activeContainerRef, !isMobile);
 	const lastPositionRef = useRef({ x: null, y: null });
+	const shouldAnimate = !isMobile && isPointerInside;
 
 	const parsedSettings = useMemo(() => {
 		const parseSettings = (settingsStr) =>
@@ -117,16 +123,51 @@ const VariableProximity = forwardRef((props, ref) => {
 		}
 	};
 
+	useEffect(() => {
+		if (isMobile) return;
+		const target = activeContainerRef?.current;
+		if (!target) return;
+
+		const handleEnter = () => setIsPointerInside(true);
+		const handleLeave = () => {
+			setIsPointerInside(false);
+			lastPositionRef.current = { x: null, y: null };
+		};
+
+		target.addEventListener("mouseenter", handleEnter);
+		target.addEventListener("mouseleave", handleLeave);
+		target.addEventListener("touchstart", handleEnter, { passive: true });
+		target.addEventListener("touchend", handleLeave);
+		target.addEventListener("touchcancel", handleLeave);
+
+		return () => {
+			target.removeEventListener("mouseenter", handleEnter);
+			target.removeEventListener("mouseleave", handleLeave);
+			target.removeEventListener("touchstart", handleEnter);
+			target.removeEventListener("touchend", handleLeave);
+			target.removeEventListener("touchcancel", handleLeave);
+		};
+	}, [activeContainerRef, isMobile]);
+
+	useEffect(() => {
+		if (shouldAnimate) return;
+		letterRefs.current.forEach((letterRef) => {
+			if (!letterRef) return;
+			letterRef.style.fontVariationSettings = fromFontVariationSettings;
+		});
+	}, [shouldAnimate, fromFontVariationSettings]);
+
 	useAnimationFrame(() => {
-		if (!containerRef?.current || isMobile) return; // disable on mobile
-		const containerRect = containerRef.current.getBoundingClientRect();
+		const target = activeContainerRef?.current;
+		if (!target) return;
+		const containerRect = target.getBoundingClientRect();
 		const { x, y } = mousePositionRef.current;
 		if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) {
 			return;
 		}
 		lastPositionRef.current = { x, y };
 
-		letterRefs.current.forEach((letterRef, index) => {
+		letterRefs.current.forEach((letterRef) => {
 			if (!letterRef) return;
 
 			const rect = letterRef.getBoundingClientRect();
@@ -154,17 +195,27 @@ const VariableProximity = forwardRef((props, ref) => {
 				})
 				.join(", ");
 
-			interpolatedSettingsRef.current[index] = newSettings;
 			letterRef.style.fontVariationSettings = newSettings;
 		});
-	}, !isMobile);
+	}, shouldAnimate);
 
 	const words = label.split(" ");
 	let letterIndex = 0;
 
+	const setRefs = (node) => {
+		localContainerRef.current = node;
+		if (typeof ref === "function") {
+			ref(node);
+			return;
+		}
+		if (ref) {
+			ref.current = node;
+		}
+	};
+
 	return (
 		<span
-			ref={ref}
+			ref={setRefs}
 			className={`${className} variable-proximity`}
 			onClick={onClick}
 			style={{ display: "inline", ...style }}
@@ -176,19 +227,18 @@ const VariableProximity = forwardRef((props, ref) => {
 					{word.split("").map((letter) => {
 						const currentLetterIndex = letterIndex++;
 						return (
-							<motion.span
+							<Motion.span
 								key={currentLetterIndex}
 								ref={(el) => {
 									letterRefs.current[currentLetterIndex] = el;
 								}}
 								style={{
 									display: "inline-block",
-									fontVariationSettings:
-										interpolatedSettingsRef.current[currentLetterIndex],
+									fontVariationSettings: fromFontVariationSettings,
 								}}
 								aria-hidden="true">
 								{letter}
-							</motion.span>
+							</Motion.span>
 						);
 					})}
 					{wordIndex < words.length - 1 && (

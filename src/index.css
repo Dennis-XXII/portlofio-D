@@ -1,8 +1,6 @@
 /* ----------------------------------------------------------
    🌿 Global Styles & Variables
 -----------------------------------------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-
 :root {
 	--bg: #f9f9f9;
 	--ink: #222222;
@@ -674,6 +672,20 @@ body {
 @media (max-width: 768px) {
 	.section {
 		padding: 48px 24px;
+	}
+
+	.nav {
+		backdrop-filter: none;
+		background: rgba(249, 249, 249, 0.94);
+	}
+
+	.mobile-nav {
+		backdrop-filter: none;
+		background: rgba(249, 249, 249, 0.97);
+	}
+
+	.btn--ghost {
+		backdrop-filter: none;
 	}
 
 	.h1 {

@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m as Motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./StoryCard.css";
 
@@ -94,44 +94,44 @@ export default function StorytellingCard({
 	};
 
 	return (
-		<motion.div
+		<Motion.div
 			ref={ref}
 			className={`story-card ${themeClasses[theme]} ${alignClasses[align]}`}
 			variants={containerVariants}
 			initial="hidden"
 			animate={inView ? "visible" : "hidden"}>
 			<div className="story-card__content">
-				<motion.h2 className="story-card__title" variants={titleVariants}>
+				<Motion.h2 className="story-card__title" variants={titleVariants}>
 					{title.split(" ").map((word, i) => (
-						<motion.span
+						<Motion.span
 							key={i}
 							className="story-card__word"
 							variants={titleVariants}>
 							{word}{" "}
-						</motion.span>
+						</Motion.span>
 					))}
-				</motion.h2>
+				</Motion.h2>
 
-				<motion.div
+				<Motion.div
 					className="story-card__underline"
 					variants={underlineVariants}
 				/>
 
 				{subtitle && (
-					<motion.p
+					<Motion.p
 						className="story-card__subtitle"
 						variants={subtitleVariants}>
 						{subtitle}
-					</motion.p>
+					</Motion.p>
 				)}
 
 				{children && (
-					<motion.div className="story-card__extra" variants={subtitleVariants}>
+					<Motion.div className="story-card__extra" variants={subtitleVariants}>
 						{children}
-					</motion.div>
+					</Motion.div>
 				)}
 			</div>
-		</motion.div>
+		</Motion.div>
 	);
 }
 

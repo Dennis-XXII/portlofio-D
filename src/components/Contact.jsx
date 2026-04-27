@@ -1,7 +1,7 @@
 import AnimatedSection from "./AnimatedSection";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { motion } from "motion/react";
+import { m as Motion } from "framer-motion";
 
 export default function Contact({ setActive }) {
 	const { ref: startRef, inView: startInView } = useInView({
@@ -23,7 +23,7 @@ export default function Contact({ setActive }) {
 						Find me on
 					</h2>
 					<div className="icons" style={{ marginTop: 22 }}>
-						<motion.a
+						<Motion.a
 							whileHover={{ scale: 1.1 }}
 							transition={{
 								type: "spring",
@@ -47,8 +47,8 @@ export default function Contact({ setActive }) {
 								style={{ color: "var(--brand)", textDecoration: "none" }}>
 								LinkedIn
 							</span>
-						</motion.a>
-						<motion.a
+						</Motion.a>
+						<Motion.a
 							whileHover={{ scale: 1.1 }}
 							transition={{
 								type: "spring",
@@ -73,7 +73,7 @@ export default function Contact({ setActive }) {
 								style={{ color: "var(--brand)", textDecoration: "none" }}>
 								Git Hub
 							</span>
-						</motion.a>
+						</Motion.a>
 					</div>
 					<p
 						style={{
