@@ -24,7 +24,7 @@ export const experiences = [
     image: "/experience3.jpg",
     title: "RIC Music Club",
     role: "Visual Creator & Editor",
-    years: "2023 – 2025",
+    years: "2025 – 2026",
     imgAlt: "Experience 3 image",
     link: "https://www.facebook.com/profile.php?id=100089996959451",
     description:
@@ -33,16 +33,26 @@ export const experiences = [
   {
     image: "/experience1.png",
     title: "SKYRISE CORNER EDUCATION AGENCY",
-    role: "Content Editor",
+    role: "Creative Officer",
     years: "2024 – Active",
     imgAlt: "Experience 1 image",
     link: "https://www.facebook.com/sharingaboutthai",
     description:
-      "As a Content Creator & Editor at Skyrise Corner Education Agency, I created and edited engaging visual content for marketing campaigns, including social media graphics, promotional videos, and web content visuals.",
+      "As a Creative Officer at Skyrise Corner Education Agency, I created and edited engaging visual content for marketing campaigns, including social media graphics, promotional videos, and web content visuals.",
   },
 ];
 
 export const projects = [
+  {
+    image: "/GUARDIAN.png",
+    title: "GUARDIAN Fall Detection Model + NLP-based Analyzer - AIIC2026",
+    year: "2026",
+    brief: "Next.js, Roboflow, YOLOv11-Pose, Anthropic SDK, fastAPI, python",
+    link: "https://www.facebook.com/share/p/18PQhEHoUE/",
+    repo: "https://github.com/CoronaZoro/falldetection",
+    description:
+      "This is the project that won me the Applied Artificial Intelligence Innovation Challenge 2026, organized by Rangsit International College and AI Association of Thailand(AIAT) in collaboration with Musashino University, Japan. Developed a double validated and velocity-based classification model using YOLOv11-Pose for fall detection and integrated it with a web-based NLP analyzer to provide real-time insights and alerts for elderly care and health monitoring for private and public sectors. ",
+  },
   {
     image: "/rsuGloball.webp",
     title: "RSU Global! - Student Appointment System",
@@ -175,28 +185,5 @@ export const certifications = [
     year: "Aug 2025",
     description:
       "Gained hands‑on skills in SEO, social media management, content creation, and e‑commerce strategy. Applied data‑driven marketing and customer engagement techniques through real‑world projects.",
-  },
-];
-
-export const hobbies = [
-  {
-    img: "/hobby1.jpg",
-    caption: "Table Tennis",
-    desc: "I got bronze in Rangsit University Payom Games 2023.",
-  },
-  {
-    img: "/hobby2.jpeg",
-    caption: "Table Tennis",
-    desc: "In the following year, 2025. I got Gold.",
-  },
-  {
-    img: "/hobby3.jpg",
-    caption: "Travelling",
-    desc: "I also love to travel to various places around me.",
-  },
-  {
-    img: "/hobby4.jpg",
-    caption: "Khao Yai",
-    desc: "A special place for me with many memories.",
   },
 ];
