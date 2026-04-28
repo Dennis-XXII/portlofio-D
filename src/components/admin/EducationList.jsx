@@ -1,10 +1,87 @@
 "use client";
 
-import { deleteEducation } from "@/app/actions";
-import { useState } from "react";
+import { deleteEducation, reorderEducation } from "@/app/actions";
+import { useState, useEffect, useRef } from "react";
+import { Reorder, useDragControls, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
-export default function EducationList({ education }) {
+function EducationItem({ edu, handleDelete, loadingId }) {
+  const controls = useDragControls();
+
+  return (
+    <Reorder.Item 
+      value={edu} 
+      className="admin-item"
+      dragListener={false}
+      dragControls={controls}
+      layout
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      whileDrag={{ 
+        scale: 1.03, 
+        boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
+        zIndex: 100,
+      }}
+      transition={{ 
+        layout: { type: "spring", stiffness: 600, damping: 40 },
+        scale: { duration: 0.2 }
+      }}
+    >
+      <div className="admin-item-content">
+        <div 
+          className="reorder-handle" 
+          onPointerDown={(e) => controls.start(e)}
+          style={{ cursor: "grab", touchAction: "none" }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M4 8h16M4 16h16" />
+          </svg>
+        </div>
+        <div className="admin-item-info">
+          <h4>{edu.degree}</h4>
+          <p>{edu.institution} | {edu.years}</p>
+        </div>
+      </div>
+      <div className="admin-item-actions">
+        <Link href={`/admin/education/${edu.id}`} className="edit-btn">Edit</Link>
+        <button 
+          onClick={() => handleDelete(edu.id)} 
+          disabled={loadingId === edu.id}
+          className="delete-btn"
+        >
+          {loadingId === edu.id ? "..." : "Delete"}
+        </button>
+      </div>
+    </Reorder.Item>
+  );
+}
+
+export default function EducationList({ education: initialEducation }) {
+  const [education, setEducation] = useState(initialEducation);
   const [loadingId, setLoadingId] = useState(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    setEducation(initialEducation);
+  }, [initialEducation]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        await reorderEducation(education.map(e => e.id));
+      } catch (err) {
+        console.error("Failed to save new order", err);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [education]);
 
   async function handleDelete(id) {
     if (!confirm("Are you sure?")) return;
@@ -13,29 +90,23 @@ export default function EducationList({ education }) {
       await deleteEducation(id);
     } catch (err) {
       alert("Failed to delete education");
-      console.error(err);
     } finally {
       setLoadingId(null);
     }
   }
 
   return (
-    <div className="admin-list">
-      {education.map((edu) => (
-        <div key={edu.id} className="admin-item">
-          <div className="admin-item-info">
-            <h4>{edu.degree}</h4>
-            <p>{edu.institution} | {edu.years}</p>
-          </div>
-          <button 
-            onClick={() => handleDelete(edu.id)} 
-            disabled={loadingId === edu.id}
-            className="delete-btn"
-          >
-            {loadingId === edu.id ? "..." : "Delete"}
-          </button>
-        </div>
-      ))}
-    </div>
+    <Reorder.Group axis="y" values={education} onReorder={setEducation} className="admin-list">
+      <AnimatePresence mode="popLayout">
+        {education.map((edu) => (
+          <EducationItem 
+            key={edu.id} 
+            edu={edu} 
+            handleDelete={handleDelete} 
+            loadingId={loadingId} 
+          />
+        ))}
+      </AnimatePresence>
+    </Reorder.Group>
   );
 }

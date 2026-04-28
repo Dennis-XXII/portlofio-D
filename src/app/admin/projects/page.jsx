@@ -1,24 +1,26 @@
 import { getProjects } from "../../actions";
-import ProjectForm from "@/components/admin/ProjectForm";
 import ProjectList from "@/components/admin/ProjectList";
+import Link from "next/link";
 
 export default async function AdminProjects() {
   const projects = await getProjects();
 
   return (
     <div>
-      <h1 className='h1' style={{ marginBottom: "32px" }}>Manage Projects</h1>
+      <div className="admin-header">
+        <h1 className='h1'>Manage Projects</h1>
+        <Link href="/admin/projects/new" className="primary-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Add Project
+        </Link>
+      </div>
       
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px" }}>
-        <section>
-          <h2 className='h3' style={{ marginBottom: "20px" }}>Add New Project</h2>
-          <ProjectForm />
-        </section>
-
-        <section>
-          <h2 className='h3' style={{ marginBottom: "20px" }}>Existing Projects</h2>
-          <ProjectList projects={projects} />
-        </section>
+      <div className="summary-card">
+        <h2 className="h2" style={{ fontSize: "16px", textTransform: "uppercase", letterSpacing: "1px", color: "#666" }}>Existing Projects</h2>
+        <p style={{ marginBottom: "20px", fontSize: "14px", color: "#888" }}>Drag items to reorder them on your portfolio.</p>
+        <ProjectList projects={projects} />
       </div>
     </div>
   );
