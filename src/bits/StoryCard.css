@@ -1,12 +1,13 @@
 /* ----------------------------------------------------------
-   📖 Storytelling Cards
+   📖 Storytelling Cards - Updated Minimalist Style
 -----------------------------------------------------------*/
 .story-card {
 	width: 100%;
-	padding: 40px 40px;
+	padding: 0;
 	position: relative;
 	overflow: hidden;
-	margin-bottom: 20px;
+	margin-bottom: 80px; /* Increased white space below title */
+	margin-top: 40px;    /* Increased white space above title */
 }
 
 .story-card__content {
@@ -15,70 +16,42 @@
 }
 
 .story-card__title {
-	font-size: clamp(32px, 6vw, 56px);
-	font-weight: 500;
+	font-size: clamp(32px, 6vw, 64px); /* Slightly larger titles */
+	font-weight: 700; /* Bolder titles */
 	font-kerning: auto;
 	line-height: 1.1;
 	margin: 0;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.03em;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.25em;
+	color: var(--brand); /* Default to brand color (black) */
 }
 
 .story-card__word {
 	display: inline-block;
 }
 
+/* Discarded background rectangle and underline as requested */
 .story-card__underline {
-	height: 6px;
-	width: 30%;
-	background: var(--brand);
-	margin: 24px 0;
-	transform-origin: left;
-	border-radius: 3px;
+	display: none;
 }
 
 .story-card__subtitle {
-	font-size: clamp(18px, 2.5vw, 28px);
-	line-height: 1.6;
-	margin: 24px 0 0 0;
-	font-weight: 300;
-	max-width: 700px;
+	display: none; /* Discarded subtitles as requested */
 }
 
 .story-card__extra {
 	margin-top: 32px;
 }
 
-/* Theme variations */
-.story-card--light {
-	background: var(--bg);
-	color: var(--brand);
-}
-
-.story-card--dark {
-	background: var(--brand);
-	color: var(--bg);
-}
-
-.story-card--dark .story-card__underline {
-	background: var(--bg);
-}
-
-.story-card--gradient {
-	background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-	color: white;
-}
-
-.story-card--gradient .story-card__underline {
-	background: linear-gradient(90deg, var(--bg), #81c784);
-}
-
+/* Theme variations - background removed */
+.story-card--light,
+.story-card--dark,
+.story-card--gradient,
 .story-card--accent {
-	background: linear-gradient(135deg, #e8f5e9 0%, #f5f5f5 100%);
+	background: transparent;
 	color: var(--brand);
-	border-left: 8px solid var(--accent);
 }
 
 /* Alignment variations */
@@ -89,10 +62,6 @@
 .story-card--left .story-card__content {
 	margin-left: 0;
 	margin-right: auto;
-}
-
-.story-card--left .story-card__underline {
-	transform-origin: left;
 }
 
 .story-card--center {
@@ -108,17 +77,6 @@
 	justify-content: center;
 }
 
-.story-card--center .story-card__underline {
-	margin-left: auto;
-	margin-right: auto;
-	transform-origin: center;
-}
-
-.story-card--center .story-card__subtitle {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .story-card--right {
 	text-align: right;
 }
@@ -132,42 +90,14 @@
 	justify-content: flex-end;
 }
 
-.story-card--right .story-card__underline {
-	margin-left: auto;
-	transform-origin: right;
-}
-
-.story-card--right .story-card__subtitle {
-	margin-left: auto;
-}
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
 	.story-card {
-		padding: 20px 20px;
+		margin-bottom: 40px;
+		margin-top: 20px;
 	}
 
 	.story-card__title {
-		font-size: clamp(18px, 5vw, 48px);
-	}
-
-	.story-card__subtitle {
-		font-size: clamp(12px, 3vw, 20px);
-		margin: 16px 0 0 0;
-	}
-
-	.story-card__underline {
-		height: 4px;
-		margin: 16px 0;
-	}
-}
-
-@media (max-width: 480px) {
-	.story-card {
-		padding: 20px 20px;
-	}
-
-	.story-card__subtitle {
-		margin: 12px 0 0 0;
+		font-size: clamp(28px, 5vw, 48px);
 	}
 }

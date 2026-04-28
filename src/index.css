@@ -107,22 +107,25 @@ body {
    ✍️ Typography
 -----------------------------------------------------------*/
 .h1 {
-	font-size: clamp(36px, 4vw, 56px);
+	font-size: clamp(36px, 4vw, 64px); /* Slightly larger */
 	font-weight: 600;
 	color: var(--brand);
+	margin-bottom: 32px; /* Added margin */
 }
 
 .h2 {
 	font-size: clamp(36px, 3vw, 48px);
 	font-weight: 600;
 	color: var(--brand);
-	margin-bottom: 24px;
+	margin-top: 64px;    /* Added margin top */
+	margin-bottom: 40px; /* Increased margin bottom */
 }
 
 .h3 {
 	font-size: clamp(20px, 2vw, 24px);
 	font-weight: 600;
 	color: var(--brand);
+	margin-bottom: 16px; /* Added margin bottom */
 }
 
 .headerP {

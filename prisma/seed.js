@@ -1,20 +1,11 @@
-import { fileURLToPath } from 'url'
-import path from 'path'
-import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
+import 'dotenv/config'
+import prisma from '../src/lib/prisma.js'
 import { experiences, projects, skills, softSkills, languages, education, achievements, certifications } from '../src/data.js'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const dbPath = path.resolve(__dirname, '../dev.db')
-
-const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` })
-const prisma = new PrismaClient({ adapter })
 
 async function main() {
   console.log('Start seeding...')
 
-  // Clear existing data
+  // Clear existing data (Careful: this deletes all current data in Postgres)
   await prisma.experience.deleteMany()
   await prisma.project.deleteMany()
   await prisma.skill.deleteMany()

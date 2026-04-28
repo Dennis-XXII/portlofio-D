@@ -99,7 +99,13 @@ export default function About({ setActive }) {
                 {tabs
                   .find((t) => t.id === activeTab)
                   .data.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={item.id || i}>
+                      {typeof item === "string" 
+                        ? item 
+                        : item.level 
+                          ? `${item.name} (${item.level})` 
+                          : item.name}
+                    </li>
                   ))}
               </ul>
             </div>

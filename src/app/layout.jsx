@@ -1,5 +1,6 @@
 import "../index.css";
 import "../App.css";
+import { Providers } from "@/components/Providers";
 
 export const metadata = {
   title: "Kyaw Swar Hein — Full-stack Developer & Visual Designer",
@@ -36,7 +37,9 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <div id="root">{children}</div>
+        <Providers>
+          <div id="root">{children}</div>
+        </Providers>
       </body>
     </html>
   );
