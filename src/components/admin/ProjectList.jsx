@@ -21,14 +21,14 @@ export default function ProjectList({ projects }) {
   }
 
   return (
-    <div className="project-list">
+    <div className="admin-list">
       {projects.map((project) => (
-        <div key={project.id} className="admin-project-item">
+        <div key={project.id} className="admin-item">
           <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
             <img src={project.image} alt={project.title} style={{ width: "60px", height: "40px", objectFit: "cover", borderRadius: "4px" }} />
-            <div>
-              <h4 style={{ margin: 0 }}>{project.title}</h4>
-              <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>{project.year}</p>
+            <div className="admin-item-info">
+              <h4>{project.title}</h4>
+              <p>{project.year}</p>
             </div>
           </div>
           <button 

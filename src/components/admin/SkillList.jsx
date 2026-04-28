@@ -20,10 +20,12 @@ export default function SkillList({ skills }) {
   }
 
   return (
-    <div className="project-list">
+    <div className="admin-list">
       {skills.map((skill) => (
-        <div key={skill.id} className="admin-project-item">
-          <span>{skill.name}</span>
+        <div key={skill.id} className="admin-item">
+          <div className="admin-item-info">
+            <h4>{skill.name}</h4>
+          </div>
           <button 
             onClick={() => handleDelete(skill.id)} 
             disabled={loadingId === skill.id}

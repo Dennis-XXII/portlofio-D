@@ -2,109 +2,233 @@
    🔐 Admin Dashboard Styles
 -----------------------------------------------------------*/
 
-.admin-nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    padding: 12px 16px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    font-weight: 500;
+:root {
+  --admin-sidebar-w: 260px;
+  --admin-bg: #f4f7f6;
+  --admin-sidebar-bg: #1a1c1e;
+  --admin-accent: #3b82f6;
 }
 
-.admin-nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--admin-bg) !important;
+  color: #333 !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
 }
 
+/* Reset or override global section/container styles */
+.admin-container .section {
+  padding: 0 !important;
+  border-bottom: none !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+.admin-container .container {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Typography Overrides */
+.admin-container h1, 
+.admin-container .h1 {
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  margin-bottom: 24px !important;
+  margin-top: 0 !important;
+}
+
+.admin-container h2, 
+.admin-container .h2 {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+.admin-container h3, 
+.admin-container .h3 {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #444 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Navigation Sidebar */
+.admin-nav {
+  width: var(--admin-sidebar-w);
+  background-color: var(--admin-sidebar-bg);
+  color: white;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.admin-nav-links a {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: none !important;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.admin-nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white !important;
+}
+
+/* Main Content Area */
+.admin-main {
+  margin-left: var(--admin-sidebar-w);
+  flex: 1;
+  padding: 60px;
+  width: calc(100% - var(--admin-sidebar-w));
+}
+
+/* Cards & Layout */
 .summary-card {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .admin-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .form-group label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--brand);
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
 }
 
 .form-group input, 
-.form-group textarea {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 14px;
+.form-group textarea,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  background-color: #fff;
+  width: 100%;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: 2px solid var(--brand);
-    border-color: transparent;
+  outline: 2px solid var(--admin-accent);
+  border-color: transparent;
 }
 
 .submit-btn {
-    margin-top: 10px;
-    padding: 14px;
-    background: var(--brand);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: filter 0.2s;
+  margin-top: 10px;
+  padding: 14px;
+  background: var(--admin-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: filter 0.2s;
 }
 
 .submit-btn:hover {
-    filter: brightness(1.1);
+  filter: brightness(1.1);
 }
 
-.project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* List Items */
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.admin-project-item {
-    background: white;
-    padding: 16px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+.admin-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.admin-item-info h4 {
+  margin: 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+}
+
+.admin-item-info p {
+  margin: 4px 0 0 0 !important;
+  font-size: 13px !important;
+  color: #666 !important;
 }
 
 .delete-btn {
-    padding: 8px 16px;
-    background: #ff4d4f;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    transition: opacity 0.2s;
+  padding: 8px 16px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity 0.2s;
 }
 
 .delete-btn:hover {
-    opacity: 0.8;
+  opacity: 0.8;
+}
+
+.signout-btn {
+  margin-top: auto;
+  padding: 12px;
+  background: transparent;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.signout-btn:hover {
+  background: #ff4d4f;
+  color: white;
 }

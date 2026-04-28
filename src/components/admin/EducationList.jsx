@@ -20,12 +20,12 @@ export default function EducationList({ education }) {
   }
 
   return (
-    <div className="project-list">
+    <div className="admin-list">
       {education.map((edu) => (
-        <div key={edu.id} className="admin-project-item">
-          <div>
-            <h4 style={{ margin: 0 }}>{edu.degree}</h4>
-            <p style={{ margin: 0, fontSize: "12px", color: "#666" }}>{edu.institution} | {edu.years}</p>
+        <div key={edu.id} className="admin-item">
+          <div className="admin-item-info">
+            <h4>{edu.degree}</h4>
+            <p>{edu.institution} | {edu.years}</p>
           </div>
           <button 
             onClick={() => handleDelete(edu.id)} 

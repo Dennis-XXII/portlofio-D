@@ -76,7 +76,7 @@ export default function Home({ setActive }) {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1} className='text_box'>
-            <h1 className='h1' style={{ fontWeight: "200" }}>
+            <h1 className='h1' style={{ fontWeight: "200", marginBottom: "8px" }}>
               Hello, I’m{" "}
               <Motion.span
                 whileHover={{ letterSpacing: "2px" }}
