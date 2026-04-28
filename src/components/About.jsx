@@ -1,11 +1,16 @@
 import AnimatedSection from "./AnimatedSection";
-import { skills, softSkills, languages, education } from "../data";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import StorytellingCard from "../bits/StoryCard.jsx";
+import { getSkills, getLanguages, getEducation } from "../app/actions";
 
 export default function About({ setActive }) {
-  //start and end refs for inView detection
+  const [data, setData] = useState({
+    skills: { technical: [], soft: [] },
+    languages: [],
+    education: []
+  });
+
   const { ref: startRef, inView: startInView } = useInView({
     threshold: 0.3,
   });
@@ -13,10 +18,26 @@ export default function About({ setActive }) {
 
   const [activeTab, setActiveTab] = useState("hard");
 
+  useEffect(() => {
+    async function fetchData() {
+      const [skillsData, languagesData, educationData] = await Promise.all([
+        getSkills(),
+        getLanguages(),
+        getEducation()
+      ]);
+      setData({
+        skills: skillsData,
+        languages: languagesData,
+        education: educationData
+      });
+    }
+    fetchData();
+  }, []);
+
   const tabs = [
-    { id: "hard", label: "Tech Skills", data: skills },
-    { id: "soft", label: "Soft Skills", data: softSkills },
-    { id: "languages", label: "Languages", data: languages },
+    { id: "hard", label: "Tech Skills", data: data.skills.technical },
+    { id: "soft", label: "Soft Skills", data: data.skills.soft },
+    { id: "languages", label: "Languages", data: data.languages },
   ];
 
   useEffect(() => {
@@ -27,7 +48,6 @@ export default function About({ setActive }) {
   return (
     <section id='about' className='section'>
       <div className='container'>
-        {/* subtle heading */}
         <StorytellingCard
           title='About me'
           subtitle='& my background'
@@ -38,8 +58,8 @@ export default function About({ setActive }) {
 
         {/* Education */}
         <h2 className='h2'>Education</h2>
-        {education.map((edu, i) => (
-          <AnimatedSection key={i} delay={i * 0.08}>
+        {data.education.map((edu, i) => (
+          <AnimatedSection key={edu.id || i} delay={i * 0.08}>
             <div className='kv'>
               <p className='headerP'>{edu.degree}</p>
               <p className='infoP'>
@@ -52,42 +72,6 @@ export default function About({ setActive }) {
             </div>
           </AnimatedSection>
         ))}
-
-        {/* achievements
-				<h2 className="h2" style={{ marginTop: "100px" }}>
-					Achievements
-				</h2>
-				{achievements.map((ach, i) => (
-					<AnimatedSection key={i} delay={i * 0.08}>
-						<div className="kv">
-							<div>
-								<p className="headerP">
-									{ach.title} - {ach.provider}
-								</p>
-								<p style={{ maxWidth: "900px" }}>{ach.description}</p>
-							</div>
-							<div>{ach.year}</div>
-						</div>
-					</AnimatedSection>
-				))}  */}
-
-        {/* Certifications
-				<h2 className="h2" style={{ marginTop: "100px" }}>
-					Certifications
-				</h2>
-				{certifications.map((cert, i) => (
-					<AnimatedSection key={i} delay={i * 0.08}>
-						<div className="kv">
-							<div>
-								<p className="headerP">
-									{cert.title} - {cert.provider}
-								</p>
-								<p style={{ maxWidth: "900px" }}>{cert.description}</p>
-							</div>
-							<div>{cert.year}</div>
-						</div>
-					</AnimatedSection>
-				))}  */}
 
         {/* Skills + Languages */}
         <div>
@@ -115,7 +99,13 @@ export default function About({ setActive }) {
                 {tabs
                   .find((t) => t.id === activeTab)
                   .data.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={item.id || i}>
+                      {typeof item === "string" 
+                        ? item 
+                        : item.level 
+                          ? `${item.name} (${item.level})` 
+                          : item.name}
+                    </li>
                   ))}
               </ul>
             </div>

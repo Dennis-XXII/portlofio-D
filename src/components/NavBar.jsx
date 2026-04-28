@@ -51,7 +51,7 @@ export default function NavBar({ active }) {
 	const handleClick = useCallback(
 		(id) => (e) => {
 			e.preventDefault();
-			setIsOpen(false); // new - Close menu on link click
+			setIsOpen(false);
 			const el = document.getElementById(id);
 			if (!el) return;
 
@@ -59,8 +59,16 @@ export default function NavBar({ active }) {
 				parseInt(
 					getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
 				) || 68;
-			const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
-			window.scrollTo({ top: y, behavior: "smooth" });
+
+			if (window.lenis) {
+				window.lenis.scrollTo(el, {
+					offset: -(navH + 12),
+					duration: 1.5,
+				});
+			} else {
+				const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
+				window.scrollTo({ top: y, behavior: "smooth" });
+			}
 		},
 		[]
 	);

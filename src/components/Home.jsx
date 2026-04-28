@@ -30,8 +30,16 @@ export default function Home({ setActive }) {
       parseInt(
         getComputedStyle(document.documentElement).getPropertyValue("--nav-h"),
       ) || 68;
-    const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
-    window.scrollTo({ top: y, behavior: "smooth" });
+
+    if (window.lenis) {
+      window.lenis.scrollTo(el, {
+        offset: -(navH + 12),
+        duration: 1.5,
+      });
+    } else {
+      const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   }, []);
 
   // container reference for variable proximity

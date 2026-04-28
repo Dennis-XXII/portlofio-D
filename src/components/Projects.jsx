@@ -1,34 +1,33 @@
 import AnimatedSection from "./AnimatedSection";
-import { projects } from "../data";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
+import { m as Motion, AnimatePresence } from "framer-motion";
 import "../projects.css";
 import StorytellingCard from "../bits/StoryCard";
+import { getProjects } from "../app/actions";
 
 export default function Projects({ setActive }) {
+	const [projects, setProjects] = useState([]);
+	const [hoveredIndex, setHoveredIndex] = useState(null);
+
 	const { ref: startRef, inView: startInView } = useInView({
 		threshold: 0.3,
 	});
 	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
 	useEffect(() => {
-		if (startInView) setActive("projects");
-		if (endInView) setActive("projects"); // switch to next section when bottom enters
+		async function fetchData() {
+			const data = await getProjects();
+			setProjects(data);
+		}
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		if (startInView || endInView) setActive("projects");
 	}, [startInView, endInView, setActive]);
 
-	const [currentIndex, setCurrentIndex] = useState(0);
-
-	const handleDotClick = (index) => {
-		setCurrentIndex(index);
-	};
-
-	const handleNext = () => {
-		setCurrentIndex((prev) => (prev + 1) % projects.length);
-	};
-
-	const handlePrev = () => {
-		setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-	};
+	if (projects.length === 0) return null;
 
 	return (
 		<section id="projects" className="section">
@@ -36,84 +35,87 @@ export default function Projects({ setActive }) {
 				<p ref={startRef} />
 				<StorytellingCard
 					title="Every project tells a story"
-					subtitle="And here are mine"
 					align="left"
 					theme="dark"
 				/>
 
-				<div className="stack-gap">
-					<AnimatedSection key={currentIndex} delay={currentIndex * 0.08}>
-						<div className="projects-card">
-							<div className="projects-image-wrapper">
-								<img
-									src={projects[currentIndex].image}
-									alt={projects[currentIndex].imgAlt}
-									className="projects-img"
-									loading="lazy"
-									decoding="async"
-									width="1600"
-									height="900"
-									sizes="(max-width: 768px) 100vw, 85vw"
-								/>
-								<div className="projects-overlay"></div>
-							</div>
-							<div className="projects-content">
-								<div className="projects-header">
-									<div>
-										<h3 className="h3">{projects[currentIndex].title}</h3>
-										<span className="projects-title">
-											{projects[currentIndex].brief}
-										</span>
+				<div className="projects-grid">
+					{/* Left Column: Dynamic Preview */}
+					<div className="projects-preview">
+						<AnimatePresence mode="wait">
+							{hoveredIndex !== null ? (
+								<Motion.div
+									key={hoveredIndex}
+									initial={{ opacity: 0, x: -20 }}
+									animate={{ opacity: 1, x: 0 }}
+									exit={{ opacity: 0, x: 20 }}
+									transition={{ duration: 0.4, ease: "easeOut" }}
+									className="preview-content"
+								>
+									<div className="preview-image-wrapper">
+										<img
+											src={projects[hoveredIndex].image}
+											alt={projects[hoveredIndex].imgAlt || ""}
+											className="preview-img"
+										/>
 									</div>
-									<span className="projects-years">
-										{projects[currentIndex].year}
-									</span>
-								</div>
-								<p className="projects-description">
-									{projects[currentIndex].description}
-								</p>
-								<div className="projects-footer">
-									{projects[currentIndex].link && (
+									<div className="preview-details">
+										<p className="preview-description">
+											{projects[hoveredIndex].description}
+										</p>
+									</div>
+								</Motion.div>
+							) : (
+								<Motion.div
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 0.5 }}
+									className="preview-placeholder"
+								>
+									<p>Hover over a project to see details</p>
+								</Motion.div>
+							)}
+						</AnimatePresence>
+					</div>
+
+					{/* Right Column: Project List */}
+					<div className="projects-list">
+						{projects.map((project, index) => (
+							<div
+								key={project.id || index}
+								className={`project-item ${hoveredIndex === index ? "active" : ""}`}
+								onMouseEnter={() => setHoveredIndex(index)}
+								onMouseLeave={() => setHoveredIndex(null)}
+							>
+								<h3 className="project-item-title">{project.title}</h3>
+								<p className="project-item-brief">{project.brief}</p>
+								
+								<div className="project-item-footer">
+									{project.link && (
 										<a
-											className="projects-link"
-											href={projects[currentIndex].link}
+											className="projects-link-small"
+											href={project.link}
 											target="_blank"
-											rel="noopener noreferrer">
-											Visit Website
+											rel="noopener noreferrer"
+											onClick={(e) => e.stopPropagation()}
+										>
+											Website
 										</a>
 									)}
-									{projects[currentIndex].repo && (
+									{project.repo && (
 										<a
-											className="projects-link"
-											href={projects[currentIndex].repo}
+											className="projects-link-small"
+											href={project.repo}
 											target="_blank"
-											rel="noopener noreferrer">
-											Visit Repository
+											rel="noopener noreferrer"
+											onClick={(e) => e.stopPropagation()}
+										>
+											Repo
 										</a>
 									)}
 								</div>
 							</div>
-						</div>
-					</AnimatedSection>
-					<AnimatedSection delay={0.1}>
-						<div className="projects-navigation">
-							<button onClick={handlePrev} aria-label="Previous Project">
-								&#8592; Prev
-							</button>
-							<div className="projects-dots">
-								{projects.map((_, index) => (
-									<span
-										key={index}
-										className={`dot ${index === currentIndex ? "active" : ""}`}
-										onClick={() => handleDotClick(index)}
-										aria-label={`Go to project ${index + 1}`}></span>
-								))}
-							</div>
-							<button onClick={handleNext} aria-label="Next Project">
-								Next &#8594;
-							</button>
-						</div>
-					</AnimatedSection>
+						))}
+					</div>
 				</div>
 				<p ref={endRef} />
 			</div>

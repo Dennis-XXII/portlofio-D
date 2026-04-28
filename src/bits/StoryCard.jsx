@@ -117,14 +117,6 @@ export default function StorytellingCard({
 					variants={underlineVariants}
 				/>
 
-				{subtitle && (
-					<Motion.p
-						className="story-card__subtitle"
-						variants={subtitleVariants}>
-						{subtitle}
-					</Motion.p>
-				)}
-
 				{children && (
 					<Motion.div className="story-card__extra" variants={subtitleVariants}>
 						{children}

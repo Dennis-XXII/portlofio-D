@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// NextAuth Models
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Portfolio Models
+model Experience {
+  id          String   @id @default(cuid())
+  image       String
+  title       String
+  role        String
+  years       String
+  imgAlt      String?
+  link        String?
+  description String
+  order       Int      @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  image       String
+  title       String
+  year        String
+  brief       String
+  link        String?
+  repo        String?
+  description String
+  imgAlt      String?
+  order       Int      @default(0)
+}
+
+model Skill {
+  id    String @id @default(cuid())
+  name  String
+  type  String // 'technical' or 'soft'
+  order Int    @default(0)
+}
+
+model Language {
+  id    String @id @default(cuid())
+  name  String
+  level String
+  order Int    @default(0)
+}
+
+model Education {
+  id          String @id @default(cuid())
+  institution String
+  degree      String
+  years       String
+  remarks     String
+  order       Int    @default(0)
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  title       String
+  provider    String
+  year        String
+  description String
+  order       Int    @default(0)
+}
+
+model Certification {
+  id          String @id @default(cuid())
+  title       String
+  provider    String
+  year        String
+  description String
+  order       Int    @default(0)
+}
