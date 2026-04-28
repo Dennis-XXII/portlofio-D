@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  image       String
+  title       String
+  role        String
+  years       String
+  imgAlt      String?
+  link        String?
+  description String
+  order       Int      @default(0)
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  image       String
+  title       String
+  year        String
+  brief       String
+  link        String?
+  repo        String?
+  description String
+  imgAlt      String?
+  order       Int      @default(0)
+}
+
+model Skill {
+  id    String @id @default(cuid())
+  name  String
+  type  String // 'technical' or 'soft'
+  order Int    @default(0)
+}
+
+model Language {
+  id    String @id @default(cuid())
+  name  String
+  level String
+  order Int    @default(0)
+}
+
+model Education {
+  id          String @id @default(cuid())
+  institution String
+  degree      String
+  years       String
+  remarks     String
+  order       Int    @default(0)
+}
+
+model Achievement {
+  id          String @id @default(cuid())
+  title       String
+  provider    String
+  year        String
+  description String
+  order       Int    @default(0)
+}
+
+model Certification {
+  id          String @id @default(cuid())
+  title       String
+  provider    String
+  year        String
+  description String
+  order       Int    @default(0)
+}

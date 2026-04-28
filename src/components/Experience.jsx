@@ -1,15 +1,24 @@
 import AnimatedSection from "./AnimatedSection";
-import { experiences } from "../data";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../exp.css";
 import StorytellingCard from "../bits/StoryCard";
+import { getExperiences } from "../app/actions";
 
 export default function Experience({ setActive }) {
+	const [experiences, setExperiences] = useState([]);
 	const { ref: startRef, inView: startInView } = useInView({
 		threshold: 0.3,
 	});
 	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
+
+	useEffect(() => {
+		async function fetchData() {
+			const data = await getExperiences();
+			setExperiences(data);
+		}
+		fetchData();
+	}, []);
 
 	useEffect(() => {
 		if (startInView) setActive("experience");
@@ -29,12 +38,12 @@ export default function Experience({ setActive }) {
 
 				<div className="stack-gap">
 					{experiences.map((exp, i) => (
-						<AnimatedSection key={i} delay={i * 0.08}>
+						<AnimatedSection key={exp.id || i} delay={i * 0.08}>
 							<div className="experience-card">
 								<div className="experience-image-wrapper">
 									<img
 										src={exp.image}
-										alt={exp.imgAlt}
+										alt={exp.imgAlt || ""}
 										className="experience-img"
 										loading="lazy"
 										decoding="async"

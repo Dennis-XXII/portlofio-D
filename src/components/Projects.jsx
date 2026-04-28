@@ -1,34 +1,47 @@
 import AnimatedSection from "./AnimatedSection";
-import { projects } from "../data";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
 import "../projects.css";
 import StorytellingCard from "../bits/StoryCard";
+import { getProjects } from "../app/actions";
 
 export default function Projects({ setActive }) {
+	const [projects, setProjects] = useState([]);
+	const [currentIndex, setCurrentIndex] = useState(0);
+
 	const { ref: startRef, inView: startInView } = useInView({
 		threshold: 0.3,
 	});
 	const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
 
 	useEffect(() => {
+		async function fetchData() {
+			const data = await getProjects();
+			setProjects(data);
+		}
+		fetchData();
+	}, []);
+
+	useEffect(() => {
 		if (startInView) setActive("projects");
 		if (endInView) setActive("projects"); // switch to next section when bottom enters
 	}, [startInView, endInView, setActive]);
-
-	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const handleDotClick = (index) => {
 		setCurrentIndex(index);
 	};
 
 	const handleNext = () => {
+		if (projects.length === 0) return;
 		setCurrentIndex((prev) => (prev + 1) % projects.length);
 	};
 
 	const handlePrev = () => {
+		if (projects.length === 0) return;
 		setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
 	};
+
+	if (projects.length === 0) return null;
 
 	return (
 		<section id="projects" className="section">
@@ -42,12 +55,12 @@ export default function Projects({ setActive }) {
 				/>
 
 				<div className="stack-gap">
-					<AnimatedSection key={currentIndex} delay={currentIndex * 0.08}>
+					<AnimatedSection key={projects[currentIndex].id || currentIndex} delay={0.08}>
 						<div className="projects-card">
 							<div className="projects-image-wrapper">
 								<img
 									src={projects[currentIndex].image}
-									alt={projects[currentIndex].imgAlt}
+									alt={projects[currentIndex].imgAlt || ""}
 									className="projects-img"
 									loading="lazy"
 									decoding="async"

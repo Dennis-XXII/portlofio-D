@@ -26,6 +26,7 @@ dist-ssr/
 
 # Vercel
 .vercel
+.next/
 
 # Environment variables
 .env
@@ -34,5 +35,12 @@ dist-ssr/
 .env.test.local
 .env.production.local
 
-#CLI tools
+# Database
+*.db
+*.db-journal
+
+# Prisma
+/prisma/generated-client/
+
+# CLI tools
 .gemini/
