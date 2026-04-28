@@ -1,12 +1,25 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
 function LoginContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const error = searchParams.get("error");
+  const callbackUrl = searchParams.get("callbackUrl") || "/admin";
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push(callbackUrl);
+    }
+  }, [status, callbackUrl, router]);
+
+  if (status === "loading") {
+    return <div style={{ display: "flex", height: "100vh", alignItems: "center", justifyContent: "center" }}>Loading...</div>;
+  }
 
   return (
     <div style={{ 
@@ -48,7 +61,7 @@ function LoginContent() {
         </p>
         
         <button
-          onClick={() => signIn("github", { callbackUrl: "/admin" })}
+          onClick={() => signIn("github", { callbackUrl })}
           style={{
             width: "100%",
             padding: "14px",
