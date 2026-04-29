@@ -30,8 +30,15 @@ export function PortfolioProvider({ children }) {
     about: false,
   });
 
+  const hydrate = useCallback((initialData) => {
+    setData(prev => ({
+      ...prev,
+      ...initialData
+    }));
+  }, []);
+
   const fetchInitialData = useCallback(async () => {
-    // If we already have the main lists, don't fetch again
+    // If we already have data (from hydration or previous fetch), don't fetch again
     if (data.projects && data.experiences && data.skills) return;
     
     setLoading(prev => ({ ...prev, initial: true }));
@@ -56,7 +63,7 @@ export function PortfolioProvider({ children }) {
     } finally {
       setLoading(prev => ({ ...prev, initial: false }));
     }
-  }, [data]);
+  }, [data.projects, data.experiences, data.skills]);
 
   const fetchProjectDetail = useCallback(async (id) => {
     // If already cached, return it
@@ -78,6 +85,7 @@ export function PortfolioProvider({ children }) {
     ...data,
     projectDetails,
     loading,
+    hydrate,
     fetchInitialData,
     fetchProjectDetail,
   };
