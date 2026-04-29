@@ -1,5 +1,6 @@
 import "../index.css";
 import { Providers } from "@/components/Providers";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "Kyaw Swar Hein — Full-stack Developer & Visual Designer",
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <div id="root">{children}</div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
