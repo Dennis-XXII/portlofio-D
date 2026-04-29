@@ -79,6 +79,16 @@ model Project {
   description String
   imgAlt      String?
   order       Int      @default(0)
+  sections    ProjectSection[]
+}
+
+model ProjectSection {
+  id        String  @id @default(cuid())
+  projectId String
+  image     String
+  text      String  @db.Text
+  order     Int     @default(0)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Skill {

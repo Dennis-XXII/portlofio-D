@@ -1,6 +1,7 @@
 // new - import useState, useEffect and framer-motion
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { m as Motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import Link from "next/link";
 
 const LINKS = [
 	{ id: "home", label: "Home" },
@@ -10,7 +11,7 @@ const LINKS = [
 	{ id: "contact", label: "Contact" },
 ];
 
-// new - A simple hamburger icon component
+// A simple hamburger icon component
 const HamburgerIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +29,7 @@ const HamburgerIcon = () => (
 	</svg>
 );
 
-// new - A simple close icon component
+// A simple close icon component
 const CloseIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -46,58 +47,46 @@ const CloseIcon = () => (
 );
 
 export default function NavBar({ active }) {
-	const [isOpen, setIsOpen] = useState(false); // new - State to control the mobile menu
+	const [isOpen, setIsOpen] = useState(false);
 
-	const handleClick = useCallback(
-		(id) => (e) => {
-			e.preventDefault();
-			setIsOpen(false);
-			const el = document.getElementById(id);
-			if (!el) return;
-
-			const navH =
-				parseInt(
-					getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
-				) || 68;
-
-			if (window.lenis) {
-				window.lenis.scrollTo(el, {
-					offset: -(navH + 12),
-					duration: 1.5,
-				});
-			} else {
-				const y = el.getBoundingClientRect().top + window.scrollY - (navH + 12);
-				window.scrollTo({ top: y, behavior: "smooth" });
-			}
-		},
-		[]
-	);
-
-	// new - Lock body scroll when the menu is open
+	// Lock body scroll when the menu is open
 	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
 		} else {
 			document.body.style.overflow = "unset";
 		}
-		// Cleanup function to reset scroll on component unmount
 		return () => {
 			document.body.style.overflow = "unset";
 		};
 	}, [isOpen]);
 
-	// new - Variants for the drawer animation
+	// Variants for the drawer animation
 	const drawerVariants = {
 		hidden: { x: "100%" },
 		visible: { x: "0%", transition: { type: "tween", duration: 0.3 } },
 		exit: { x: "100%", transition: { type: "tween", duration: 0.2 } },
 	};
 
-	// new - Variants for the overlay
+	// Variants for the overlay
 	const overlayVariants = {
 		hidden: { opacity: 0 },
 		visible: { opacity: 1, transition: { duration: 0.3 } },
 		exit: { opacity: 0, transition: { duration: 0.2 } },
+	};
+
+	const handleLinkClick = (e, id) => {
+		// Only smooth scroll if we are on the home page and lenis is available
+		if (window.location.pathname === "/" && window.lenis) {
+			const el = document.getElementById(id);
+			if (el) {
+				e.preventDefault();
+				window.lenis.scrollTo(el, { offset: -68 });
+				setIsOpen(false);
+				// Update hash without jumping
+				history.pushState(null, null, id === "home" ? "/" : `/#${id}`);
+			}
+		}
 	};
 
 	return (
@@ -117,11 +106,13 @@ export default function NavBar({ active }) {
 						<div className="nav__links" role="tablist" aria-label="Sections">
 							{LINKS.map((link) => {
 								const isActive = active === link.id;
+								const href = link.id === "home" ? "/" : `/#${link.id}`;
+								
 								return (
-									<a
+									<Link
 										key={link.id}
-										href={`#${link.id}`}
-										onClick={handleClick(link.id)}
+										href={href}
+										onClick={(e) => handleLinkClick(e, link.id)}
 										className={`nav__btn ${isActive ? "is-active" : ""}`}
 										role="tab"
 										aria-selected={isActive}
@@ -138,13 +129,12 @@ export default function NavBar({ active }) {
 											/>
 										)}
 										<span className="nav__label">{link.label}</span>
-									</a>
+									</Link>
 								);
 							})}
 						</div>
 					</LayoutGroup>
 
-					{/* new - Hamburger Button for mobile */}
 					<Motion.button
 						className="hamburger-btn"
 						onClick={() => setIsOpen(true)}
@@ -154,7 +144,7 @@ export default function NavBar({ active }) {
 				</div>
 			</nav>
 
-			{/* new - Mobile Menu Drawer with Framer Motion */}
+			{/* Mobile Menu Drawer */}
 			<AnimatePresence>
 				{isOpen && (
 					<>
@@ -186,21 +176,25 @@ export default function NavBar({ active }) {
 								aria-label="Mobile navigation">
 								{LINKS.map((link) => {
 									const isActive = active === link.id;
+									const href = link.id === "home" ? "/" : `/#${link.id}`;
+									
 									return (
-										<a
+										<Link
 											key={link.id}
-											href={`#${link.id}`}
-											onClick={handleClick(link.id)}
+											href={href}
+											onClick={(e) => {
+												handleLinkClick(e, link.id);
+												setIsOpen(false);
+											}}
 											className={`mobile-nav__link ${
 												isActive ? "is-active" : ""
 											}`}
 											role="menuitem"
 											aria-current={isActive ? "page" : undefined}
 											aria-selected={isActive}>
-											{/* optional left indicator bar */}
 											<span className="mobile-nav__dot" aria-hidden="true" />
 											<span className="mobile-nav__label">{link.label}</span>
-										</a>
+										</Link>
 									);
 								})}
 							</div>

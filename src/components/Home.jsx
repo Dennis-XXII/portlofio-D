@@ -1,17 +1,10 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { m as Motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
-import { useInView } from "react-intersection-observer";
 import TiltedCard from "../bits/TiltedCard";
 import VariableProximity from "../bits/ProximityParagraph";
 
-export default function Home({ setActive }) {
-  // Track when the Home section is in view for active nav
-  const { ref: inViewRef, inView } = useInView({ threshold: 0.6 });
-  useEffect(() => {
-    if (inView) setActive("home");
-  }, [inView, setActive]);
-
+export default function Home() {
   // Track scrolling progress to fade out arrow + text
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -42,17 +35,12 @@ export default function Home({ setActive }) {
     }
   }, []);
 
-  // container reference for variable proximity
-
   const containerRef = useRef(null);
 
   return (
     <section
       id='home'
-      ref={(node) => {
-        sectionRef.current = node;
-        inViewRef(node);
-      }}
+      ref={sectionRef}
       className='section section--fullscreen home-section'
       style={{ padding: "100px 0", marginTop: "-15px" }}
     >

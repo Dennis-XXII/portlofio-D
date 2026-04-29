@@ -1,45 +1,32 @@
+"use client";
+
 import AnimatedSection from "./AnimatedSection";
-import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { m as Motion, AnimatePresence } from "framer-motion";
 import "../projects.css";
 import StorytellingCard from "../bits/StoryCard";
-import { getProjects } from "../app/actions";
+import Link from "next/link";
+import { usePortfolio } from "./PortfolioContext";
 
-export default function Projects({ setActive }) {
-  const [projects, setProjects] = useState([]);
+export default function Projects() {
+  const { projects, loading } = usePortfolio();
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  const { ref: startRef, inView: startInView } = useInView({
-    threshold: 0.3,
-  });
-  const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getProjects();
-      setProjects(data);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (startInView || endInView) setActive("projects");
-  }, [startInView, endInView, setActive]);
-
-  if (projects.length === 0) return null;
+  const isLoading = loading.initial && !projects;
 
   return (
-    <section id='projects' className='section'>
+    <section
+      id='projects'
+      className='section'
+      style={{ minHeight: "600px", position: "relative" }}
+    >
       <div className='container'>
-        <p ref={startRef} />
         <StorytellingCard title='Projects' align='left' theme='dark' />
 
         <div className='projects-grid'>
           {/* Left Column: Dynamic Preview */}
           <div className='projects-preview'>
             <AnimatePresence mode='wait'>
-              {hoveredIndex !== null ? (
+              {!isLoading && hoveredIndex !== null && projects ? (
                 <Motion.div
                   key={hoveredIndex}
                   initial={{ opacity: 0, x: -20 }}
@@ -48,13 +35,17 @@ export default function Projects({ setActive }) {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className='preview-content'
                 >
-                  <div className='preview-image-wrapper'>
+                  <Link
+                    href={`/projects/${projects[hoveredIndex].id}`}
+                    className='preview-image-wrapper'
+                    style={{ display: "block", cursor: "pointer" }}
+                  >
                     <img
                       src={projects[hoveredIndex].image}
                       alt={projects[hoveredIndex].imgAlt || ""}
                       className='preview-img'
                     />
-                  </div>
+                  </Link>
                   <div className='preview-details'>
                     <p className='preview-description'>
                       {projects[hoveredIndex].description}
@@ -64,10 +55,11 @@ export default function Projects({ setActive }) {
               ) : (
                 <Motion.div
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.5 }}
-                  className='preview-placeholder'
+                  animate={{ opacity: 0.7 }}
+                  className={`preview-placeholder ${isLoading ? "skeleton" : ""}`}
+                  style={{ height: "100%", borderRadius: "24px" }}
                 >
-                  <p>Hover over a project to see details</p>
+                  {!isLoading && <p>Hover over a project to see details</p>}
                 </Motion.div>
               )}
             </AnimatePresence>
@@ -75,46 +67,59 @@ export default function Projects({ setActive }) {
 
           {/* Right Column: Project List */}
           <div className='projects-list'>
-            {projects.map((project, index) => (
-              <div
-                key={project.id || index}
-                className={`project-item ${hoveredIndex === index ? "active" : ""}`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <h3 className='project-item-title'>{project.title}</h3>
-                <p className='project-item-brief'>{project.brief}</p>
+            {isLoading
+              ? // Skeletons
+                [1, 2, 3, 4].map((n) => (
+                  <div
+                    key={n}
+                    className='project-item skeleton'
+                    style={{ height: "100px", marginBottom: "12px" }}
+                  >
+                    <div className='project-item-title' />
+                    <div className='project-item-brief' />
+                  </div>
+                ))
+              : projects?.map((project, index) => (
+                  <div
+                    key={project.id || index}
+                    id={project.id}
+                    className={`project-item ${hoveredIndex === index ? "active" : ""}`}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{ scrollMarginTop: "120px" }}
+                  >
+                    <Link
+                      href={`/projects/${project.id}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <h3 className='project-item-title'>{project.title}</h3>
+                      <p className='project-item-brief'>{project.brief}</p>
+                    </Link>
 
-                <div className='project-item-footer'>
-                  {project.link && (
-                    <a
-                      className='projects-link-small'
-                      href={project.link}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Website
-                    </a>
-                  )}
-                  {project.repo && (
-                    <a
-                      className='projects-link-small'
-                      href={project.repo}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      Repo
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+                    <div className='project-item-footer'>
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className='projects-link-small'
+                        style={{ marginLeft: "auto" }}
+                      >
+                        Read more &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
-        <p ref={endRef} />
       </div>
+      {/* Anchor for the end of the section */}
+      <div
+        id='projects-end'
+        style={{
+          position: "absolute",
+          bottom: 0,
+          height: "1px",
+          width: "100%",
+        }}
+      />
     </section>
   );
 }

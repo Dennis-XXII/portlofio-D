@@ -85,6 +85,7 @@ export async function updateProject(id, data) {
   });
   revalidatePath("/");
   revalidatePath("/admin/projects");
+  revalidatePath(`/projects/${id}`);
   return project;
 }
 
@@ -107,6 +108,47 @@ export async function reorderProjects(ids) {
   );
   await prisma.$transaction(transactions);
   revalidatePath("/");
+}
+
+// Project Section Actions
+export async function createProjectSection(projectId, data) {
+  await checkAuth();
+  const count = await prisma.projectSection.count({ where: { projectId } });
+  const section = await prisma.projectSection.create({
+    data: { ...data, projectId, order: count },
+  });
+  revalidatePath(`/projects/${projectId}`);
+  revalidatePath(`/admin/projects/${projectId}`);
+  return section;
+}
+
+export async function updateProjectSection(id, data) {
+  await checkAuth();
+  const section = await prisma.projectSection.update({
+    where: { id },
+    data,
+  });
+  revalidatePath(`/projects/${section.projectId}`);
+  return section;
+}
+
+export async function deleteProjectSection(id) {
+  await checkAuth();
+  const section = await prisma.projectSection.delete({ where: { id } });
+  revalidatePath(`/projects/${section.projectId}`);
+  return section;
+}
+
+export async function reorderProjectSections(projectId, ids) {
+  await checkAuth();
+  const transactions = ids.map((id, index) =>
+    prisma.projectSection.update({
+      where: { id },
+      data: { order: index },
+    })
+  );
+  await prisma.$transaction(transactions);
+  revalidatePath(`/projects/${projectId}`);
 }
 
 // Experience Actions
@@ -204,7 +246,10 @@ export async function reorderEducation(ids) {
 
 // SINGLE ITEM FETCHERS
 export async function getProject(id) {
-  return await prisma.project.findUnique({ where: { id } });
+  return await prisma.project.findUnique({ 
+    where: { id },
+    include: { sections: { orderBy: { order: 'asc' } } }
+  });
 }
 
 export async function getExperience(id) {

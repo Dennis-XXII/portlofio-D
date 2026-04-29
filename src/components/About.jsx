@@ -1,49 +1,20 @@
 import AnimatedSection from "./AnimatedSection";
-import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StorytellingCard from "../bits/StoryCard.jsx";
-import { getSkills, getLanguages, getEducation } from "../app/actions";
+import { usePortfolio } from "./PortfolioContext";
 
-export default function About({ setActive }) {
-  const [data, setData] = useState({
-    skills: { technical: [], soft: [] },
-    languages: [],
-    education: [],
-  });
-
-  const { ref: startRef, inView: startInView } = useInView({
-    threshold: 0.3,
-  });
-  const { ref: endRef, inView: endInView } = useInView({ threshold: 0.3 });
-
+export default function About() {
+  const { skills, languages, education, loading } = usePortfolio();
   const [activeTab, setActiveTab] = useState("hard");
-
-  useEffect(() => {
-    async function fetchData() {
-      const [skillsData, languagesData, educationData] = await Promise.all([
-        getSkills(),
-        getLanguages(),
-        getEducation(),
-      ]);
-      setData({
-        skills: skillsData,
-        languages: languagesData,
-        education: educationData,
-      });
-    }
-    fetchData();
-  }, []);
+  const isLoading = loading.initial && !skills;
 
   const tabs = [
-    { id: "hard", label: "Tech Skills", data: data.skills.technical },
-    { id: "soft", label: "Soft Skills", data: data.skills.soft },
-    { id: "languages", label: "Languages", data: data.languages },
+    { id: "hard", label: "Tech Skills", data: skills?.technical },
+    { id: "soft", label: "Soft Skills", data: skills?.soft },
+    { id: "languages", label: "Languages", data: languages },
   ];
 
-  useEffect(() => {
-    if (startInView) setActive("about");
-    if (endInView) setActive("about"); // switch to next section when bottom enters
-  }, [startInView, endInView, setActive]);
+  const currentTab = tabs.find((t) => t.id === activeTab);
 
   return (
     <section id='about' className='section'>
@@ -54,24 +25,29 @@ export default function About({ setActive }) {
           align='left'
           theme='dark'
         />
-        <p ref={startRef} style={{ height: "0px" }} />
 
         {/* Education */}
         <h2 className='h2'>Education</h2>
-        {data.education.map((edu, i) => (
-          <AnimatedSection key={edu.id || i} delay={i * 0.08}>
-            <div className='kv'>
-              <p className='headerP'>{edu.degree}</p>
-              <p className='infoP'>
-                {edu.institution} ( {edu.years} )
-              </p>
-              <p style={{ maxWidth: "70%" }}>
-                <b>Remark: </b>
-                {edu.remarks}
-              </p>
-            </div>
-          </AnimatedSection>
-        ))}
+        {isLoading ? (
+           [1, 2].map(n => (
+             <div key={n} className="kv skeleton" style={{ height: "120px", marginBottom: "16px" }} />
+           ))
+        ) : (
+          education?.map((edu, i) => (
+            <AnimatedSection key={edu.id || i} delay={i * 0.08}>
+              <div className='kv'>
+                <p className='headerP'>{edu.degree}</p>
+                <p className='infoP'>
+                  {edu.institution} ( {edu.years} )
+                </p>
+                <p style={{ maxWidth: "70%" }}>
+                  <b>Remark: </b>
+                  {edu.remarks}
+                </p>
+              </div>
+            </AnimatedSection>
+          ))
+        )}
 
         {/* Skills + Languages */}
         <div>
@@ -90,29 +66,29 @@ export default function About({ setActive }) {
           </div>
 
           {/* Tab Content */}
-          <AnimatedSection key={activeTab}>
-            <div className='tab-content'>
-              <h2 className='h2'>
-                {tabs.find((t) => t.id === activeTab).label}
-              </h2>
-              <ul className='ul'>
-                {tabs
-                  .find((t) => t.id === activeTab)
-                  .data.map((item, i) => (
-                    <li key={item.id || i}>
-                      {typeof item === "string"
-                        ? item
-                        : item.level
-                          ? `${item.name} (${item.level})`
-                          : item.name}
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </AnimatedSection>
+          {isLoading ? (
+            <div className="tab-content skeleton" style={{ height: "200px" }} />
+          ) : (
+            <AnimatedSection key={activeTab}>
+              <div className='tab-content'>
+                <h2 className='h2'>
+                  {currentTab.label}
+                </h2>
+                <ul className='ul'>
+                  {currentTab.data?.map((item, i) => (
+                      <li key={item.id || i}>
+                        {typeof item === "string"
+                          ? item
+                          : item.level
+                            ? `${item.name} (${item.level})`
+                            : item.name}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </AnimatedSection>
+          )}
         </div>
-
-        <p ref={endRef} />
       </div>
     </section>
   );
