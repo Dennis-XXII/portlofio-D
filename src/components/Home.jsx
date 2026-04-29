@@ -117,7 +117,7 @@ export default function Home() {
               <Motion.a
                 whileTap={{ scale: 0.95 }}
                 className='btn'
-                href='/Kyaw Swar Hein.pdf'
+                href='https://d0z7rkmp6y4girrt.public.blob.vercel-storage.com/kyawswarhein.pdf'
                 download='Kyaw Swar Hein.pdf'
                 target='_blank'
                 rel='noopener noreferrer'
