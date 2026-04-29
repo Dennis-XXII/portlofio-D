@@ -2,47 +2,47 @@
    📖 Storytelling Cards - Updated Minimalist Style
 -----------------------------------------------------------*/
 .story-card {
-	width: 100%;
-	padding: 0;
-	position: relative;
-	overflow: hidden;
-	margin-bottom: 80px; /* Increased white space below title */
-	margin-top: 40px;    /* Increased white space above title */
+  width: 100%;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 80px; /* Increased white space below title */
+  margin-top: 40px; /* Increased white space above title */
 }
 
 .story-card__content {
-	max-width: 900px;
-	width: 100%;
+  max-width: 900px;
+  width: 100%;
 }
 
 .story-card__title {
-	font-size: clamp(32px, 6vw, 64px); /* Slightly larger titles */
-	font-weight: 700; /* Bolder titles */
-	font-kerning: auto;
-	line-height: 1.1;
-	margin: 0;
-	letter-spacing: -0.03em;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.25em;
-	color: var(--brand); /* Default to brand color (black) */
+  font-size: clamp(32px, 6vw, 92px); /* Slightly larger titles */
+  font-weight: 700; /* Bolder titles */
+  font-kerning: auto;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.03em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  color: var(--brand); /* Default to brand color (black) */
 }
 
 .story-card__word {
-	display: inline-block;
+  display: inline-block;
 }
 
 /* Discarded background rectangle and underline as requested */
 .story-card__underline {
-	display: none;
+  display: none;
 }
 
 .story-card__subtitle {
-	display: none; /* Discarded subtitles as requested */
+  display: none; /* Discarded subtitles as requested */
 }
 
 .story-card__extra {
-	margin-top: 32px;
+  margin-top: 32px;
 }
 
 /* Theme variations - background removed */
@@ -50,54 +50,54 @@
 .story-card--dark,
 .story-card--gradient,
 .story-card--accent {
-	background: transparent;
-	color: var(--brand);
+  background: transparent;
+  color: var(--brand);
 }
 
 /* Alignment variations */
 .story-card--left {
-	text-align: left;
+  text-align: left;
 }
 
 .story-card--left .story-card__content {
-	margin-left: 0;
-	margin-right: auto;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .story-card--center {
-	text-align: center;
+  text-align: center;
 }
 
 .story-card--center .story-card__content {
-	margin-left: auto;
-	margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .story-card--center .story-card__title {
-	justify-content: center;
+  justify-content: center;
 }
 
 .story-card--right {
-	text-align: right;
+  text-align: right;
 }
 
 .story-card--right .story-card__content {
-	margin-left: auto;
-	margin-right: 0;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .story-card--right .story-card__title {
-	justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-	.story-card {
-		margin-bottom: 40px;
-		margin-top: 20px;
-	}
+  .story-card {
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
 
-	.story-card__title {
-		font-size: clamp(28px, 5vw, 48px);
-	}
+  .story-card__title {
+    font-size: clamp(28px, 5vw, 48px);
+  }
 }

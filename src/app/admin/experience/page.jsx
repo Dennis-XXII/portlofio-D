@@ -1,24 +1,26 @@
 import { getExperiences } from "../../actions";
-import ExperienceForm from "@/components/admin/ExperienceForm";
 import ExperienceList from "@/components/admin/ExperienceList";
+import Link from "next/link";
 
 export default async function AdminExperience() {
   const experiences = await getExperiences();
 
   return (
     <div>
-      <h1 className='h1' style={{ marginBottom: "32px" }}>Manage Experience</h1>
+      <div className="admin-header">
+        <h1 className='h1'>Manage Experience</h1>
+        <Link href="/admin/experience/new" className="primary-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Add Experience
+        </Link>
+      </div>
       
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px" }}>
-        <section>
-          <h2 className='h3' style={{ marginBottom: "20px" }}>Add New Experience</h2>
-          <ExperienceForm />
-        </section>
-
-        <section>
-          <h2 className='h3' style={{ marginBottom: "20px" }}>Existing Experiences</h2>
-          <ExperienceList experiences={experiences} />
-        </section>
+      <div className="summary-card">
+        <h2 className="h2" style={{ fontSize: "16px", textTransform: "uppercase", letterSpacing: "1px", color: "#666" }}>Existing Experiences</h2>
+        <p style={{ marginBottom: "20px", fontSize: "14px", color: "#888" }}>Drag items to reorder them on your portfolio.</p>
+        <ExperienceList experiences={experiences} />
       </div>
     </div>
   );

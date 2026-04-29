@@ -8,7 +8,7 @@ export default function About({ setActive }) {
   const [data, setData] = useState({
     skills: { technical: [], soft: [] },
     languages: [],
-    education: []
+    education: [],
   });
 
   const { ref: startRef, inView: startInView } = useInView({
@@ -23,12 +23,12 @@ export default function About({ setActive }) {
       const [skillsData, languagesData, educationData] = await Promise.all([
         getSkills(),
         getLanguages(),
-        getEducation()
+        getEducation(),
       ]);
       setData({
         skills: skillsData,
         languages: languagesData,
-        education: educationData
+        education: educationData,
       });
     }
     fetchData();
@@ -54,7 +54,7 @@ export default function About({ setActive }) {
           align='left'
           theme='dark'
         />
-        <p ref={startRef} />
+        <p ref={startRef} style={{ height: "0px" }} />
 
         {/* Education */}
         <h2 className='h2'>Education</h2>
@@ -100,10 +100,10 @@ export default function About({ setActive }) {
                   .find((t) => t.id === activeTab)
                   .data.map((item, i) => (
                     <li key={item.id || i}>
-                      {typeof item === "string" 
-                        ? item 
-                        : item.level 
-                          ? `${item.name} (${item.level})` 
+                      {typeof item === "string"
+                        ? item
+                        : item.level
+                          ? `${item.name} (${item.level})`
                           : item.name}
                     </li>
                   ))}

@@ -60,7 +60,7 @@ export default function Home({ setActive }) {
         <div className='media_home'>
           <AnimatedSection delay={0.1}>
             <TiltedCard
-              imageSrc='/dennis.webp'
+              imageSrc='https://d0z7rkmp6y4girrt.public.blob.vercel-storage.com/dennis.webp'
               imageAlt='Portrait of Kyaw Swar Hein'
               containerHeight='250px'
               containerWidth='250px'
@@ -76,7 +76,10 @@ export default function Home({ setActive }) {
           </AnimatedSection>
 
           <AnimatedSection delay={0.1} className='text_box'>
-            <h1 className='h1' style={{ fontWeight: "200" }}>
+            <h1
+              className='h1'
+              style={{ fontWeight: "200", marginBottom: "8px" }}
+            >
               Hello, I’m{" "}
               <Motion.span
                 whileHover={{ letterSpacing: "2px" }}
