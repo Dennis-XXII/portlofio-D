@@ -3,9 +3,12 @@ import "../exp.css";
 import StorytellingCard from "../bits/StoryCard";
 import { usePortfolio } from "./PortfolioContext";
 
-export default function Experience() {
+export default function Experience({ initialData }) {
 	const { experiences, loading } = usePortfolio();
-	const isLoading = loading.initial && !experiences;
+	
+	// Priority: Hydrated Context > SSR Props > Loading State
+	const data = experiences || initialData;
+	const isLoading = loading.initial && !data;
 
 	return (
 		<section id="experience" className="section" style={{ minHeight: "400px" }}>
@@ -27,7 +30,7 @@ export default function Experience() {
 							</div>
 						))
 					) : (
-						experiences?.map((exp, i) => (
+						data?.map((exp, i) => (
 							<AnimatedSection key={exp.id || i} delay={i * 0.08}>
 								<div className="experience-card">
 									<div className="experience-image-wrapper">

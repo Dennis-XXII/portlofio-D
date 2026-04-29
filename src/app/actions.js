@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
 import { put } from "@vercel/blob";
 
 // AUTH HELPER
@@ -15,40 +15,71 @@ async function checkAuth() {
   return session;
 }
 
-// FETCH ACTIONS
-export async function getExperiences() {
-  return await prisma.experience.findMany({
-    orderBy: { order: "asc" },
-  });
-}
+// FETCH ACTIONS (CACHED)
+export const getExperiences = unstable_cache(
+  async () => {
+    return await prisma.experience.findMany({
+      orderBy: { order: "asc" },
+    });
+  },
+  ["experiences-list"],
+  { tags: ["experiences"] }
+);
 
-export async function getProjects() {
-  return await prisma.project.findMany({
-    orderBy: { order: "asc" },
-  });
-}
+export const getProjects = unstable_cache(
+  async () => {
+    return await prisma.project.findMany({
+      orderBy: { order: "asc" },
+    });
+  },
+  ["projects-list"],
+  { tags: ["projects"] }
+);
 
-export async function getSkills() {
-  const allSkills = await prisma.skill.findMany({
-    orderBy: { order: "asc" },
-  });
-  return {
-    technical: allSkills.filter(s => s.type === 'technical'),
-    soft: allSkills.filter(s => s.type === 'soft'),
-  };
-}
+export const getSkills = unstable_cache(
+  async () => {
+    const allSkills = await prisma.skill.findMany({
+      orderBy: { order: "asc" },
+    });
+    return {
+      technical: allSkills.filter(s => s.type === 'technical'),
+      soft: allSkills.filter(s => s.type === 'soft'),
+    };
+  },
+  ["skills-list"],
+  { tags: ["skills"] }
+);
 
-export async function getLanguages() {
-  return await prisma.language.findMany({
-    orderBy: { order: "asc" },
-  });
-}
+export const getLanguages = unstable_cache(
+  async () => {
+    return await prisma.language.findMany({
+      orderBy: { order: "asc" },
+    });
+  },
+  ["languages-list"],
+  { tags: ["languages"] }
+);
 
-export async function getEducation() {
-  return await prisma.education.findMany({
-    orderBy: { order: "asc" },
-  });
-}
+export const getEducation = unstable_cache(
+  async () => {
+    return await prisma.education.findMany({
+      orderBy: { order: "asc" },
+    });
+  },
+  ["education-list"],
+  { tags: ["education"] }
+);
+
+export const getProject = unstable_cache(
+  async (id) => {
+    return await prisma.project.findUnique({ 
+      where: { id },
+      include: { sections: { orderBy: { order: 'asc' } } }
+    });
+  },
+  ["project-detail"],
+  { tags: ["projects"] }
+);
 
 // MUTATION ACTIONS
 
@@ -72,6 +103,7 @@ export async function createProject(data) {
   const project = await prisma.project.create({
     data: { ...data, order: count },
   });
+  revalidateTag("projects");
   revalidatePath("/");
   revalidatePath("/admin/projects");
   return project;
@@ -83,6 +115,7 @@ export async function updateProject(id, data) {
     where: { id },
     data,
   });
+  revalidateTag("projects");
   revalidatePath("/");
   revalidatePath("/admin/projects");
   revalidatePath(`/projects/${id}`);
@@ -94,6 +127,7 @@ export async function deleteProject(id) {
   await prisma.project.delete({
     where: { id },
   });
+  revalidateTag("projects");
   revalidatePath("/");
   revalidatePath("/admin/projects");
 }
@@ -107,6 +141,7 @@ export async function reorderProjects(ids) {
     })
   );
   await prisma.$transaction(transactions);
+  revalidateTag("projects");
   revalidatePath("/");
 }
 
@@ -117,6 +152,7 @@ export async function createProjectSection(projectId, data) {
   const section = await prisma.projectSection.create({
     data: { ...data, projectId, order: count },
   });
+  revalidateTag("projects");
   revalidatePath(`/projects/${projectId}`);
   revalidatePath(`/admin/projects/${projectId}`);
   return section;
@@ -128,6 +164,7 @@ export async function updateProjectSection(id, data) {
     where: { id },
     data,
   });
+  revalidateTag("projects");
   revalidatePath(`/projects/${section.projectId}`);
   return section;
 }
@@ -135,6 +172,7 @@ export async function updateProjectSection(id, data) {
 export async function deleteProjectSection(id) {
   await checkAuth();
   const section = await prisma.projectSection.delete({ where: { id } });
+  revalidateTag("projects");
   revalidatePath(`/projects/${section.projectId}`);
   return section;
 }
@@ -148,6 +186,7 @@ export async function reorderProjectSections(projectId, ids) {
     })
   );
   await prisma.$transaction(transactions);
+  revalidateTag("projects");
   revalidatePath(`/projects/${projectId}`);
 }
 
@@ -158,6 +197,7 @@ export async function createExperience(data) {
   const exp = await prisma.experience.create({ 
     data: { ...data, order: count } 
   });
+  revalidateTag("experiences");
   revalidatePath("/");
   revalidatePath("/admin/experience");
   return exp;
@@ -166,6 +206,7 @@ export async function createExperience(data) {
 export async function deleteExperience(id) {
   await checkAuth();
   await prisma.experience.delete({ where: { id } });
+  revalidateTag("experiences");
   revalidatePath("/");
   revalidatePath("/admin/experience");
 }
@@ -179,6 +220,7 @@ export async function reorderExperiences(ids) {
     })
   );
   await prisma.$transaction(transactions);
+  revalidateTag("experiences");
   revalidatePath("/");
 }
 
@@ -189,6 +231,7 @@ export async function createSkill(data) {
   const skill = await prisma.skill.create({ 
     data: { ...data, order: count } 
   });
+  revalidateTag("skills");
   revalidatePath("/");
   revalidatePath("/admin/skills");
   return skill;
@@ -197,6 +240,7 @@ export async function createSkill(data) {
 export async function deleteSkill(id) {
   await checkAuth();
   await prisma.skill.delete({ where: { id } });
+  revalidateTag("skills");
   revalidatePath("/");
   revalidatePath("/admin/skills");
 }
@@ -210,6 +254,7 @@ export async function reorderSkills(ids) {
     })
   );
   await prisma.$transaction(transactions);
+  revalidateTag("skills");
   revalidatePath("/");
 }
 
@@ -220,6 +265,7 @@ export async function createEducation(data) {
   const edu = await prisma.education.create({ 
     data: { ...data, order: count } 
   });
+  revalidateTag("education");
   revalidatePath("/");
   revalidatePath("/admin/education");
   return edu;
@@ -228,6 +274,7 @@ export async function createEducation(data) {
 export async function deleteEducation(id) {
   await checkAuth();
   await prisma.education.delete({ where: { id } });
+  revalidateTag("education");
   revalidatePath("/");
   revalidatePath("/admin/education");
 }
@@ -241,17 +288,11 @@ export async function reorderEducation(ids) {
     })
   );
   await prisma.$transaction(transactions);
+  revalidateTag("education");
   revalidatePath("/");
 }
 
 // SINGLE ITEM FETCHERS
-export async function getProject(id) {
-  return await prisma.project.findUnique({ 
-    where: { id },
-    include: { sections: { orderBy: { order: 'asc' } } }
-  });
-}
-
 export async function getExperience(id) {
   return await prisma.experience.findUnique({ where: { id } });
 }
@@ -271,6 +312,7 @@ export async function updateExperience(id, data) {
     where: { id },
     data,
   });
+  revalidateTag("experiences");
   revalidatePath("/");
   revalidatePath("/admin/experience");
   return exp;
@@ -282,6 +324,7 @@ export async function updateSkill(id, data) {
     where: { id },
     data,
   });
+  revalidateTag("skills");
   revalidatePath("/");
   revalidatePath("/admin/skills");
   return skill;
@@ -293,6 +336,7 @@ export async function updateEducation(id, data) {
     where: { id },
     data,
   });
+  revalidateTag("education");
   revalidatePath("/");
   revalidatePath("/admin/education");
   return edu;

@@ -8,10 +8,13 @@ import StorytellingCard from "../bits/StoryCard";
 import Link from "next/link";
 import { usePortfolio } from "./PortfolioContext";
 
-export default function Projects() {
+export default function Projects({ initialData }) {
   const { projects, loading } = usePortfolio();
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const isLoading = loading.initial && !projects;
+  
+  // Priority: Hydrated Context > SSR Props > Loading State
+  const data = projects || initialData;
+  const isLoading = loading.initial && !data;
 
   return (
     <section
@@ -26,7 +29,7 @@ export default function Projects() {
           {/* Left Column: Dynamic Preview */}
           <div className='projects-preview'>
             <AnimatePresence mode='wait'>
-              {!isLoading && hoveredIndex !== null && projects ? (
+              {!isLoading && hoveredIndex !== null && data ? (
                 <Motion.div
                   key={hoveredIndex}
                   initial={{ opacity: 0, x: -20 }}
@@ -36,26 +39,26 @@ export default function Projects() {
                   className='preview-content'
                 >
                   <Link
-                    href={`/projects/${projects[hoveredIndex].id}`}
+                    href={`/projects/${data[hoveredIndex].id}`}
                     className='preview-image-wrapper'
                     style={{ display: "block", cursor: "pointer" }}
                   >
                     <img
-                      src={projects[hoveredIndex].image}
-                      alt={projects[hoveredIndex].imgAlt || ""}
+                      src={data[hoveredIndex].image}
+                      alt={data[hoveredIndex].imgAlt || ""}
                       className='preview-img'
                     />
                   </Link>
                   <div className='preview-details'>
                     <p className='preview-description'>
-                      {projects[hoveredIndex].description}
+                      {data[hoveredIndex].description}
                     </p>
                   </div>
                 </Motion.div>
               ) : (
                 <Motion.div
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.7 }}
+                  animate={{ opacity: 0.5 }}
                   className={`preview-placeholder ${isLoading ? "skeleton" : ""}`}
                   style={{ height: "100%", borderRadius: "24px" }}
                 >
@@ -79,7 +82,7 @@ export default function Projects() {
                     <div className='project-item-brief' />
                   </div>
                 ))
-              : projects?.map((project, index) => (
+              : data?.map((project, index) => (
                   <div
                     key={project.id || index}
                     id={project.id}
