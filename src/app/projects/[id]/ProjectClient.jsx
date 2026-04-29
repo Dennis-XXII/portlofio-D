@@ -9,7 +9,7 @@ import { usePortfolio } from "@/components/PortfolioContext";
 
 export default function ProjectClient({ project }) {
   const { hydrate, projectDetails } = usePortfolio();
-  
+
   useEffect(() => {
     if (project) {
       hydrate({ projectDetails: { [project.id]: project } });
@@ -17,25 +17,25 @@ export default function ProjectClient({ project }) {
   }, [project, hydrate]);
 
   // Priority: Props (instant from SSR) -> Cache (client-side context)
-  const displayProject = project || (project?.id ? projectDetails[project.id] : null);
+  const displayProject =
+    project || (project?.id ? projectDetails[project.id] : null);
 
   if (!displayProject) {
     return (
       <div style={{ textAlign: "center", paddingTop: "200px" }}>
-        <h1 className="h1">Project Not Found</h1>
-        <Link href="/#projects" className="btn" style={{ marginTop: "24px" }}>
+        <h1 className='h1'>Project Not Found</h1>
+        <Link href='/#projects' className='btn' style={{ marginTop: "24px" }}>
           Back to Projects
         </Link>
       </div>
     );
   }
 
-  const hasSections = displayProject.sections && displayProject.sections.length > 0;
+  const hasSections =
+    displayProject.sections && displayProject.sections.length > 0;
 
   return (
     <LazyMotion features={domMax}>
-      <NavBar active='projects' />
-
       <main style={{ paddingTop: "140px", paddingBottom: "100px" }}>
         <div className='container'>
           {/* Header */}
@@ -71,7 +71,7 @@ export default function ProjectClient({ project }) {
                   fontSize: "20px",
                   lineHeight: "1.8",
                   color: "var(--ink-2)",
-                  maxWidth: "900px",
+                  maxWidth: "1200px",
                 }}
               >
                 {displayProject.description}
