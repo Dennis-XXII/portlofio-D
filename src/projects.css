@@ -69,7 +69,7 @@
 }
 
 .projects-link-small:hover {
-  color: var(--brand-acent);
+  color: var(--accent);
 }
 
 /* Left Column: Dynamic Preview */
@@ -116,11 +116,11 @@
 
 .preview-placeholder {
   width: 100%;
-  height: 400px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px dashed rgba(0, 0, 0, 0.1);
+  border: 2px dashed rgba(0, 0, 0, 0.2);
   border-radius: var(--radius-xl);
   color: var(--ink-2);
   font-style: italic;
