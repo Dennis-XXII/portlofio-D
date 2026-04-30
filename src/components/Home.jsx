@@ -110,7 +110,7 @@ export default function Home() {
               style={{
                 display: "flex",
                 gap: 12,
-                margin: "12px 0 12px",
+                margin: "32px 0 12px",
                 justifyContent: "center",
               }}
             >

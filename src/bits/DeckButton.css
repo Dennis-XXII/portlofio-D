@@ -1,0 +1,136 @@
+/* DeckButtonStandalone.css - Vanilla CSS for the EP-133 style button */
+
+.deck-button-outer {
+  padding: 2.5px;
+  background-color: #0a0a0a;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.deck-button {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  height: 72px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Red Variant */
+.deck-button--red {
+  background-color: #d42a02;
+  border-radius: 12px;
+  box-shadow:
+    inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.2),
+    3.2px 3.2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Gray Variant */
+.deck-button--gray {
+  background: linear-gradient(to bottom, #d4d2cf, #b8b6b3);
+  border-radius: 12px;
+  box-shadow:
+    inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.2),
+    3.2px 3.2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.deck-button:active:not(:disabled) {
+  box-shadow: inset 0.5px 0.5px 4px #000000;
+  transform: translateY(2px);
+}
+
+.deck-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deck-button-label {
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  pointer-events: none;
+}
+
+.deck-button-label--red {
+  color: #c7c3c0;
+  font-size: 8px;
+}
+
+.deck-button-label--gray {
+  color: #545251;
+  font-size: 9px;
+}
+
+.deck-button-icon {
+  transition: transform 0.1s ease;
+  pointer-events: none;
+}
+
+.deck-button-icon--red {
+  width: 16px;
+  height: 16px;
+  fill: #c7c3c0;
+}
+
+.deck-button-icon--gray {
+  width: 20px;
+  height: 20px;
+  fill: #545251;
+}
+
+.deck-button:active:not(:disabled) .deck-button-icon {
+  transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .deck-button {
+    width: 64px;
+    height: 64px;
+  }
+  .deck-button-label--red {
+    font-size: 7.5px;
+  }
+  .deck-button-label--gray {
+    font-size: 8.5px;
+  }
+  .deck-button-icon--red {
+    width: 14px;
+    height: 14px;
+  }
+  .deck-button-icon--gray {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .deck-button {
+    width: 56px;
+    height: 56px;
+  }
+  .deck-button-label--red {
+    font-size: 7px;
+  }
+  .deck-button-label--gray {
+    font-size: 8px;
+  }
+  .deck-button-icon--red {
+    width: 12px;
+    height: 12px;
+  }
+  .deck-button-icon--gray {
+    width: 16px;
+    height: 16px;
+  }
+}

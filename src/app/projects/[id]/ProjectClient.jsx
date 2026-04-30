@@ -1,11 +1,11 @@
 "use client";
 
 import AnimatedSection from "@/components/AnimatedSection";
-import NavBar from "@/components/NavBar";
 import { LazyMotion, domMax } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePortfolio } from "@/components/PortfolioContext";
+import "@/project-detail.css";
 
 export default function ProjectClient({ project }) {
   const { hydrate, projectDetails } = usePortfolio();
@@ -36,48 +36,21 @@ export default function ProjectClient({ project }) {
 
   return (
     <LazyMotion features={domMax}>
-      <main style={{ paddingTop: "140px", paddingBottom: "100px" }}>
+      <main className='project-detail-main'>
         <div className='container'>
           {/* Header */}
           <AnimatedSection>
-            <div style={{ marginBottom: hasSections ? "80px" : "40px" }}>
-              <Link
-                href={`/#${displayProject.id}`}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  color: "var(--ink-2)",
-                  textDecoration: "none",
-                  marginBottom: "32px",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  fontFamily: "inherit",
-                }}
-              >
+            <div className='project-detail-header'>
+              <Link href={`/#${displayProject.id}`} className='back-link'>
                 ← Back to Projects
               </Link>
-              <h1 className='h1' style={{ marginBottom: "16px" }}>
-                {displayProject.title}
-              </h1>
-              <p
-                className='infoP'
-                style={{ marginBottom: "32px", fontSize: "14px" }}
-              >
+              <h1 className='h1 project-title'>{displayProject.title}</h1>
+              <div className='project-meta'>
                 {displayProject.year} • {displayProject.brief}
-              </p>
-              <p
-                style={{
-                  fontSize: "20px",
-                  lineHeight: "1.8",
-                  color: "var(--ink-2)",
-                  maxWidth: "1200px",
-                }}
-              >
-                {displayProject.description}
-              </p>
+              </div>
+              <p className='project-description'>{displayProject.description}</p>
 
-              <div style={{ display: "flex", gap: "16px", marginTop: "40px" }}>
+              <div className='project-actions'>
                 {displayProject.link && (
                   <a
                     href={displayProject.link}
@@ -103,56 +76,25 @@ export default function ProjectClient({ project }) {
           </AnimatedSection>
 
           {hasSections ? (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "120px" }}
-            >
+            <div className='project-sections'>
               {displayProject.sections.map((section, index) => {
                 const isEven = index % 2 === 0;
                 return (
                   <AnimatedSection key={section.id}>
                     <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns:
-                          "repeat(auto-fit, minmax(300px, 1fr))",
-                        gap: "60px",
-                        alignItems: "center",
-                        direction: isEven ? "ltr" : "rtl",
-                      }}
+                      className={`project-section-grid ${isEven ? "is-even" : "is-odd"}`}
                     >
-                      <div style={{ direction: "ltr" }}>
-                        <div
-                          style={{
-                            width: "100%",
-                            aspectRatio: "4/3",
-                            borderRadius: "24px",
-                            overflow: "hidden",
-                            boxShadow: "var(--shadow-md)",
-                            backgroundColor: "var(--button-bg)",
-                          }}
-                        >
+                      <div className='project-section-image-container'>
+                        <div className='project-section-image-wrapper'>
                           <img
                             src={section.image}
                             alt=''
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "cover",
-                            }}
+                            className='project-section-image'
                           />
                         </div>
                       </div>
-                      <div style={{ direction: "ltr" }}>
-                        <p
-                          style={{
-                            fontSize: "18px",
-                            lineHeight: "1.8",
-                            color: "var(--ink-2)",
-                            whiteSpace: "pre-wrap",
-                          }}
-                        >
-                          {section.text}
-                        </p>
+                      <div className='project-section-content'>
+                        <p className='project-section-text'>{section.text}</p>
                       </div>
                     </div>
                   </AnimatedSection>
@@ -161,20 +103,8 @@ export default function ProjectClient({ project }) {
             </div>
           ) : (
             <AnimatedSection delay={0.2}>
-              <div
-                style={{
-                  marginTop: "60px",
-                  padding: "80px 40px",
-                  borderRadius: "32px",
-                  backgroundColor: "var(--button-bg)",
-                  textAlign: "center",
-                  border: "1px dashed var(--nav-border)",
-                }}
-              >
-                <h2
-                  className='h2'
-                  style={{ marginBottom: "12px", color: "var(--brand)" }}
-                >
+              <div className='project-coming-soon'>
+                <h2 className='h2' style={{ marginBottom: "12px", color: "var(--brand)" }}>
                   Coming Soon
                 </h2>
                 <p style={{ color: "var(--ink-2)", fontSize: "16px" }}>
@@ -185,18 +115,10 @@ export default function ProjectClient({ project }) {
             </AnimatedSection>
           )}
 
-          <div
-            style={{
-              marginTop: "120px",
-              textAlign: "center",
-              paddingTop: "60px",
-              borderTop: "1px solid var(--nav-border)",
-            }}
-          >
+          <div className='project-footer'>
             <Link
               href={`/#${displayProject.id}`}
               className='btn btn--ghost'
-              style={{ fontFamily: "inherit" }}
             >
               Back to all projects
             </Link>
