@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createProjectSection, updateProjectSection, deleteProjectSection, reorderProjectSections, uploadImage } from "@/app/actions";
 import { Reorder, AnimatePresence, motion } from "framer-motion";
 
@@ -26,6 +26,8 @@ export default function ProjectSectionManager({ projectId, sections: initialSect
   const [editingId, setEditingId] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [insertAfterId, setInsertAfterId] = useState(null);
+  
+  const formRef = useRef(null);
 
   const [formState, setFormState] = useState({
     type: null, // 'image' | 'text'
@@ -60,6 +62,12 @@ export default function ProjectSectionManager({ projectId, sections: initialSect
   };
 
   const rows = groupIntoRows(sections);
+
+  function scrollToForm() {
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 50);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -130,7 +138,7 @@ export default function ProjectSectionManager({ projectId, sections: initialSect
       width: section.width || "full",
       file: null
     });
-    window.scrollTo({ top: document.querySelector(".admin-form").offsetTop - 100, behavior: "smooth" });
+    scrollToForm();
   }
 
   function handleFillSlot(sectionId) {
@@ -142,7 +150,7 @@ export default function ProjectSectionManager({ projectId, sections: initialSect
       width: "half",
       file: null
     });
-    window.scrollTo({ top: document.querySelector(".admin-form").offsetTop - 100, behavior: "smooth" });
+    scrollToForm();
   }
 
   function handleDragOver(e) {
@@ -248,7 +256,7 @@ export default function ProjectSectionManager({ projectId, sections: initialSect
         </AnimatePresence>
       </Reorder.Group>
 
-      <div className="admin-form">
+      <div className="admin-form" ref={formRef}>
         <h3 className="h3">
           {editingId ? "Edit Block" : (insertAfterId ? "Insert Half Block" : "Add New Block")}
         </h3>
