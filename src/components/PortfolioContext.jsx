@@ -31,10 +31,21 @@ export function PortfolioProvider({ children }) {
   });
 
   const hydrate = useCallback((initialData) => {
-    setData(prev => ({
-      ...prev,
-      ...initialData
-    }));
+    const { projectDetails: initialProjectDetails, ...otherData } = initialData;
+    
+    if (Object.keys(otherData).length > 0) {
+      setData(prev => ({
+        ...prev,
+        ...otherData
+      }));
+    }
+
+    if (initialProjectDetails) {
+      setProjectDetails(prev => ({
+        ...prev,
+        ...initialProjectDetails
+      }));
+    }
   }, []);
 
   const fetchInitialData = useCallback(async () => {

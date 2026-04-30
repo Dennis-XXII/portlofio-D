@@ -2,7 +2,7 @@
    🌿 Global Styles & Variables
 -----------------------------------------------------------*/
 :root {
-  --bg: #f9f9f9;
+  --bg: #fafafa;
   --ink: #222222;
   --ink-2: #555555;
   --button-bg: #e5e5e5;
@@ -10,12 +10,18 @@
   --brand: #000000;
   --brand-2: #2f2f2f;
   --accent: #4caf50;
-  --nav-h: 68px;
+  --nav-h: 80px;
   --max-w: 1120px;
   --radius-xl: 24px;
   --radius-lg: 16px;
   --radius-md: 8px;
   --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.08);
+
+  --ie133-popButton: #c7401e;
+  --ie133-black: #2a2a29;
+  --ie133-bg: #e6e1da;
+  --ie133-buttons: #c2c1bf;
+  --ie133-frame: #666563;
 }
 
 * {
@@ -79,20 +85,58 @@ body {
 .container {
   width: 100%;
   max-width: var(--max-w);
-  padding: 20px;
+  padding: 0 40px;
   margin-inline: auto;
   margin-top: 0;
-  align-self: center;
-  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* ----------------------------------------------------------
+   📖 Project Detail View
+-----------------------------------------------------------*/
+.detail-section {
+  margin-bottom: 80px;
+}
+
+.detail-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+@media (max-width: 768px) {
+  .detail-section {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    direction: ltr !important;
+    margin-bottom: 60px;
+  }
+
+  .detail-text {
+    font-size: 16px;
+    text-align: justify;
+  }
+
+  .detail-image-wrapper {
+    border-radius: 20px !important;
+  }
 }
 
 .section {
-  padding: 40px;
+  padding: 80px 0;
   scroll-margin-top: calc(var(--nav-h) + 20px);
-  border-bottom: 1px solid color-mix(in srgb, var(--brand-2) 40%, transparent);
-  align-items: center;
-  margin-top: auto;
-  margin-bottom: auto;
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-2) 10%, transparent);
 }
 
 .section--fullscreen {
@@ -132,12 +176,8 @@ body {
 }
 
 .infoP {
-  color: white;
-  font-size: 12px;
-  background-color: var(--brand);
-  width: fit-content;
-  padding: 6px 12px;
-  border-radius: 999px;
+  color: var(--brand);
+  font-size: 14px;
 }
 
 /* ----------------------------------------------------------

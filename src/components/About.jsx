@@ -26,35 +26,38 @@ export default function About({ initialData }) {
   return (
     <section id='about' className='section'>
       <div className='container'>
-        <StorytellingCard
-          title='About me'
-          subtitle='& my background'
-          align='left'
-          theme='dark'
-        />
+        <StorytellingCard title='About me' align='left' theme='dark' />
 
         {/* Education */}
         <h2 className='h2'>Education</h2>
-        {isLoading ? (
-           [1, 2].map(n => (
-             <div key={n} className="kv skeleton" style={{ height: "120px", marginBottom: "16px" }} />
-           ))
-        ) : (
-          currentEducation?.map((edu, i) => (
-            <AnimatedSection key={edu.id || i} delay={i * 0.08}>
-              <div className='kv'>
-                <p className='headerP'>{edu.degree}</p>
-                <p className='infoP'>
-                  {edu.institution} ( {edu.years} )
-                </p>
-                <p style={{ maxWidth: "70%" }}>
-                  <b>Remark: </b>
-                  {edu.remarks}
-                </p>
-              </div>
-            </AnimatedSection>
-          ))
-        )}
+        {isLoading
+          ? [1, 2].map((n) => (
+              <div
+                key={n}
+                className='kv skeleton'
+                style={{ height: "120px", marginBottom: "16px" }}
+              />
+            ))
+          : currentEducation?.map((edu, i) => (
+              <AnimatedSection key={edu.id || i} delay={i * 0.08}>
+                <div className='kv'>
+                  <p className='headerP'>{edu.degree}</p>
+                  <p className='infoP'>
+                    {edu.institution} ( {edu.years} )
+                  </p>
+                  <p
+                    style={{
+                      maxWidth: "80%",
+                      color: "var(--ink)",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <b>Remark: </b>
+                    {edu.remarks}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
 
         {/* Skills + Languages */}
         <div>
@@ -74,23 +77,21 @@ export default function About({ initialData }) {
 
           {/* Tab Content */}
           {isLoading ? (
-            <div className="tab-content skeleton" style={{ height: "200px" }} />
+            <div className='tab-content skeleton' style={{ height: "200px" }} />
           ) : (
             <AnimatedSection key={activeTab}>
               <div className='tab-content'>
-                <h2 className='h2'>
-                  {currentTab.label}
-                </h2>
+                <h2 className='h2'>{currentTab.label}</h2>
                 <ul className='ul'>
                   {currentTab.data?.map((item, i) => (
-                      <li key={item.id || i}>
-                        {typeof item === "string"
-                          ? item
-                          : item.level
-                            ? `${item.name} (${item.level})`
-                            : item.name}
-                      </li>
-                    ))}
+                    <li key={item.id || i}>
+                      {typeof item === "string"
+                        ? item
+                        : item.level
+                          ? `${item.name} (${item.level})`
+                          : item.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </AnimatedSection>
