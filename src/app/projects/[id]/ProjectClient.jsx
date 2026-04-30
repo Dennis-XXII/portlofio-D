@@ -16,7 +16,6 @@ export default function ProjectClient({ project }) {
     }
   }, [project, hydrate]);
 
-  // Priority: Props (instant from SSR) -> Cache (client-side context)
   const displayProject =
     project || (project?.id ? projectDetails[project.id] : null);
 
@@ -31,8 +30,26 @@ export default function ProjectClient({ project }) {
     );
   }
 
-  const hasSections =
-    displayProject.sections && displayProject.sections.length > 0;
+  const sections = displayProject.sections || [];
+
+  // Group adjacent "half" width blocks into pairs
+  const renderRows = () => {
+    const rows = [];
+    let i = 0;
+    while (i < sections.length) {
+      const current = sections[i];
+      if (current.width === "half" && i + 1 < sections.length && sections[i+1].width === "half") {
+        rows.push({ type: "split", blocks: [current, sections[i+1]] });
+        i += 2;
+      } else {
+        rows.push({ type: "single", block: current });
+        i += 1;
+      }
+    }
+    return rows;
+  };
+
+  const rows = renderRows();
 
   return (
     <LazyMotion features={domMax}>
@@ -52,22 +69,12 @@ export default function ProjectClient({ project }) {
 
               <div className='project-actions'>
                 {displayProject.link && (
-                  <a
-                    href={displayProject.link}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='btn'
-                  >
+                  <a href={displayProject.link} target='_blank' rel='noopener noreferrer' className='btn'>
                     Visit Website
                   </a>
                 )}
                 {displayProject.repo && (
-                  <a
-                    href={displayProject.repo}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='btn btn--ghost'
-                  >
+                  <a href={displayProject.repo} target='_blank' rel='noopener noreferrer' className='btn btn--ghost'>
                     View Source
                   </a>
                 )}
@@ -75,51 +82,55 @@ export default function ProjectClient({ project }) {
             </div>
           </AnimatedSection>
 
-          {hasSections ? (
-            <div className='project-sections'>
-              {displayProject.sections.map((section, index) => {
-                const isEven = index % 2 === 0;
-                return (
-                  <AnimatedSection key={section.id}>
-                    <div
-                      className={`project-section-grid ${isEven ? "is-even" : "is-odd"}`}
-                    >
-                      <div className='project-section-image-container'>
-                        <div className='project-section-image-wrapper'>
-                          <img
-                            src={section.image}
-                            alt=''
-                            className='project-section-image'
-                          />
+          <div className='project-sections'>
+            {rows.length > 0 ? (
+              rows.map((row, index) => (
+                <AnimatedSection key={index}>
+                  <div className={`project-row ${row.type === "split" ? "is-split" : "is-single"}`}>
+                    {row.type === "split" ? (
+                      row.blocks.map((block) => (
+                        <div key={block.id} className={`project-block type-${block.type}`}>
+                          {block.type === "image" ? (
+                            <div className='project-section-image-wrapper'>
+                              <img src={block.content} alt='' className='project-section-image' />
+                            </div>
+                          ) : (
+                            <p className='project-section-text'>{block.content}</p>
+                          )}
                         </div>
+                      ))
+                    ) : (
+                      <div className={`project-block type-${row.block.type} is-full`}>
+                        {row.block.type === "image" ? (
+                          <div className='project-section-image-wrapper' style={{ aspectRatio: "21/9" }}>
+                            <img src={row.block.content} alt='' className='project-section-image' />
+                          </div>
+                        ) : (
+                          <p className='project-section-text' style={{ maxWidth: "800px", margin: "0 auto" }}>
+                            {row.block.content}
+                          </p>
+                        )}
                       </div>
-                      <div className='project-section-content'>
-                        <p className='project-section-text'>{section.text}</p>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                );
-              })}
-            </div>
-          ) : (
-            <AnimatedSection delay={0.2}>
-              <div className='project-coming-soon'>
-                <h2 className='h2' style={{ marginBottom: "12px", color: "var(--brand)" }}>
-                  Coming Soon
-                </h2>
-                <p style={{ color: "var(--ink-2)", fontSize: "16px" }}>
-                  I'm currently putting together the details for this project.
-                  Stay tuned!
-                </p>
-              </div>
-            </AnimatedSection>
-          )}
+                    )}
+                  </div>
+                </AnimatedSection>
+              ))
+            ) : (
+              <AnimatedSection delay={0.2}>
+                <div className='project-coming-soon'>
+                  <h2 className='h2' style={{ marginBottom: "12px", color: "var(--brand)" }}>
+                    Coming Soon
+                  </h2>
+                  <p style={{ color: "var(--ink-2)", fontSize: "16px" }}>
+                    I'm currently putting together the details for this project.
+                  </p>
+                </div>
+              </AnimatedSection>
+            )}
+          </div>
 
           <div className='project-footer'>
-            <Link
-              href={`/#${displayProject.id}`}
-              className='btn btn--ghost'
-            >
+            <Link href={`/#${displayProject.id}`} className='btn btn--ghost'>
               Back to all projects
             </Link>
           </div>

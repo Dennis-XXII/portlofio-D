@@ -136,7 +136,7 @@
 }
 
 .timeline-link:hover {
-  color: var(--accent);
+  color: var(--ie133-popButton);
 }
 
 /* Mobile adjustments */

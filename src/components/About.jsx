@@ -26,12 +26,7 @@ export default function About({ initialData }) {
   return (
     <section id='about' className='section'>
       <div className='container'>
-        <StorytellingCard
-          title='About me'
-          subtitle='& my background'
-          align='left'
-          theme='dark'
-        />
+        <StorytellingCard title='About me' align='left' theme='dark' />
 
         {/* Education */}
         <h2 className='h2'>Education</h2>
@@ -53,7 +48,7 @@ export default function About({ initialData }) {
                   <p
                     style={{
                       maxWidth: "80%",
-                      color: "var(--ink-2)",
+                      color: "var(--ink)",
                       fontSize: "14px",
                     }}
                   >

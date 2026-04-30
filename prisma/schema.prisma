@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,22 +6,20 @@ datasource db {
   provider = "postgresql"
 }
 
-// NextAuth Models
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -55,9 +50,8 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// Portfolio Models
 model Experience {
-  id          String   @id @default(cuid())
+  id          String  @id @default(cuid())
   image       String
   title       String
   role        String
@@ -65,11 +59,11 @@ model Experience {
   imgAlt      String?
   link        String?
   description String
-  order       Int      @default(0)
+  order       Int     @default(0)
 }
 
 model Project {
-  id          String   @id @default(cuid())
+  id          String           @id @default(cuid())
   image       String
   title       String
   year        String
@@ -78,23 +72,24 @@ model Project {
   repo        String?
   description String
   imgAlt      String?
-  order       Int      @default(0)
+  order       Int              @default(0)
   sections    ProjectSection[]
 }
 
 model ProjectSection {
   id        String  @id @default(cuid())
   projectId String
-  image     String
-  text      String  @db.Text
   order     Int     @default(0)
+  content   String  @default("")
+  type      String  @default("text")
+  width     String  @default("full")
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }
 
 model Skill {
   id    String @id @default(cuid())
   name  String
-  type  String // 'technical' or 'soft'
+  type  String
   order Int    @default(0)
 }
 

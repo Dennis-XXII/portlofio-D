@@ -58,31 +58,37 @@
 .project-sections {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 80px;
 }
 
-.project-section-grid {
+.project-row {
+  width: 100%;
+}
+
+.project-row.is-split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 60px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
 }
 
-.project-section-grid.is-even {
-  direction: ltr;
+.project-row.is-single {
+  display: flex;
+  flex-direction: column;
 }
 
-.project-section-grid.is-odd {
-  direction: rtl;
+.project-block {
+  width: 100%;
 }
 
-.project-section-content {
-  direction: ltr; /* Reset direction for text */
+.project-block.type-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .project-section-image-wrapper {
   width: 100%;
-  aspect-ratio: 4/3;
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -94,10 +100,11 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
+  display: block;
 }
 
 .project-section-image-wrapper:hover .project-section-image {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .project-section-text {
@@ -125,6 +132,12 @@
 }
 
 /* Mobile responsive */
+@media (max-width: 992px) {
+  .project-row.is-split {
+    gap: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .project-detail-main {
     padding-top: 100px;
@@ -134,52 +147,33 @@
   }
 
   .project-detail-header {
-    font-size: 12px;
     margin-bottom: 40px;
   }
 
   .project-title {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 12px;
   }
 
-  .project-meta {
-    font-size: 12px;
-    padding: 0px;
-    background-color: transparent;
-    color: var(--brand);
-    margin-bottom: 16px;
-  }
-
   .project-description {
-    font-size: 12px;
+    font-size: 16px;
     line-height: 1.7;
   }
 
   .project-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 12px;
-    max-width: 240px;
-    margin-top: 16px;
-  }
-
-  .project-actions .btn {
-    width: 100%;
-    font-size: 12px;
+    margin-top: 24px;
   }
 
   .project-sections {
-    gap: 60px;
+    gap: 40px;
   }
 
-  .project-section-grid {
+  .project-row.is-split {
     grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .project-section-grid.is-odd {
-    direction: ltr; /* Standard flow on mobile */
+    gap: 40px;
   }
 
   .project-section-text {
@@ -187,11 +181,6 @@
   }
 
   .project-section-image-wrapper {
-    aspect-ratio: 16/9;
-  }
-
-  .project-footer {
-    margin-top: 60px;
-    padding-top: 40px;
+    aspect-ratio: 16/9 !important;
   }
 }

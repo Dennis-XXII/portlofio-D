@@ -2,7 +2,7 @@
    🌿 Global Styles & Variables
 -----------------------------------------------------------*/
 :root {
-  --bg: #f9f9f9;
+  --bg: #fafafa;
   --ink: #222222;
   --ink-2: #555555;
   --button-bg: #e5e5e5;
@@ -10,7 +10,7 @@
   --brand: #000000;
   --brand-2: #2f2f2f;
   --accent: #4caf50;
-  --nav-h: 68px;
+  --nav-h: 80px;
   --max-w: 1120px;
   --radius-xl: 24px;
   --radius-lg: 16px;
@@ -20,7 +20,7 @@
   --ie133-popButton: #c7401e;
   --ie133-black: #2a2a29;
   --ie133-bg: #e6e1da;
-  --ie133-buttons: #C2C1BF;
+  --ie133-buttons: #c2c1bf;
   --ie133-frame: #666563;
 }
 
@@ -176,12 +176,8 @@ body {
 }
 
 .infoP {
-  color: white;
-  font-size: 12px;
-  background-color: var(--brand);
-  width: fit-content;
-  padding: 6px 12px;
-  border-radius: 999px;
+  color: var(--brand);
+  font-size: 14px;
 }
 
 /* ----------------------------------------------------------

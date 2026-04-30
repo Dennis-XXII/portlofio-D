@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-} from "react";
+import { useState, useEffect, useRef } from "react";
 import NavBar from "../components/NavBar";
 import Home from "../components/Home";
 import Experience from "../components/Experience";
@@ -49,7 +45,7 @@ export default function HomeClient({ initialData }) {
       if (isProgrammaticScroll.current) return;
 
       const scrollY = window.scrollY;
-      
+
       if (scrollY < 120) {
         setActive("home");
         return;
@@ -96,17 +92,17 @@ export default function HomeClient({ initialData }) {
           immediate,
           offset: -68,
         });
-        
+
         // If the target is a project card, set active to 'projects'
         if (SECTIONS.includes(targetId)) {
           setActive(targetId);
         } else {
-          const parentSection = el.closest('section');
+          const parentSection = el.closest("section");
           if (parentSection && SECTIONS.includes(parentSection.id)) {
             setActive(parentSection.id);
           }
         }
-        
+
         // Keep programmatic scroll true for a while to survive layout shifts
         setTimeout(() => {
           isProgrammaticScroll.current = false;
@@ -139,13 +135,15 @@ export default function HomeClient({ initialData }) {
       <Home />
       <Experience initialData={initialData?.experiences} />
       <Projects initialData={initialData?.projects} />
-      <About initialData={{
-        skills: initialData?.skills,
-        languages: initialData?.languages,
-        education: initialData?.education
-      }} />
+      <About
+        initialData={{
+          skills: initialData?.skills,
+          languages: initialData?.languages,
+          education: initialData?.education,
+        }}
+      />
       <Contact />
-      
+
       <footer className='footer' style={{ textAlign: "center" }}>
         <Motion.div className='container'>
           <p>

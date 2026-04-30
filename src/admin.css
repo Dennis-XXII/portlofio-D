@@ -16,7 +16,11 @@
   min-height: 100vh;
   background-color: var(--admin-bg) !important;
   color: #222 !important;
-  font-family: "Raleway", system-ui, -apple-system, sans-serif !important;
+  font-family:
+    "Raleway",
+    system-ui,
+    -apple-system,
+    sans-serif !important;
 }
 
 /* Reset or override global section/container styles */
@@ -34,7 +38,7 @@
 }
 
 /* Typography Overrides */
-.admin-container h1, 
+.admin-container h1,
 .admin-container .h1 {
   font-size: 32px !important;
   font-weight: 600 !important;
@@ -44,7 +48,7 @@
   letter-spacing: -0.02em;
 }
 
-.admin-container h2, 
+.admin-container h2,
 .admin-container .h2 {
   font-size: 20px !important;
   font-weight: 600 !important;
@@ -144,7 +148,7 @@
   color: #000;
 }
 
-.form-group input, 
+.form-group input,
 .form-group textarea,
 .form-group select {
   padding: 14px;
@@ -181,7 +185,7 @@
 
 .primary-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .secondary-btn {
@@ -295,8 +299,8 @@
   margin-top: auto;
   padding: 14px;
   background: transparent;
-  color: rgba(255,255,255,0.6);
-  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
@@ -304,7 +308,7 @@
 }
 
 .signout-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   border-color: white;
 }
@@ -314,4 +318,282 @@
   cursor: grab;
   display: flex;
   align-items: center;
+}
+
+/* Dynamic Section Editor */
+.section-builder {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  background: #fdfdfd;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px dashed #ddd;
+}
+
+.builder-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.skeleton-box {
+  aspect-ratio: 4 / 3;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px dashed #ccc;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.admin-form .skeleton-box {
+  aspect-ratio: auto;
+  min-height: 200px;
+  padding: 30px;
+}
+
+.skeleton-box:hover {
+  background: #e8e8e8;
+  border-color: #999;
+}
+
+.skeleton-icon-group {
+  display: flex;
+  gap: 20px;
+}
+
+.skeleton-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.skeleton-icon:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.skeleton-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.content-preview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.content-preview img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.content-preview svg {
+  width: 48px;
+  height: 48px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.content-preview textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+}
+
+.content-preview textarea:focus {
+  outline: none;
+}
+
+.change-type-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  font-size: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.change-type-btn:hover {
+  background: #fff;
+  border-color: #000;
+}
+
+.skeleton-box.drag-over {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: #000;
+  border-style: solid;
+}
+
+/* Row-based Admin Editor */
+.admin-row-item {
+  background: white;
+  padding: 20px;
+  border-radius: var(--admin-radius);
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  box-shadow: var(--admin-shadow);
+  margin-bottom: 16px;
+  cursor: grab;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.admin-row-item:active {
+  cursor: grabbing;
+}
+
+.row-reorder-handle {
+  color: #ccc;
+  padding-top: 10px;
+}
+
+.row-content {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+}
+
+.is-split .row-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.row-block {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  min-width: 0; /* Help with text truncation */
+}
+
+.row-block-preview {
+  height: 80px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-block-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #999;
+}
+
+.row-block-info {
+  flex: 1;
+}
+
+.row-block-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.row-block-info span {
+  font-size: 10px;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.row-block-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-mini-btn, .delete-mini-btn {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.edit-mini-btn {
+  background: #eee;
+  color: #333;
+}
+
+.edit-mini-btn:hover {
+  background: #ddd;
+}
+
+.delete-mini-btn {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.delete-mini-btn:hover {
+  background: #fecaca;
+}
+
+.swap-btn {
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 16px;
+  color: #666;
+}
+
+.swap-btn:hover {
+  background: #000;
+  color: white;
+  border-color: #000;
 }
