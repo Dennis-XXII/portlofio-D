@@ -45,3 +45,4 @@ dist-ssr/
 # CLI tools
 .gemini/
 GEMINI.md
+CLAUDE.md
