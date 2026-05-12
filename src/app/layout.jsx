@@ -23,7 +23,7 @@ export const metadata = {
     images: ["/dennis.webp"],
   },
   icons: {
-    icon: "/dennis.webp",
+    icon: "/hero.webp",
   },
 };
 
