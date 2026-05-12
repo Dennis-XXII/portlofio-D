@@ -48,7 +48,7 @@ export default function Home() {
         <div className='media_home'>
           <AnimatedSection delay={0.1}>
             <TiltedCard
-              imageSrc='https://d0z7rkmp6y4girrt.public.blob.vercel-storage.com/dennis.webp'
+              imageSrc='https://d0z7rkmp6y4girrt.public.blob.vercel-storage.com/hero.webp'
               imageAlt='Portrait of Kyaw Swar Hein'
               containerHeight='250px'
               containerWidth='250px'
