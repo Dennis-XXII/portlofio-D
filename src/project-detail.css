@@ -93,6 +93,7 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   background-color: var(--button-bg);
+  justify-self: center;
 }
 
 .project-section-image {
@@ -112,6 +113,7 @@
   line-height: 1.8;
   color: var(--ink-2);
   white-space: pre-wrap;
+  align-content: center;
 }
 
 /* Coming Soon State */
