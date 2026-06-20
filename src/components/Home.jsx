@@ -95,7 +95,7 @@ export default function Home() {
             >
               <VariableProximity
                 label={
-                  "I’m a passionate full stack developer and creative content editor with a knack for crafting engaging digital experiences. With a strong foundation in both front-end and back-end technologies, I thrive on bringing ideas to life through code and creativity."
+                  "I'm a junior software engineer with a passion for crafting elegant solutions and learning new technologies. I'm currently looking for opportunities to grow and contribute to impactful projects."
                 }
                 className={"variable-proximity-demo"}
                 fromFontVariationSettings="'wght' 200, 'opsz' 9"

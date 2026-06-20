@@ -99,7 +99,7 @@ export default function NavBar({ active }) {
             <h2>Kyaw Swar Hein</h2>
             <span className='badge'>
               <span className='badge__dot' />
-              Open for work!
+              Currently in Internship
             </span>
           </div>
 
